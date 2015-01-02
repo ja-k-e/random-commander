@@ -10,7 +10,12 @@ module.exports = function(grunt) {
     copy: {
       html: {
         files: [
-          {expand: true, flatten: false, cwd: 'src/html', src: ['*'], dest: 'build', filter: 'isFile'},
+          {expand: true, flatten: false, cwd: 'src/html', src: ['*'], dest: 'build', filter: 'isFile'}
+        ]
+      },
+      templates: {
+        files: [
+          {expand: true, flatten: false, cwd: 'src/html/templates', src: ['*'], dest: 'build/templates', filter: 'isFile'}
         ]
       }
     },
@@ -32,7 +37,7 @@ module.exports = function(grunt) {
           join: true
         },
         files: {
-          'src/scripts/app.js': ['src/scripts/coffee/app.coffee', 'src/scripts/coffee/**/*.coffee', 'src/scripts/coffee/*.coffee']
+          'src/scripts/app.js': ['src/scripts/app.coffee', 'src/scripts/**/*.coffee', 'src/scripts/*.coffee']
         }
       }
     },
@@ -57,7 +62,7 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['src/scripts/coffee/**/*.coffee', 'src/scripts/coffee/*.coffee'],
+        files: ['src/scripts/**/*.coffee', 'src/scripts/*.coffee'],
         tasks: ['script'],
         options: {
           livereload: true
@@ -73,6 +78,13 @@ module.exports = function(grunt) {
       html: {
         files: ['src/html/*.html'],
         tasks: ['html'],
+        options: {
+          livereload: true
+        }
+      },
+      templates: {
+        files: ['src/html/templates/*.html'],
+        tasks: ['templates'],
         options: {
           livereload: true
         }
@@ -106,12 +118,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('style',   ['sass:dist', 'autoprefixer:overwrite', 'cssmin:compile']);
-  grunt.registerTask('script',  ['coffee:compile', 'uglify:app']);
-  grunt.registerTask('html',    ['copy:html']);
-  grunt.registerTask('bowerjs', ['bower_concat:build', 'uglify:bower']);
+  grunt.registerTask('style',     ['sass:dist', 'autoprefixer:overwrite', 'cssmin:compile']);
+  grunt.registerTask('script',    ['coffee:compile', 'uglify:app']);
+  grunt.registerTask('html',      ['copy:html']);
+  grunt.registerTask('templates', ['copy:templates']);
+  grunt.registerTask('bowerjs',   ['bower_concat:build', 'uglify:bower']);
 
-  grunt.registerTask('build',   [ 'style', 'script', 'html', 'bowerjs' ]);
-  grunt.registerTask('serve',   [ 'build', 'connect:server', 'watch' ]);
+  grunt.registerTask('build',     [ 'style', 'script', 'html', 'templates', 'bowerjs' ]);
+  grunt.registerTask('serve',     [ 'build', 'connect:server', 'watch' ]);
 
 };

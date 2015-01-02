@@ -2,8 +2,167 @@
 <html>
 <head>
   <title>Random Commander</title>
+  <link rel=stylesheet href="css/main.min.css">
+  <script src="js/head.min.js"></script>
 </head>
-<body>
-<h1>Hello world</h1>
+<body ng-app="RandomCommander">
+
+    <aside ng-controller="DataCtrl">
+      <div class="container">
+        <div class="global-data data-group">
+          <h1>Global</h1>
+          <div class="col-container">
+            <div class="col-3">
+              <div class="ns-group">
+                <div number-switch label="Measures" min="4" max="32" step="1" model="composition.measures"></div>
+                <div number-switch label="Tempo" min="80" max="160" step="1" model="composition.tempo"></div>
+                <div number-switch label="Beats" min="2" max="7" step="1" model="composition.beats"></div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div grid-options label="Resolution" model="composition.resolution" groupname="resolutions" options="library.resolutions"></div>
+            </div>
+            <div class="col-6">
+              <div grid-options label="Root" model="composition.root" groupname="roots" options="library.notes"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="treble-data data-group">
+          <h1>Treble Clef</h1>
+          <div class="dg-row"
+            ng-class="{open: view.t_data == 'values'}">
+            <h2 ng-click="dataRow('values', 't')">Values</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{value.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="value in library.values track by $index"
+                  model="treble.values[$index]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dg-row"
+            ng-class="{open: view.t_data == 'intervals'}">
+            <h2 ng-click="dataRow('intervals', 't')">Intervals</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{interval.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="interval in library.intervals track by $index"
+                  model="treble.intervals[$index]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dg-row"
+            ng-class="{open: view.t_data == 'chords'}">
+            <h2 ng-click="dataRow('chords', 't')">Chords</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{chord.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="chord in library.chords track by $index"
+                  model="treble.chords[$index]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dg-row"
+            ng-class="{open: view.t_data == 'octaves'}">
+            <h2 ng-click="dataRow('octaves', 't')">Octaves</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{octave.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="octave in library.octaves track by $index"
+                  model="treble.octaves[$index]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="bass-data data-group">
+          <h1>Bass Clef</h1>
+          <div class="dg-row"
+            ng-class="{open: view.b_data == 'values'}">
+            <h2 ng-click="dataRow('values', 'b')">Values</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{value.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="value in library.values track by $index"
+                  model="bass.values[$index]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dg-row"
+            ng-class="{open: view.b_data == 'intervals'}">
+            <h2 ng-click="dataRow('intervals', 'b')">Intervals</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{interval.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="interval in library.intervals track by $index"
+                  model="bass.intervals[$index]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dg-row"
+            ng-class="{open: view.b_data == 'chords'}">
+            <h2 ng-click="dataRow('chords', 'b')">Chords</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{chord.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="chord in library.chords track by $index"
+                  model="bass.chords[$index]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dg-row"
+            ng-class="{open: view.b_data == 'octaves'}">
+            <h2 ng-click="dataRow('octaves', 'b')">Octaves</h2>
+            <div class="dg-drawer">
+              <div class="ns-group">
+                <div number-switch
+                  label="{{octave.name}}"
+                  min="0" max="10" step="1"
+                  ng-repeat="octave in library.octaves track by $index"
+                  model="bass.octaves[$index]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="generate-song">Generate</button>
+
+      </div>
+
+    </aside>
+
+
+    <main ng-controller="DisplayCtrl">
+      <div class="triggers">
+        <a id="play">
+          <span class="play"></span>
+          <span class="stop"></span>
+        </a>
+      </div>
+    </main>
+
+  <script src="js/app.min.js"></script>
 </body>
 </html>

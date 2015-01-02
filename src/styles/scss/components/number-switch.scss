@@ -1,0 +1,94 @@
+.ns-group {
+  display: table;
+
+  [number-switch] {
+    $ns-di: 60px;
+    $ns-arrow-h: 16px;
+    user-select: none;
+    display: table-cell;
+    vertical-align: bottom;
+    padding: 0 0.5em;
+    width: $ns-di;
+
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+
+    .number-switch {
+      text-align: center;
+
+      label {
+        @include small-label;
+        display: block;
+      }
+
+      .ns-arrow-up,
+      .ns-arrow-down,
+      .ns-input {
+        display: block;
+        width: 100%;
+      }
+
+      .ns-input {
+        height: $ns-di - ($ns-arrow-h * 2);
+        line-height: $ns-di - ($ns-arrow-h * 2);
+        font-size: 1em;
+        text-align: center;
+        padding: 0;
+        background-color: $c-black;
+        color: $c-white;
+        font-weight: 100;
+        border-top: $b-gray;
+        border-bottom: $b-gray;
+      }
+
+      .ns-arrow-up,
+      .ns-arrow-down {
+        position: relative;
+        box-sizing: border-box;
+        background-color: $c-off-white;
+        // border-left: $b-gray;
+        // border-right: $b-gray;
+        display: block;
+        width: 100%;
+        height: $ns-arrow-h;
+        cursor: pointer;
+        &:hover, &:active {
+          background-color: $c-white;
+        }
+        &.disabled {
+          opacity: 0.2;
+          pointer-events: none;
+        }
+
+        $ns-arrow-size: floor($ns-arrow-h / 3);
+        &::after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate3d(-50%,-50%,0);
+          border-left: $ns-arrow-size solid transparent;
+          border-right: $ns-arrow-size solid transparent;
+
+        }
+        &.ns-arrow-up {
+          border-top: $b-gray;
+          &::after {
+            border-bottom: $ns-arrow-size solid $c-black;
+          }
+        }
+        &.ns-arrow-down {
+          border-bottom: $b-gray;
+          &::after {
+            border-top: $ns-arrow-size solid $c-black;
+          }
+        }
+
+      }
+    }
+  }
+}

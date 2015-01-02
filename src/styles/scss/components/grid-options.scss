@@ -1,0 +1,45 @@
+.grid-options {
+
+  input {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  & > label {
+    @include small-label;
+    display: block;
+  }
+  .go-grid {
+    display: table;
+    width: 100%;
+    @include clearfix;
+    .go-label {
+      display: table-cell;
+      box-sizing: border-box;
+      cursor: pointer;
+      padding: 1.35em 0.5em;
+      text-align: center;
+      background-color: $c-black;
+      border-left: $b-light;
+      border-top: $b-light;
+      border-bottom: $b-light;
+      opacity: 0.8;
+      &:hover, &:active {
+        opacity: 1;
+      }
+      &:last-child {
+        border-right: $b-light;
+      }
+      &.selected {
+        opacity: 1;
+        border-color: $c-gray;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        & + .go-label {
+          border-left-color: transparent;
+        }
+      }
+    }
+  }
+}

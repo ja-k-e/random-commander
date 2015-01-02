@@ -1,0 +1,46 @@
+.data-group {
+  margin: 1em 0;
+
+  &:first-child { margin-top: 0; }
+
+  .dg-row {
+    .dg-drawer {
+      display: block;
+      box-sizing: border-box;
+      transition: max-height $ui-time, padding $ui-time;
+      overflow: hidden;
+      max-height: 0;
+      padding: 0 0.5em;
+      background-color: $c-off-black;
+    }
+    &.open {
+      h2 {
+        pointer-events: none;
+        border-color: $c-gray;
+        border-bottom: $b-light;
+      }
+      .dg-drawer {
+        padding: 1em 0.5em;
+        max-height: 120px;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 1.2em;
+    padding: 0.5em 0;
+    border-top: $b-light;
+  }
+  h2 {
+    box-sizing: border-box;
+    font-size: 1em;
+    padding: 0.5em;
+    background-color: $c-black;
+    cursor: pointer;
+    border-top: $b-light;
+    &:hover, &:active {
+      background-color: $c-off-black;
+    }
+  }
+
+}

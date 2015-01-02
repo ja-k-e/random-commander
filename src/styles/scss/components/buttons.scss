@@ -1,0 +1,21 @@
+button {
+  -webkit-appearance: none;
+  outline: none;
+  font-family: $f-sans;
+  border: $b-light;
+
+  @include uppercase;
+  font-size: 1em;
+  background-color: $c-black;
+  color: $c-white;
+  padding: 1em;
+  cursor: pointer;
+  &:hover, &:active {
+    border: $b-gray;
+    background-color: $c-off-black;
+  }
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+}

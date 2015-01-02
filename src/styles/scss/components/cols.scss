@@ -1,0 +1,17 @@
+.col-container {
+  @include clearfix;
+  @for $i from 1 through 12 {
+    .col-#{$i} {
+      float: left;
+      width: $i * (100% / 12);
+      padding: 0 1%;
+      box-sizing: border-box;
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}

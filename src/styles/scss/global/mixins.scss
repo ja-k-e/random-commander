@@ -1,0 +1,19 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin uppercase {
+  text-transform: uppercase;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+}
+
+@mixin small-label {
+  padding-bottom: 0.5em;
+  font-size: 0.75em;
+  @include uppercase;
+}

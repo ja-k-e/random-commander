@@ -1,0 +1,53 @@
+$button-di: 40px;
+a#play {
+  font-weight: 100;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  text-transform: uppercase;
+  opacity: 0.8;
+  width: 100px;
+  transition: opacity 200ms;
+  font-size: 2em;
+  &.inactive {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  &:hover, &:active {
+    opacity: 1;
+  }
+
+  width: $button-di;
+  height: $button-di;
+  line-height: $button-di;
+  border-radius: 50%;
+  background-color: $c-primary;
+  margin-bottom: 12px;
+  position: relative;
+
+  .play, .stop {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  .play {
+    border-left: 8px solid $c-white;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    transform: translate3d(-40%, -50%, 0);
+  }
+  .stop {
+    background-color: $c-white;
+    height: 10px;
+    width: 10px;
+    transform: translate3d(-50%, -50%, 0);
+    display: none;
+  }
+
+  &.playing {
+    .play { display: none;}
+    .stop { display: block;}
+  }
+
+}

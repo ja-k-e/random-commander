@@ -1,0 +1,24 @@
+// sizes
+$s-min-w: 900px;
+$s-max-w: 1200px;
+
+// fonts
+$f-sans: 'Helvetica Neue LT Pro', Helvetica, sans-serif;
+
+// timing
+$ui-time: 300ms;
+
+// colors
+$c-primary: #939393;
+$c-primary-d: darken($c-primary, 20%);
+$c-primary-b: darken($c-primary, 50%);
+$c-white: #FFFFFF;
+$c-off-white: darken($c-white,15%);
+$c-trans-white: transparentize($c-white,0.8);
+$c-gray: #9a9a9a;
+$c-black: #101010;
+$c-off-black: lighten($c-black,5%);
+
+// borders
+$b-gray: 1px solid $c-gray;
+$b-light: 1px solid $c-trans-white;
