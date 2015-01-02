@@ -33,7 +33,7 @@ aside {
           transition: top 300ms;
   z-index: 99; }
 
-input {
+input, textarea {
   max-width: 100%;
   box-sizing: border-box;
   -webkit-appearance: none;
@@ -174,7 +174,10 @@ button {
   -webkit-appearance: none;
   outline: none;
   font-family: "Helvetica Neue LT Pro", Helvetica, sans-serif;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: none;
+  border-right: none;
   text-transform: uppercase;
   font-weight: 100;
   letter-spacing: 0.01em;
@@ -184,7 +187,8 @@ button {
   padding: 1em;
   cursor: pointer; }
   button:hover, button:active {
-    border: 1px solid #9a9a9a;
+    border-top: 1px solid #9a9a9a;
+    border-bottom: 1px solid #9a9a9a;
     background-color: #1d1d1d; }
   button.disabled {
     pointer-events: none;
@@ -298,7 +302,7 @@ a#play {
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    opacity: 0.8; }
+    opacity: 0.6; }
     .grid-options .go-grid .go-label:hover, .grid-options .go-grid .go-label:active {
       opacity: 1; }
     .grid-options .go-grid .go-label:last-child {
@@ -390,3 +394,20 @@ a#play {
           .ns-group [number-switch] .number-switch .ns-arrow-up.ns-arrow-down::after,
           .ns-group [number-switch] .number-switch .ns-arrow-down.ns-arrow-down::after {
             border-top: 5px solid #101010; }
+
+.json-paster {
+  margin-top: 1em; }
+  .json-paster label {
+    padding-bottom: 0.5em;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    display: block; }
+  .json-paster textarea {
+    display: block;
+    width: 100%;
+    height: 200px;
+    background-color: #101010;
+    color: white;
+    padding: 1em; }

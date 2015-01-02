@@ -1,5 +1,5 @@
 <div class="grid-options">
-  <label ng-bind="label"></label>
+  <label ng-bind="label" ng-if="label"></label>
   <input type="radio"
     id="{{groupname}}-option-{{option.value}}"
     name="{{groupname}}"
@@ -11,6 +11,7 @@
     <label class="go-label"
       id="{{groupname}}-option-{{option.value}}-label"
       for="{{groupname}}-option-{{option.value}}"
+      ng-class="{selected: option.value == model}"
       ng-repeat="option in options track by $index"
       ng-click="select(option)">{{option.name}}</label>
     </span>

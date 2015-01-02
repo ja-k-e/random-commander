@@ -1,18 +1,19 @@
 <div class="number-switch">
+
   <label ng-bind="label"></label>
-  <span class="arrow-up"
-    ng-class="{inactive: model == max}"
-    ng-click="changeClick('+')"
-    ng-mousedown="changeMouseDown('+')"
-    ng-mouseup="changeMouseUp()">Up</span>
-  <input class="input"
-    type="number"
+
+  <span class="ns-arrow-up"
+    ng-class="{disabled: model == max}"
+    ng-click="changeClick('+')"></span>
+
+  <input class="ns-input"
+    type="text"
     step="{{step}}"
     ng-model="model"
     ng-blur="validate(min,max)">
-  <span class="arrow-down"
-    ng-class="{inactive: model == min}"
-    ng-click="changeClick('-')"
-    ng-mousedown="changeMouseDown('-')"
-    ng-mouseup="changeMouseUp()">Down</span>
+
+  <span class="ns-arrow-down"
+    ng-class="{disabled: model == min}"
+    ng-click="changeClick('-')"></span>
+
 </div>

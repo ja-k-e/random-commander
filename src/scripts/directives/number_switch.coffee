@@ -37,18 +37,6 @@ app.directive "numberSwitch", [
       scope.changeClick = (direction) ->
         change(scope.model, direction)
 
-      # on mousedown
-      scope.changeMouseDown = (direction) ->
-        # do nothing, if you release off of element, it will keep going
-        # promise = $interval( ->
-        #   change(scope.model, direction)
-        # , 200)
-
-      # clear interval on mouse up
-      scope.changeMouseUp = () ->
-        # do nothing, see changeMouseDown
-        # $interval.cancel promise
-
       # on blur, validate whatever was typed in
       scope.validate = (min, max) ->
         min = scope.$eval attrs.min || 0
@@ -56,11 +44,15 @@ app.directive "numberSwitch", [
         # if random characters
         float = parseFloat scope.model
         if isNaN(float) || float == undefined
-          scope.model = min
+          scope.model = parseFloat min
         # if too small
         else if scope.model < min
-          scope.model = min
+          scope.model = parseFloat  min
         # if too big
         else if scope.model > max
-          scope.model = max
+          scope.model = parseFloat max
+        # it is right
+        else
+          scope.model = float
+
 ]

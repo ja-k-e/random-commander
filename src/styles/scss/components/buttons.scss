@@ -2,7 +2,10 @@ button {
   -webkit-appearance: none;
   outline: none;
   font-family: $f-sans;
-  border: $b-light;
+  border-top: $b-light;
+  border-bottom: $b-light;
+  border-left: none;
+  border-right: none;
 
   @include uppercase;
   font-size: 1em;
@@ -11,7 +14,8 @@ button {
   padding: 1em;
   cursor: pointer;
   &:hover, &:active {
-    border: $b-gray;
+    border-top: $b-gray;
+    border-bottom: $b-gray;
     background-color: $c-off-black;
   }
   &.disabled {

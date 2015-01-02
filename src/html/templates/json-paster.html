@@ -1,0 +1,8 @@
+<div class="json-paster">
+  <label ng-bind="label"></label>
+  <textarea
+    ng-bind="model | json"
+    onclick="this.focus();this.select()"
+    ng-blur="update()">
+  </textarea>
+</div>
