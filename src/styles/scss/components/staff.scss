@@ -1,0 +1,32 @@
+.staff {
+  display: table;
+  width: 100%;
+  height: 100px;
+  .beat {
+    display: table-cell;
+    position: relative;
+    &.chord {
+      background: red;
+      $dot-di: 4px;
+      .note-interval {
+        display: block;
+        position: absolute;
+        width: $dot-di;
+        height: $dot-di;
+        left: calc(50% - #{$dot-di/2});
+        margin-top: $dot-di/-2;
+        background: $c-black;
+        border-radius: 50%;
+      }
+    }
+    &.sustain {
+      background: blue;
+    }
+    &.null {
+      background: yellow;
+    }
+    &.active {
+      background: white;
+    }
+  }
+}

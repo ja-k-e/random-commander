@@ -4,7 +4,6 @@ app.service 'DataLibrary', [ () ->
         {name: '1/4', value: 4}
         {name: '1/8', value: 8}
         {name: '1/16', value: 16}
-        {name: '1/32', value: 32}
       ]
       notes: [
         {name: 'C', value: 0}
@@ -39,7 +38,6 @@ app.service 'DataLibrary', [ () ->
         {name: 'Quarter', size: 1/4, denominator: 4}
         {name: 'Eighth', size: 1/8, denominator: 8}
         {name: 'Sixteenth', size: 1/16, denominator: 16}
-        {name: 'Thirty-second', size: 1/32, denominator: 32}
         {name: 'Dotted Half', size: 1/1.5, denominator: 1.5}
         {name: 'Dotted Quarter', size: 1/6, denominator: 6}
         {name: 'Dotted Eighth', size: 1/12, denominator: 12}

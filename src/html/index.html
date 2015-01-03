@@ -43,7 +43,7 @@
               <div class="col-container">
                 <div class="col-3">
                   <div class="ns-group">
-                    <div number-switch label="Decibles" min="-24" max="0" step="1" model="composition.clefs.treble.decibles"></div>
+                    <div number-switch label="Decibels" min="-24" max="0" step="1" model="composition.clefs.treble.decibels"></div>
                     <div number-switch label="Base Octave" min="1" max="8" step="1" model="composition.clefs.treble.baseoctave"></div>
                   </div>
                 </div>
@@ -124,12 +124,12 @@
 
           <div class="dg-row"
             ng-class="{open: view.b_data == 'tone'}">
-            <h2 ng-click="dataRow('tone', 'b')">Tone (Treble)</h2>
+            <h2 ng-click="dataRow('tone', 'b')">Tone (Bass)</h2>
             <div class="dg-drawer">
               <div class="col-container">
                 <div class="col-3">
                   <div class="ns-group">
-                    <div number-switch label="Decibles" min="-24" max="0" step="1" model="composition.clefs.bass.decibles"></div>
+                    <div number-switch label="Decibels" min="-24" max="0" step="1" model="composition.clefs.bass.decibels"></div>
                     <div number-switch label="Base Octave" min="1" max="8" step="1" model="composition.clefs.bass.baseoctave"></div>
                   </div>
                 </div>
@@ -205,10 +205,9 @@
           </div>
         </div>
 
-        <button id="generate-song"
-          ng-click="generateComposition()">Generate</button>
+        <button id="generate-performance" ng-click="generatePerformance()">Generate</button>
 
-        <div json-paster model="composition" label="Copy/Paste to Save/Resume Settings"></div>
+        <div json-paster model="composition" label="Copy/Paste to Save/Resume Settings. Warning: Does not save specific pattern, just settings."></div>
 
       </div>
 
@@ -216,11 +215,28 @@
 
 
     <main ng-controller="DisplayCtrl">
-      <div class="triggers">
-        <a id="play">
-          <span class="play"></span>
-          <span class="stop"></span>
-        </a>
+      <div class="container">
+        <div class="notation">
+          <div class="staff"
+            ng-class="{treble: $index == 0, bass: $index == 1}"
+            ng-repeat="staff in performance track by $index">
+            <div class="beat"
+              ng-repeat="chord in staff track by $index"
+              ng-class="{null: chord == 0, sustain: chord == 'sus', chord: chord.notes}"
+              style="width: {{100 / staff.length}}%">
+              <span class="note-interval ni-{{note.int * note.octave}}"
+                ng-repeat="note in chord.notes track by $index"
+                style="top: {{note.int * note.octave / 36 * 100}}%"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="triggers">
+          <a id="play" ng-click="togglePerformance()">
+            <span class="play" ng-if="!playing"></span>
+            <span class="stop" ng-if="playing"></span>
+          </a>
+        </div>
       </div>
     </main>
 

@@ -8,24 +8,22 @@ body {
 }
 
 .container {
+  width: 95%;
   min-width: $s-min-w;
   max-width: $s-max-w;
   margin: 0 auto;
 }
 
 main {
-  position: absolute;
-  width: 90%;
-  right: 0;
-  top: 0; bottom: 0;
+
 }
 
 aside {
   position: fixed;
   overflow: scroll;
   background-color: $c-trans-white;
-  top: 0%;
-  // top: 80%;
+  // top: 0%;
+  top: 80%;
   bottom: 0;
   width: 100%;
   box-sizing: border-box;
@@ -34,7 +32,7 @@ aside {
   transition: top $ui-time;
   z-index: 99;
   &:hover {
-    // top: 20%;
+    top: 20%;
   }
 }
 

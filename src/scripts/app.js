@@ -25,58 +25,122 @@
 
   app.controller('RandomCommanderCtrl', [
     '$scope', 'DataLibrary', 'Performance', function($scope, DataLibrary, Performance) {
+      var performance_interval;
       $scope.library = DataLibrary;
+      $scope.metronome = false;
       $scope.composition = {
         measures: 12,
         tempo: 120,
         beats: 4,
         resolution: 16,
-        root: 5,
+        root: 3,
         clefs: {
           treble: {
-            values: [0, 0, 10, 5, 0, 0, 0, 0, 0, 0],
-            intervals: [10, 0, 0, 5, 0, 0, 5, 0, 0, 0, 5, 0],
-            chords: [10, 5, 0, 0, 0],
-            octaves: [5, 10, 5],
-            silence: 5,
+            values: [5, 0, 10, 5, 5, 0, 0, 0, 0],
+            intervals: [10, 0, 0, 5, 0, 0, 0, 5, 0, 0, 5, 0],
+            chords: [10, 5, 5, 0, 0],
+            octaves: [5, 8, 10],
+            silence: 3,
             baseoctave: 5,
-            waveform: 'sine',
-            decibles: -4
+            waveform: 'sawtooth',
+            decibels: -12
           },
           bass: {
-            values: [0, 0, 10, 5, 0, 0, 0, 0, 0, 0],
-            intervals: [10, 0, 0, 5, 0, 0, 5, 0, 0, 0, 5, 0],
-            chords: [10, 5, 0, 0, 0],
-            octaves: [5, 10, 5],
-            silence: 5,
+            values: [10, 10, 10, 0, 0, 0, 0, 0, 0],
+            intervals: [10, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 0],
+            chords: [10, 2, 0, 0, 0],
+            octaves: [4, 10, 4],
+            silence: 2,
             baseoctave: 3,
-            waveform: 'sine',
-            decibles: -4
+            waveform: 'sawtooth',
+            decibels: -12
           }
         }
       };
       $scope.performance = Performance.getPerformance($scope.composition);
-      console.log($scope.performance);
-      return $scope.generateComposition = function() {
-        var composition, osc, osc2, performance, transport;
-        composition = $scope.composition;
-        performance = $scope.performance;
-        transport = new Tone.Transport();
-        transport.setBpm(composition.tempo);
-        Tone.Transport.setInterval(function(time) {
-          return envelope.triggerAttack(time);
-        }, composition.resolution + "n");
-        osc = new Tone.Oscillator(440, "sine");
-        osc2 = new Tone.Oscillator(840, "sine");
-        osc.setVolume(-24.0);
-        osc2.setVolume(-24.0);
-        osc.toMaster();
-        osc2.toMaster();
-        osc.start(0);
-        osc2.start(0);
-        osc.stop("+4n");
-        osc2.stop("+4n");
-        return transport.start();
+      $scope.generatePerformance = function() {
+        $scope.stopPerformance();
+        return $scope.performance = Performance.getPerformance($scope.composition);
+      };
+      console.log($scope.performance[0].length, $scope.performance[1].length);
+      $scope.playing = false;
+      $scope.current_step = 0;
+      performance_interval = void 0;
+      $scope.playPerformance = function() {
+        var beat_width, beats, decibels, index, next_beat, tempo_time, time, waveforms;
+        $scope.playing = true;
+        waveforms = [$scope.composition.clefs.treble.waveform, $scope.composition.clefs.bass.waveform];
+        decibels = [$scope.composition.clefs.treble.decibels, $scope.composition.clefs.bass.decibels];
+        beats = $scope.composition.measures * ($scope.composition.beats * ($scope.composition.resolution / 4));
+        beat_width = 100 / beats;
+        index = 0;
+        tempo_time = 60000 / $scope.composition.tempo;
+        next_beat = function() {
+          var beat_count, bps, chord, chord_length_secs, clef, freq, gain, i, metronome, note, osc, sequence, sustain, _i, _j, _len, _len1, _ref, _ref1;
+          $('.beat:nth-child(' + (index + 1) + ')').addClass('active');
+          _ref = $scope.performance;
+          for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+            sequence = _ref[i];
+            chord = sequence[index];
+            if ($scope.metronome && index % $scope.composition.beats === 0) {
+              if (index % ($scope.composition.beats * $scope.composition.beats)) {
+                freq = 3000;
+              } else {
+                freq = 4000;
+              }
+              metronome = new Tone.Oscillator(freq, 'square');
+              metronome.setVolume(-30);
+              metronome.toMaster();
+              metronome.start(0);
+              metronome.stop("+16n");
+            }
+            if (i === 0) {
+              clef = 'treble';
+            } else {
+              clef = 'bass';
+            }
+            if (typeof chord === "object") {
+              bps = $scope.composition.tempo / 60;
+              beat_count = chord.length / 0.25;
+              chord_length_secs = beat_count * bps / 2;
+              sustain = (chord_length_secs / bps) - 0.1;
+              _ref1 = chord.notes;
+              for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+                note = _ref1[_j];
+                osc = new Tone.Oscillator(note.freq, waveforms[i]);
+                gain = osc.dbToGain($scope.composition.clefs[clef].decibels);
+                decibels = osc.gainToDb(gain / chord.notes.length);
+                osc.setVolume(decibels);
+                osc.toMaster();
+                osc.start(0);
+                osc.stop("+" + sustain);
+              }
+            }
+            if (typeof chord === "object") {
+              $('.' + clef + ' .beat.active').removeClass('active');
+              $('.' + clef + ' .beat.go').removeClass(clef + '-go');
+              $('.' + clef + ' .beat:nth-child(' + (index + 1) + ')').addClass(clef + '-go');
+            } else if (chord !== 'sus') {
+              $('.' + clef + ' .beat.active').removeClass('active');
+              $('.' + clef + ' .beat.go').removeClass(clef + '-go');
+            }
+          }
+          return index = (index + 1) % beats;
+        };
+        next_beat();
+        time = tempo_time / ($scope.composition.resolution / 4);
+        return performance_interval = window.setInterval(next_beat, time);
+      };
+      $scope.stopPerformance = function() {
+        $scope.playing = false;
+        return window.clearInterval(performance_interval);
+      };
+      return $scope.togglePerformance = function() {
+        if ($scope.playing === true) {
+          return $scope.stopPerformance();
+        } else {
+          return $scope.playPerformance();
+        }
       };
     }
   ]);
@@ -182,9 +246,6 @@
           }, {
             name: '1/16',
             value: 16
-          }, {
-            name: '1/32',
-            value: 32
           }
         ],
         notes: [
@@ -283,10 +344,6 @@
             name: 'Sixteenth',
             size: 1 / 16,
             denominator: 16
-          }, {
-            name: 'Thirty-second',
-            size: 1 / 32,
-            denominator: 32
           }, {
             name: 'Dotted Half',
             size: 1 / 1.5,
@@ -425,9 +482,103 @@
     'DataLibrary', function(DataLibrary) {
       return {
         getPerformance: function(composition) {
-          return {
-            moo: 'oink'
+          var ChancePkg, blank, chord, clef, duration, index, interval, new_chord, new_octave, note, octave, random, randomVal, res_value, sequence, sequences, temp_duration, value, _i, _j, _ref;
+          ChancePkg = function(vals, key) {
+            var amount, i, new_vals, new_vals_chances, total, val, vals_count, value, _i, _j, _len, _len1;
+            new_vals = [];
+            vals_count = 0;
+            for (i = _i = 0, _len = vals.length; _i < _len; i = ++_i) {
+              value = vals[i];
+              if (value > 0) {
+                vals_count += value;
+                new_vals.push([DataLibrary[key][i], value]);
+              }
+            }
+            new_vals_chances = [];
+            total = 0;
+            for (i = _j = 0, _len1 = new_vals.length; _j < _len1; i = ++_j) {
+              val = new_vals[i];
+              amount = total + ((val[1] / vals_count) * 100000);
+              if (i + 1 === new_vals.length) {
+                amount = 100000;
+              }
+              new_vals_chances.push(amount);
+              total = amount;
+            }
+            return {
+              chances: new_vals_chances,
+              vals: new_vals
+            };
           };
+          randomVal = function(chance_pkg) {
+            var chance, i, random, _i, _len, _ref;
+            random = Math.random() * 100000;
+            _ref = chance_pkg.chances;
+            for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+              chance = _ref[i];
+              if (random < chance) {
+                return chance_pkg.vals[i];
+              }
+            }
+          };
+          duration = composition.measures * (composition.beats * (composition.resolution / 4));
+          sequences = [];
+          for (index in composition.clefs) {
+            clef = composition.clefs[index];
+            sequence = [];
+            temp_duration = duration;
+            clef.values_pkg = new ChancePkg(clef.values, 'values');
+            clef.intervals_pkg = new ChancePkg(clef.intervals, 'intervals');
+            clef.octaves_pkg = new ChancePkg(clef.octaves, 'octaves');
+            clef.chords_pkg = new ChancePkg(clef.chords, 'chords');
+            while (temp_duration > 0) {
+              random = Math.random() * 10;
+              if (random > clef.silence) {
+                chord = randomVal(clef.chords_pkg)[0]["value"];
+                value = randomVal(clef.values_pkg)[0]["denominator"];
+                if (((1 / value) / (1 / composition.resolution)) >= temp_duration) {
+                  value = (1 / temp_duration) / (1 / composition.resolution);
+                }
+                new_chord = {
+                  length: 1 / value,
+                  notes: []
+                };
+                for (note = _i = 1; 1 <= chord ? _i <= chord : _i >= chord; note = 1 <= chord ? ++_i : --_i) {
+                  interval = randomVal(clef.intervals_pkg)[0]["interval"];
+                  octave = randomVal(clef.octaves_pkg)[0]["value"];
+                  interval += composition.root;
+                  if (interval > 12) {
+                    interval -= 12;
+                  }
+                  new_octave = clef.baseoctave + ((2 - octave) * -1);
+                  note = DataLibrary.frequencies[new_octave - 1][interval];
+                  if (new_chord.notes.indexOf(note) === -1) {
+                    new_chord.notes.push({
+                      freq: note,
+                      int: interval,
+                      octave: octave
+                    });
+                  } else {
+                    console.log('duplicate note in chord, ignoring it for now.');
+                  }
+                }
+                sequence.push(new_chord);
+                res_value = Math.floor((1 / value) / (1 / composition.resolution));
+                if (res_value > 1) {
+                  for (blank = _j = 1, _ref = res_value - 1; 1 <= _ref ? _j <= _ref : _j >= _ref; blank = 1 <= _ref ? ++_j : --_j) {
+                    sequence.push('sus');
+                  }
+                }
+                temp_duration -= res_value;
+              } else {
+                sequence.push(0);
+                temp_duration--;
+              }
+            }
+            console.log('length', sequence.length);
+            sequences.push(sequence);
+          }
+          return sequences;
         }
       };
     }
