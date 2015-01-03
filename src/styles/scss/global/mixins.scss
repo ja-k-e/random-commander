@@ -8,12 +8,17 @@
 
 @mixin uppercase {
   text-transform: uppercase;
-  font-weight: 100;
-  letter-spacing: 0.01em;
+  font-weight: 200;
+  letter-spacing: 0.1em;
 }
 
 @mixin small-label {
-  padding-bottom: 0.5em;
-  font-size: 0.75em;
   @include uppercase;
+  padding-bottom: 0.5em;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: $c-black;
+  text-align: center;
 }

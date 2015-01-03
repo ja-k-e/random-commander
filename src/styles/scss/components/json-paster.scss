@@ -1,15 +1,15 @@
 .json-paster {
-  margin-top: 1em;
 
   label {
     @include small-label;
     display: block;
   }
   textarea {
+    font-family: monospace;
     display: block;
     width: 100%;
     height: 200px;
-    background-color: $c-black;
+    background-color: $c-primary-d;
     color: $c-white;
     padding: 1em;
   }

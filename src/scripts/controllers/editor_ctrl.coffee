@@ -5,9 +5,11 @@ app.controller 'EditorCtrl', [
 
     # view variables
     $scope.view = {
-      t_data: 'tone'
-      b_data: 'tone'
+      t_data: 'values'
+      b_data: 'values'
     }
+
+    $scope.editor = $scope.$parent.editor
 
     # change row
     $scope.dataRow = (data, clef) ->

@@ -8,9 +8,10 @@
   app.controller('EditorCtrl', [
     '$scope', function($scope) {
       $scope.view = {
-        t_data: 'tone',
-        b_data: 'tone'
+        t_data: 'values',
+        b_data: 'values'
       };
+      $scope.editor = $scope.$parent.editor;
       return $scope.dataRow = function(data, clef) {
         if (clef === 't') {
           return $scope.view.t_data = data;
@@ -28,32 +29,35 @@
       var performance_interval;
       $scope.library = DataLibrary;
       $scope.metronome = false;
+      $scope.toggleMetronome = function() {
+        return $scope.metronome = !$scope.metronome;
+      };
       $scope.composition = {
-        measures: 12,
-        tempo: 120,
+        measures: 32,
+        tempo: 90,
         beats: 4,
         resolution: 16,
-        root: 3,
+        root: 4,
         clefs: {
           treble: {
             values: [5, 0, 10, 5, 5, 0, 0, 0, 0],
             intervals: [10, 0, 0, 5, 0, 0, 0, 5, 0, 0, 5, 0],
             chords: [10, 5, 5, 0, 0],
-            octaves: [5, 8, 10],
-            silence: 3,
+            octaves: [5, 10, 10],
+            silence: 0,
             baseoctave: 5,
-            waveform: 'sawtooth',
-            decibels: -12
+            waveform: 'sine',
+            volume: 10
           },
           bass: {
             values: [10, 10, 10, 0, 0, 0, 0, 0, 0],
             intervals: [10, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 0],
-            chords: [10, 2, 0, 0, 0],
-            octaves: [4, 10, 4],
-            silence: 2,
+            chords: [10, 5, 0, 0, 0],
+            octaves: [0, 10, 0],
+            silence: 0,
             baseoctave: 3,
-            waveform: 'sawtooth',
-            decibels: -12
+            waveform: 'sine',
+            volume: 10
           }
         }
       };
@@ -62,25 +66,23 @@
         $scope.stopPerformance();
         return $scope.performance = Performance.getPerformance($scope.composition);
       };
-      console.log($scope.performance[0].length, $scope.performance[1].length);
       $scope.playing = false;
       $scope.current_step = 0;
       performance_interval = void 0;
+      $scope.progress = 0;
       $scope.playPerformance = function() {
-        var beat_width, beats, decibels, index, next_beat, tempo_time, time, waveforms;
+        var beat_width, beats, index, next_beat, tempo_time, time;
         $scope.playing = true;
-        waveforms = [$scope.composition.clefs.treble.waveform, $scope.composition.clefs.bass.waveform];
-        decibels = [$scope.composition.clefs.treble.decibels, $scope.composition.clefs.bass.decibels];
         beats = $scope.composition.measures * ($scope.composition.beats * ($scope.composition.resolution / 4));
         beat_width = 100 / beats;
         index = 0;
         tempo_time = 60000 / $scope.composition.tempo;
         next_beat = function() {
-          var beat_count, bps, chord, chord_length_secs, clef, freq, gain, i, metronome, note, osc, sequence, sustain, _i, _j, _len, _len1, _ref, _ref1;
-          $('.beat:nth-child(' + (index + 1) + ')').addClass('active');
-          _ref = $scope.performance;
-          for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-            sequence = _ref[i];
+          var beat_count, bps, chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, performance, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
+          $('.beat:nth-child(' + index + ')').addClass('active');
+          performance = $scope.performance;
+          for (i = _i = 0, _len = performance.length; _i < _len; i = ++_i) {
+            sequence = performance[i];
             chord = sequence[index];
             if ($scope.metronome && index % $scope.composition.beats === 0) {
               if (index % ($scope.composition.beats * $scope.composition.beats)) {
@@ -88,8 +90,8 @@
               } else {
                 freq = 4000;
               }
-              metronome = new Tone.Oscillator(freq, 'square');
-              metronome.setVolume(-30);
+              metronome = new Tone.OmniOscillator(freq, 'pulse');
+              metronome.setVolume(-41);
               metronome.toMaster();
               metronome.start(0);
               metronome.stop("+16n");
@@ -100,16 +102,25 @@
               clef = 'bass';
             }
             if (typeof chord === "object") {
+              waveforms = [$scope.composition.clefs.treble.waveform, $scope.composition.clefs.bass.waveform];
+              decibels = [$scope.composition.clefs.treble.decibels, $scope.composition.clefs.bass.decibels];
               bps = $scope.composition.tempo / 60;
               beat_count = chord.length / 0.25;
-              chord_length_secs = beat_count * bps / 2;
-              sustain = (chord_length_secs / bps) - 0.1;
-              _ref1 = chord.notes;
-              for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-                note = _ref1[_j];
-                osc = new Tone.Oscillator(note.freq, waveforms[i]);
-                gain = osc.dbToGain($scope.composition.clefs[clef].decibels);
-                decibels = osc.gainToDb(gain / chord.notes.length);
+              sustain = (beat_count * bps / 2) * 0.95;
+              notes_size = chord.notes.length;
+              chord_0 = performance[0][index];
+              chord_1 = performance[1][index];
+              if (chord !== chord_1 && (typeof chord_1 === "object")) {
+                notes_size += chord_1.notes.length;
+              } else if (chord !== chord_0 && (typeof chord_0 === "object")) {
+                notes_size += chord_0.notes.length;
+              }
+              _ref = chord.notes;
+              for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+                note = _ref[_j];
+                osc = new Tone.OmniOscillator(note.freq, waveforms[i]);
+                gain = 0.01 * ($scope.composition.clefs[clef].volume / 10);
+                decibels = osc.gainToDb((gain / notes_size) + (gain * 0.7));
                 osc.setVolume(decibels);
                 osc.toMaster();
                 osc.start(0);
@@ -133,6 +144,7 @@
       };
       $scope.stopPerformance = function() {
         $scope.playing = false;
+        $('.beat.active').removeClass('active');
         return window.clearInterval(performance_interval);
       };
       return $scope.togglePerformance = function() {
@@ -471,6 +483,12 @@
           }, {
             name: 'Triangle',
             value: 'triangle'
+          }, {
+            name: 'Pulse',
+            value: 'pulse'
+          }, {
+            name: 'PWM',
+            value: 'pwm'
           }
         ],
         frequencies: [[16.351, 17.324, 18.354, 19.445, 20.601, 21.827, 23.124, 24.499, 25.956, 27.5, 29.135, 30.868], [32.703, 34.648, 36.708, 38.891, 41.203, 43.654, 46.249, 48.999, 51.913, 55, 58.27, 61.735], [65.406, 69.296, 73.416, 77.782, 82.407, 87.307, 92.499, 97.999, 103.826, 110, 116.541, 123.471], [130.813, 138.591, 146.832, 155.563, 164.814, 174.614, 184.997, 195.998, 207.652, 220, 233.082, 246.942], [261.626, 277.183, 293.665, 311.127, 329.628, 349.228, 369.994, 391.995, 415.305, 440, 466.164, 493.883], [523.251, 554.365, 587.33, 622.254, 659.255, 698.456, 739.989, 783.991, 830.609, 880, 932.328, 987.767], [1046.502, 1108.731, 1174.659, 1244.508, 1318.51, 1396.913, 1479.978, 1567.982, 1661.219, 1760, 1864.655, 1975.533], [2093.005, 2217.461, 2349.318, 2489.016, 2637.021, 2793.826, 2959.955, 3135.964, 3322.438, 3520, 3729.31, 3951.066], [4186.009, 4434.922, 4698.636, 4978.032, 5274.042, 5587.652, 5919.91, 6271.928, 6644.876, 7040, 7458.62, 7902.132], [8372.018, 8869.844, 9397.272, 9956.064, 10548.084, 11175.304, 11839.82, 12543.856, 13289.752, 14080, 14917.24, 15804.264]]
@@ -575,7 +593,6 @@
                 temp_duration--;
               }
             }
-            console.log('length', sequence.length);
             sequences.push(sequence);
           }
           return sequences;

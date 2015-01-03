@@ -1,0 +1,36 @@
+.grid-lines {
+  z-index: 1;
+
+  .gl-staff {
+    height: $s-staff-h;
+    position: absolute;
+    left: 2em; right: 2em;
+    top: 2em;
+    &.gl-staff-1 {
+      top: calc(2em + #{$s-staff-h});
+    }
+    .gl-octave {
+      height: $s-staff-h / 3;
+      width: 100%;
+      display: block;
+      position: relative;
+      .gl-interval {
+        border-bottom: 1px dotted rgba(255,255,255,0.1);
+        width: 100%;
+        position: absolute;
+        left: 0;
+
+        @for $i from 0 through 11 {
+          &:nth-child(#{$i + 1}) {
+            top: (1 / 12 * $i) * 100%;
+          }
+          @if ($i+1) % 4 == 0 {
+            &:nth-child(#{$i + 1}) {
+              border-bottom: 1px dotted rgba(255,255,255,0.3);
+            }
+          }
+        }
+      }
+    }
+  }
+}

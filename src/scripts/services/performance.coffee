@@ -111,7 +111,6 @@ app.service 'Performance', [
             sequence.push new_chord
             # get values resolution-relative value
             res_value = Math.floor((1 / value) / (1 / composition.resolution))
-            # console.log value, res_value
             # if we need to add sustain notes
             if res_value > 1
               # add blank values
@@ -125,7 +124,6 @@ app.service 'Performance', [
             sequence.push 0
             # subtract tick from temp_duration
             temp_duration--
-        console.log 'length',sequence.length
         sequences.push sequence
 
       return sequences

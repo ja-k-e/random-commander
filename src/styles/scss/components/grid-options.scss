@@ -13,32 +13,21 @@
   .go-grid {
     display: table;
     width: 100%;
+    background-color: $c-primary;
     @include clearfix;
     .go-label {
       display: table-cell;
-      box-sizing: border-box;
       cursor: pointer;
       padding: 1.35em 0.5em;
       text-align: center;
-      background-color: $c-black;
-      border-left: $b-light;
-      border-top: $b-light;
-      border-bottom: $b-light;
+      background-color: $c-primary;
       opacity: 0.6;
       &:hover, &:active {
         opacity: 1;
       }
-      &:last-child {
-        border-right: $b-light;
-      }
       &.selected {
         opacity: 1;
-        border-color: $c-gray;
-        border-left-color: transparent;
-        border-right-color: transparent;
-        & + .go-label {
-          border-left-color: transparent;
-        }
+        background-color: $c-primary-d;
       }
     }
   }

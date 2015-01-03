@@ -9,236 +9,272 @@
 
   <div ng-controller="RandomCommanderCtrl as main">
 
-    <aside ng-controller="EditorCtrl as editor">
-      <div class="container">
-        <div class="global-data data-group">
-          <div class="dg-row open">
-            <h2>Global</h2>
-            <div class="dg-drawer">
-              <div class="col-container">
-                <div class="col-3">
-                  <div class="ns-group">
-                    <div number-switch label="Measures" min="4" max="32" step="1" model="composition.measures"></div>
-                    <div number-switch label="Tempo" min="80" max="160" step="1" model="composition.tempo"></div>
-                    <div number-switch label="Beats" min="2" max="7" step="1" model="composition.beats"></div>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div grid-options label="Resolution" model="composition.resolution" groupname="resolutions" options="library.resolutions"></div>
-                </div>
-                <div class="col-6">
-                  <div grid-options label="Root" model="composition.root" groupname="roots" options="library.notes"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="treble-data data-group">
-
-          <div class="dg-row"
-            ng-class="{open: view.t_data == 'tone'}">
-            <h2 ng-click="dataRow('tone', 't')">Tone (Treble)</h2>
-            <div class="dg-drawer">
-              <div class="col-container">
-                <div class="col-3">
-                  <div class="ns-group">
-                    <div number-switch label="Decibels" min="-24" max="0" step="1" model="composition.clefs.treble.decibels"></div>
-                    <div number-switch label="Base Octave" min="1" max="8" step="1" model="composition.clefs.treble.baseoctave"></div>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div grid-options label="Wave Form" model="composition.clefs.treble.waveform" groupname="treble-waveform" options="library.waveforms"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.t_data == 'silence'}">
-            <h2 ng-click="dataRow('silence', 't')">Silence Influence (Treble)</h2>
-            <div class="dg-drawer">
-              <div grid-options model="composition.clefs.treble.silence" groupname="treble-silence" options="library.silence"></div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.t_data == 'values'}">
-            <h2 ng-click="dataRow('values', 't')">Value Influence (Treble)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{value.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="value in library.values track by $index"
-                  model="composition.clefs.treble.values[$index]"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.t_data == 'intervals'}">
-            <h2 ng-click="dataRow('intervals', 't')">Interval Influence (Treble)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{interval.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="interval in library.intervals track by $index"
-                  model="composition.clefs.treble.intervals[$index]"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.t_data == 'chords'}">
-            <h2 ng-click="dataRow('chords', 't')">Chord Influence (Treble)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{chord.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="chord in library.chords track by $index"
-                  model="composition.clefs.treble.chords[$index]"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.t_data == 'octaves'}">
-            <h2 ng-click="dataRow('octaves', 't')">Octave Influence (Treble)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{octave.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="octave in library.octaves track by $index"
-                  model="composition.clefs.treble.octaves[$index]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="bass-data data-group">
-
-          <div class="dg-row"
-            ng-class="{open: view.b_data == 'tone'}">
-            <h2 ng-click="dataRow('tone', 'b')">Tone (Bass)</h2>
-            <div class="dg-drawer">
-              <div class="col-container">
-                <div class="col-3">
-                  <div class="ns-group">
-                    <div number-switch label="Decibels" min="-24" max="0" step="1" model="composition.clefs.bass.decibels"></div>
-                    <div number-switch label="Base Octave" min="1" max="8" step="1" model="composition.clefs.bass.baseoctave"></div>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div grid-options label="Wave Form" model="composition.clefs.bass.waveform" groupname="bass-waveform" options="library.waveforms"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.b_data == 'silence'}">
-            <h2 ng-click="dataRow('silence', 'b')">Silence Influence (Bass)</h2>
-            <div class="dg-drawer">
-              <div grid-options model="composition.clefs.bass.silence" groupname="bass-silence" options="library.silence"></div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.b_data == 'values'}">
-            <h2 ng-click="dataRow('values', 'b')">Value Influence (Bass)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{value.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="value in library.values track by $index"
-                  model="composition.clefs.bass.values[$index]"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.b_data == 'intervals'}">
-            <h2 ng-click="dataRow('intervals', 'b')">Interval Influence (Bass)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{interval.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="interval in library.intervals track by $index"
-                  model="composition.clefs.bass.intervals[$index]"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.b_data == 'chords'}">
-            <h2 ng-click="dataRow('chords', 'b')">Chord Influence (Bass)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{chord.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="chord in library.chords track by $index"
-                  model="composition.clefs.bass.chords[$index]"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dg-row"
-            ng-class="{open: view.b_data == 'octaves'}">
-            <h2 ng-click="dataRow('octaves', 'b')">Octave Influence (Bass)</h2>
-            <div class="dg-drawer">
-              <div class="ns-group">
-                <div number-switch
-                  label="{{octave.name}}"
-                  min="0" max="10" step="1"
-                  ng-repeat="octave in library.octaves track by $index"
-                  model="composition.clefs.bass.octaves[$index]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button id="generate-performance" ng-click="generatePerformance()">Generate</button>
-
-        <div json-paster model="composition" label="Copy/Paste to Save/Resume Settings. Warning: Does not save specific pattern, just settings."></div>
-
-      </div>
-
-    </aside>
-
+    <h1 id="masthead">Random Commander</h1>
 
     <main ng-controller="DisplayCtrl">
-      <div class="container">
-        <div class="notation">
-          <div class="staff"
-            ng-class="{treble: $index == 0, bass: $index == 1}"
-            ng-repeat="staff in performance track by $index">
-            <div class="beat"
-              ng-repeat="chord in staff track by $index"
-              ng-class="{null: chord == 0, sustain: chord == 'sus', chord: chord.notes}"
-              style="width: {{100 / staff.length}}%">
-              <span class="note-interval ni-{{note.int * note.octave}}"
-                ng-repeat="note in chord.notes track by $index"
-                style="top: {{note.int * note.octave / 36 * 100}}%"></span>
+      <div class="outer-notation">
+        <div class="container">
+          <div class="notation">
+            <div class="grid-lines">
+              <!-- <span class="gl-staff gl-staff-{{$index}}" ng-repeat="staff in performance track by $index">
+                <span class="gl-octave gl-octave-{{octave.value}}" ng-repeat="octave in library.octaves track by $index">
+                  <span class="gl-interval gl-interval-{{interval.interval}}" ng-repeat="interval in library.intervals track by $index"></span>
+                </span>
+              </span> -->
+            </div>
+
+            <div class="staff"
+              ng-class="{treble: $index == 0, bass: $index == 1}"
+              ng-repeat="staff in performance track by $index">
+              <div class="beat"
+                ng-repeat="chord in staff track by $index"
+                ng-class="{null: chord == 0, sustain: chord == 'sus', chord: chord.notes}"
+                style="width: {{100 / staff.length}}%">
+                <span class="note-interval ni-{{note.int * note.octave}}"
+                  ng-repeat="note in chord.notes track by $index"
+                  style="top: {{100 - (note.int * note.octave / 36 * 100)}}%"></span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
+      <div class="container">
         <div class="triggers">
-          <a id="play" ng-click="togglePerformance()">
-            <span class="play" ng-if="!playing"></span>
-            <span class="stop" ng-if="playing"></span>
-          </a>
+          <button ng-click="togglePerformance()">
+            <span ng-if="!playing">Start Random Commander</span>
+            <span ng-if="playing">Kill Random Commander</span>
+          </button>
+          <button ng-click="toggleMetronome()">
+            <span ng-if="!metronome">Enable Metronome</span>
+            <span ng-if="metronome">Kill Metronome</span>
+          </button>
         </div>
       </div>
     </main>
+
+    <aside class="editor-canvas">
+
+      <div ng-controller="EditorCtrl as editor">
+        <div class="container">
+
+          <div class="oscillator-data data-group">
+            <div class="dg-row open">
+              <h2>Oscillators</h2>
+              <div class="dg-drawer">
+                <div class="col-container">
+                  <div class="col-4">
+                    <div grid-options label="Treble Waveform" model="composition.clefs.treble.waveform" groupname="treble-waveform" options="library.waveforms"></div>
+                  </div>
+                  <div class="col-4">
+                    <div grid-options label="Bass Waveform" model="composition.clefs.bass.waveform" groupname="bass-waveform" options="library.waveforms"></div>
+                  </div>
+                  <div class="col-4">
+                    <div class="ns-group">
+                      <div number-switch label="T. Volume" min="0" max="10" step="1" model="composition.clefs.treble.volume"></div>
+                      <div number-switch label="B. Volume" min="0" max="10" step="1" model="composition.clefs.bass.volume"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="center">
+            <button ng-click="generatePerformance()">new song (using values below)</button>
+          </div>
+
+          <div class="global-data data-group">
+            <div class="dg-row open">
+              <h2>Global</h2>
+              <div class="dg-drawer">
+                <div class="col-container">
+                  <div class="col-3">
+                    <div class="ns-group">
+                      <div number-switch label="Measures" min="4" max="64" step="1" model="composition.measures"></div>
+                      <div number-switch label="Tempo" min="80" max="160" step="1" model="composition.tempo"></div>
+                      <div number-switch label="Beats" min="2" max="7" step="1" model="composition.beats"></div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-3">
+                    <div grid-options label="Resolution" model="composition.resolution" groupname="resolutions" options="library.resolutions"></div>
+                  </div> -->
+                  <div class="col-6">
+                    <div grid-options label="Root" model="composition.root" groupname="roots" options="library.notes"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="treble-data data-group">
+
+            <div class="dg-row"
+              ng-class="{open: view.t_data == 'values'}">
+              <h2 ng-click="dataRow('values', 't')">Value Influence (Treble)</h2>
+              <div class="dg-drawer">
+                <div class="ns-group">
+                  <div number-switch
+                    label="{{value.name}}"
+                    min="0" max="10" step="1"
+                    ng-repeat="value in library.values track by $index"
+                    model="composition.clefs.treble.values[$index]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.t_data == 'intervals'}">
+              <h2 ng-click="dataRow('intervals', 't')">Interval Influence (Treble)</h2>
+              <div class="dg-drawer">
+                <div class="ns-group">
+                  <div number-switch
+                    label="{{interval.name}}"
+                    min="0" max="10" step="1"
+                    ng-repeat="interval in library.intervals track by $index"
+                    model="composition.clefs.treble.intervals[$index]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.t_data == 'chords'}">
+              <h2 ng-click="dataRow('chords', 't')">Chord Influence (Treble)</h2>
+              <div class="dg-drawer">
+                <div class="ns-group">
+                  <div number-switch
+                    label="{{chord.name}}"
+                    min="0" max="10" step="1"
+                    ng-repeat="chord in library.chords track by $index"
+                    model="composition.clefs.treble.chords[$index]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.t_data == 'octaves'}">
+              <h2 ng-click="dataRow('octaves', 't')">Octave Influence (Treble)</h2>
+              <div class="dg-drawer">
+                <div class="col-container">
+                  <div class="col-3">
+                    <div class="ns-group">
+                      <div number-switch
+                        label="{{octave.name}}"
+                        min="0" max="10" step="1"
+                        ng-repeat="octave in library.octaves track by $index"
+                        model="composition.clefs.treble.octaves[$index]"></div>
+                    </div>
+                  </div>
+                  <div class="col-9">
+                    <div class="ns-group">
+                      <div number-switch label="Starting" min="1" max="8" step="1" model="composition.clefs.treble.baseoctave"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.t_data == 'silence'}">
+              <h2 ng-click="dataRow('silence', 't')">Silence Influence (Treble)</h2>
+              <div class="dg-drawer">
+                <div grid-options model="composition.clefs.treble.silence" groupname="treble-silence" options="library.silence"></div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="bass-data data-group">
+
+            <div class="dg-row"
+              ng-class="{open: view.b_data == 'values'}">
+              <h2 ng-click="dataRow('values', 'b')">Value Influence (Bass)</h2>
+              <div class="dg-drawer">
+                <div class="ns-group">
+                  <div number-switch
+                    label="{{value.name}}"
+                    min="0" max="10" step="1"
+                    ng-repeat="value in library.values track by $index"
+                    model="composition.clefs.bass.values[$index]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.b_data == 'intervals'}">
+              <h2 ng-click="dataRow('intervals', 'b')">Interval Influence (Bass)</h2>
+              <div class="dg-drawer">
+                <div class="ns-group">
+                  <div number-switch
+                    label="{{interval.name}}"
+                    min="0" max="10" step="1"
+                    ng-repeat="interval in library.intervals track by $index"
+                    model="composition.clefs.bass.intervals[$index]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.b_data == 'chords'}">
+              <h2 ng-click="dataRow('chords', 'b')">Chord Influence (Bass)</h2>
+              <div class="dg-drawer">
+                <div class="ns-group">
+                  <div number-switch
+                    label="{{chord.name}}"
+                    min="0" max="10" step="1"
+                    ng-repeat="chord in library.chords track by $index"
+                    model="composition.clefs.bass.chords[$index]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.b_data == 'octaves'}">
+              <h2 ng-click="dataRow('octaves', 'b')">Octave Influence (Bass)</h2>
+              <div class="dg-drawer">
+                <div class="col-container">
+                  <div class="col-3">
+                    <div class="ns-group">
+                      <div number-switch
+                        label="{{octave.name}}"
+                        min="0" max="10" step="1"
+                        ng-repeat="octave in library.octaves track by $index"
+                        model="composition.clefs.bass.octaves[$index]"></div>
+                    </div>
+                  </div>
+                  <div class="col-9">
+                    <div class="ns-group">
+                      <div number-switch label="Starting" min="1" max="8" step="1" model="composition.clefs.bass.baseoctave"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dg-row"
+              ng-class="{open: view.b_data == 'silence'}">
+              <h2 ng-click="dataRow('silence', 'b')">Silence Influence (Bass)</h2>
+              <div class="dg-drawer">
+                <div grid-options model="composition.clefs.bass.silence" groupname="bass-silence" options="library.silence"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="settings-data data-group">
+            <div class="dg-row open dg-row-big">
+              <h2>Settings Store</h2>
+              <div class="dg-drawer">
+                <div json-paster model="composition" label="Copy or Paste code below to Save or Resume settings. Does not save specific pattern."></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
 
   </div>
 

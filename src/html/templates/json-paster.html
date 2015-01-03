@@ -1,5 +1,5 @@
 <div class="json-paster">
-  <label ng-bind="label"></label>
+  <label ng-if="label" ng-bind="label"></label>
   <textarea
     ng-bind="model | json"
     onclick="this.focus();this.select()"
