@@ -22,23 +22,23 @@ app.controller 'RandomCommanderCtrl', [
       root: 4 # root of key
       clefs: {
         treble: {
-          values: [5,0,10,5,5,0,0,0,0]
+          values: [5,0,10,5,0,0,0,0,0]
           intervals: [10,0,0,5,0,0,0,5,0,0,5,0]
           chords: [10,5,5,0,0]
-          octaves: [5,10,10]
+          octaves: [5,10,5]
           silence: 0
-          baseoctave: 5
-          waveform: 'sine'
-          volume: 10
+          baseoctave: 6
+          waveform: 'sawtooth'
+          volume: 6
         }
         bass: {
-          values: [10,10,10,0,0,0,0,0,0]
-          intervals: [10,0,0,10,0,0,0,10,0,0,0,0]
-          chords: [10,5,0,0,0]
+          values: [10,10,10,10,0,0,0,0,0]
+          intervals: [10,0,0,10,0,10,0,10,0,0,10,0]
+          chords: [10,0,0,0,0]
           octaves: [0,10,0]
           silence: 0
           baseoctave: 3
-          waveform: 'sine'
+          waveform: 'sawtooth'
           volume: 10
         }
       }
@@ -86,7 +86,7 @@ app.controller 'RandomCommanderCtrl', [
             if index % ($scope.composition.beats * $scope.composition.beats) then freq = 3000 else freq = 4000
             metronome = new Tone.OmniOscillator(freq, 'pulse')
             # set volume in decibels
-            metronome.setVolume -41
+            metronome.setVolume -50
             # metronome to master
             metronome.toMaster()
             # start metronome
@@ -118,9 +118,9 @@ app.controller 'RandomCommanderCtrl', [
             for note in chord.notes
               osc = new Tone.OmniOscillator(note.freq, waveforms[i])
               # get gain level from decibels
-              gain = 0.01 * ($scope.composition.clefs[clef].volume / 10)
+              gain = 0.1 * ($scope.composition.clefs[clef].volume / 10)
               # get decibels for gain divided by how many notes are playing
-              decibels = osc.gainToDb((gain / notes_size) + (gain * 0.7))
+              decibels = osc.gainToDb((gain / notes_size) + gain)
               # set volume in decibels
               osc.setVolume decibels
               # oscillator to master

@@ -40,23 +40,23 @@
         root: 4,
         clefs: {
           treble: {
-            values: [5, 0, 10, 5, 5, 0, 0, 0, 0],
+            values: [5, 0, 10, 5, 0, 0, 0, 0, 0],
             intervals: [10, 0, 0, 5, 0, 0, 0, 5, 0, 0, 5, 0],
             chords: [10, 5, 5, 0, 0],
-            octaves: [5, 10, 10],
+            octaves: [5, 10, 5],
             silence: 0,
-            baseoctave: 5,
-            waveform: 'sine',
-            volume: 10
+            baseoctave: 6,
+            waveform: 'sawtooth',
+            volume: 6
           },
           bass: {
-            values: [10, 10, 10, 0, 0, 0, 0, 0, 0],
-            intervals: [10, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 0],
-            chords: [10, 5, 0, 0, 0],
+            values: [10, 10, 10, 10, 0, 0, 0, 0, 0],
+            intervals: [10, 0, 0, 10, 0, 10, 0, 10, 0, 0, 10, 0],
+            chords: [10, 0, 0, 0, 0],
             octaves: [0, 10, 0],
             silence: 0,
             baseoctave: 3,
-            waveform: 'sine',
+            waveform: 'sawtooth',
             volume: 10
           }
         }
@@ -91,7 +91,7 @@
                 freq = 4000;
               }
               metronome = new Tone.OmniOscillator(freq, 'pulse');
-              metronome.setVolume(-41);
+              metronome.setVolume(-50);
               metronome.toMaster();
               metronome.start(0);
               metronome.stop("+16n");
@@ -119,8 +119,8 @@
               for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
                 note = _ref[_j];
                 osc = new Tone.OmniOscillator(note.freq, waveforms[i]);
-                gain = 0.01 * ($scope.composition.clefs[clef].volume / 10);
-                decibels = osc.gainToDb((gain / notes_size) + (gain * 0.7));
+                gain = 0.1 * ($scope.composition.clefs[clef].volume / 10);
+                decibels = osc.gainToDb((gain / notes_size) + gain);
                 osc.setVolume(decibels);
                 osc.toMaster();
                 osc.start(0);
