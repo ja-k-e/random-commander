@@ -15,7 +15,7 @@ app.controller 'RandomCommanderCtrl', [
 
     # the composition
     $scope.composition = {
-      measures: 32 # measures to generate
+      measures: 12 # measures to generate
       tempo: 90 # tempo of performance
       beats: 4 # beats per measure
       resolution: 16 # smallest note
@@ -86,7 +86,7 @@ app.controller 'RandomCommanderCtrl', [
             if index % ($scope.composition.beats * $scope.composition.beats) then freq = 3000 else freq = 4000
             metronome = new Tone.OmniOscillator(freq, 'pulse')
             # set volume in decibels
-            metronome.setVolume -50
+            metronome.setVolume -30
             # metronome to master
             metronome.toMaster()
             # start metronome
@@ -138,8 +138,6 @@ app.controller 'RandomCommanderCtrl', [
           else if chord != 'sus'
             $('.' + clef + ' .beat.active').removeClass 'active'
             $('.' + clef + ' .beat.go').removeClass clef + '-go'
-
-
 
         # update index
         index = (index + 1) % beats

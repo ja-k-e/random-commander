@@ -1,23 +1,17 @@
 .outer-notation {
-  padding: 4em 0;
+  padding: 2em 0;
   background: black;
   overflow: hidden;
+  box-sizing: border-box;
   box-shadow:
     0px 0px 2em black,
     0px 0px 0px 1px $c-trans-white;
 }
+
 .notation {
   position: relative;
 }
-.progress {
-  position: absolute;
-  background-color: $c-trans-white;
-  height: $s-staff-h * 2;
-  top: 4em;
-  left: 0;
-  width: 1px;
-}
-$dot-di: 4px;
+
 .staff {
   display: table;
   width: 100%;
@@ -30,12 +24,12 @@ $dot-di: 4px;
       .note-interval {
         display: block;
         position: absolute;
-        width: $dot-di;
-        height: $dot-di;
-        left: calc(50% - #{$dot-di/2});
+        width: $s-dot-di;
+        height: $s-dot-di;
+        left: calc(50% - #{$s-dot-di/2});
         background: $c-black;
         border-radius: 0%;
-        transition: height 100ms, width 100ms, box-shadow 100ms;//, border-radius 100ms;
+        transition: height 100ms, width 100ms, box-shadow 100ms ease-out;
         transform: translate3d(-50%, -50%, 0);
         opacity: 0.5;
         @for $i from 0 through 35 {
@@ -49,31 +43,14 @@ $dot-di: 4px;
         }
       }
     }
-    &.sustain {
-
-    }
-    &.null {
-
-    }
-    &::after {
-      // content: '';
-      // position: absolute;
-      // top: 40%;
-      // bottom: 40%;
-      // left: 0;
-      // right: 0;
-    }
+    &.sustain { }
+    &.null { }
     &.active {
-      &::after {
-        // border-bottom: $b-light;
-        // border-bottom-width: 12px;
-      }
       .note-interval {
         opacity: 1;
-        width: $dot-di * 2;
-        height: $dot-di * 2;
-        transition: height 400ms linear, width 400ms linear, box-shadow 4000ms ease-out;//, border-radius 4000ms;
-        // border-radius: 50%;
+        width: $s-dot-di * 2;
+        height: $s-dot-di * 2;
+        transition: height 400ms, width 400ms, box-shadow 4000ms ease-out;
         @for $i from 0 through 35 {
           &.ni-#{$i} {
             $ratio: $i / 35;

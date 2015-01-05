@@ -89,7 +89,6 @@ app.service 'DataLibrary', [ () ->
         {name: 'Sawtooth', value: 'sawtooth' }
         {name: 'Triangle', value: 'triangle' }
         {name: 'Pulse', value: 'pulse' }
-        {name: 'PWM', value: 'pwm' }
       ]
       # note frequencies array of octave arrays that start on C
       frequencies: [

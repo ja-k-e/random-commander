@@ -368,26 +368,19 @@ button {
   padding: 1em; }
 
 .outer-notation {
-  padding: 4em 0;
+  padding: 2em 0;
   background: black;
   overflow: hidden;
+  box-sizing: border-box;
   box-shadow: 0px 0px 2em black, 0px 0px 0px 1px rgba(255, 255, 255, 0.2); }
 
 .notation {
   position: relative; }
 
-.progress {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.2);
-  height: 240px;
-  top: 4em;
-  left: 0;
-  width: 1px; }
-
 .staff {
   display: table;
   width: 100%;
-  height: 120px; }
+  height: 80px; }
   .staff .beat {
     display: table-cell;
     position: relative; }
@@ -399,8 +392,8 @@ button {
       left: calc(50% - 2px);
       background: #101010;
       border-radius: 0%;
-      -webkit-transition: height 100ms, width 100ms, box-shadow 100ms;
-              transition: height 100ms, width 100ms, box-shadow 100ms;
+      -webkit-transition: height 100ms, width 100ms, box-shadow 100ms ease-out;
+              transition: height 100ms, width 100ms, box-shadow 100ms ease-out;
       -webkit-transform: translate3d(-50%, -50%, 0);
               transform: translate3d(-50%, -50%, 0);
       opacity: 0.5; }
@@ -516,8 +509,8 @@ button {
       opacity: 1;
       width: 8px;
       height: 8px;
-      -webkit-transition: height 400ms linear, width 400ms linear, box-shadow 4000ms ease-out;
-              transition: height 400ms linear, width 400ms linear, box-shadow 4000ms ease-out; }
+      -webkit-transition: height 400ms, width 400ms, box-shadow 4000ms ease-out;
+              transition: height 400ms, width 400ms, box-shadow 4000ms ease-out; }
       .staff .beat.active .note-interval.ni-0 {
         box-shadow: 0px 0px 0px 10px rgba(255, 51, 51, 0.3); }
       .staff .beat.active .note-interval.ni-1 {
@@ -594,15 +587,15 @@ button {
 .grid-lines {
   z-index: 1; }
   .grid-lines .gl-staff {
-    height: 120px;
+    height: 80px;
     position: absolute;
     left: 2em;
     right: 2em;
     top: 2em; }
     .grid-lines .gl-staff.gl-staff-1 {
-      top: calc(2em + 120px); }
+      top: calc(2em + 80px); }
     .grid-lines .gl-staff .gl-octave {
-      height: 40px;
+      height: 26.66667px;
       width: 100%;
       display: block;
       position: relative; }
