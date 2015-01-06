@@ -33,7 +33,7 @@
         return $scope.metronome = !$scope.metronome;
       };
       $scope.composition = {
-        measures: 12,
+        measures: 8,
         tempo: 90,
         beats: 4,
         resolution: 16,
@@ -558,6 +558,7 @@
                   length: 1 / value,
                   notes: []
                 };
+                console.log(value, new_chord.length / (1 / composition.resolution));
                 for (note = _i = 1; 1 <= chord ? _i <= chord : _i >= chord; note = 1 <= chord ? ++_i : --_i) {
                   interval = randomVal(clef.intervals_pkg)[0]["interval"];
                   octave = randomVal(clef.octaves_pkg)[0]["value"];

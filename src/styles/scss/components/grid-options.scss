@@ -9,6 +9,7 @@
   & > label {
     @include small-label;
     display: block;
+    color: $c-white;
   }
   .go-grid {
     display: table;
@@ -18,7 +19,7 @@
     .go-label {
       display: table-cell;
       cursor: pointer;
-      padding: 1.35em 0.5em;
+      padding: 1.1em 0.5em;
       text-align: center;
       background-color: $c-primary;
       opacity: 0.6;

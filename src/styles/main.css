@@ -3,19 +3,20 @@ body {
   font-family: "Yanone Kaffeesatz", "Helvetica Neue LT Pro", Helvetica, sans-serif;
   margin: 0;
   background-color: #101010;
-  background: -webkit-linear-gradient(45deg, #141414 0%, #212121 100%);
-  background: linear-gradient(45deg, #141414 0%, #212121 100%);
+  background: -webkit-linear-gradient(45deg, black 0%, #0d0d0d 100%);
+  background: linear-gradient(45deg, black 0%, #0d0d0d 100%);
   font-weight: 300;
   background-position: fixed;
   color: white;
   min-width: 900px;
   overflow: scroll;
-  font-size: 15px; }
+  font-size: 13px; }
 
 #masthead {
-  font-size: 3em;
+  font-size: 1em;
   text-align: center;
-  padding: 1em 0 1em; }
+  padding: 4em 0 0;
+  letter-spacing: 1em; }
 
 .container {
   width: 95%;
@@ -24,7 +25,7 @@ body {
   margin: 0 auto; }
 
 main {
-  padding: 0; }
+  padding: 2em 0 4em; }
 
 aside {
   padding: 1em 0; }
@@ -186,6 +187,7 @@ button {
   background-color: #101010;
   color: white;
   padding: 1em;
+  letter-spacing: 1em;
   cursor: pointer; }
   button:hover, button:active {
     background-color: #292929; }
@@ -204,17 +206,12 @@ button {
     box-sizing: border-box;
     -webkit-transition: max-height 300ms, padding 300ms;
             transition: max-height 300ms, padding 300ms;
-    overflow: hidden;
-    max-height: 0;
-    padding: 0 0.5em;
-    background-color: #d9d9d9; }
-  .data-group .dg-row.open h2 {
+    padding: 0; }
+  .data-group .dg-row h2 {
     pointer-events: none;
-    background-color: #101010;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
-  .data-group .dg-row.open .dg-drawer {
-    padding: 1em 0.5em;
-    max-height: 140px; }
+    background-color: #292929; }
+  .data-group .dg-row .dg-drawer {
+    padding: 1em 0; }
   .data-group h1 {
     font-size: 1.2em;
     padding: 0.5em 0;
@@ -223,11 +220,7 @@ button {
     box-sizing: border-box;
     font-size: 1em;
     padding: 0.5em;
-    background-color: #666666;
-    cursor: pointer;
-    border-top: 1px solid rgba(255, 255, 255, 0.2); }
-    .data-group h2:hover, .data-group h2:active {
-      background-color: #333333; }
+    cursor: pointer; }
 
 .grid-options input {
   opacity: 0;
@@ -244,7 +237,8 @@ button {
   letter-spacing: 0.05em;
   color: #101010;
   text-align: center;
-  display: block; }
+  display: block;
+  color: white; }
 .grid-options .go-grid {
   display: table;
   width: 100%;
@@ -256,7 +250,7 @@ button {
   .grid-options .go-grid .go-label {
     display: table-cell;
     cursor: pointer;
-    padding: 1.35em 0.5em;
+    padding: 1.1em 0.5em;
     text-align: center;
     background-color: #666666;
     opacity: 0.6; }
@@ -276,7 +270,7 @@ button {
     display: table-cell;
     vertical-align: bottom;
     padding: 0 0.5em;
-    width: 60px; }
+    width: 50px; }
     .ns-group [number-switch]:first-child {
       padding-left: 0; }
     .ns-group [number-switch]:last-child {
@@ -294,15 +288,16 @@ button {
         letter-spacing: 0.05em;
         color: #101010;
         text-align: center;
-        display: block; }
+        display: block;
+        color: white; }
       .ns-group [number-switch] .number-switch .ns-arrow-up,
       .ns-group [number-switch] .number-switch .ns-arrow-down,
       .ns-group [number-switch] .number-switch .ns-input {
         display: block;
         width: 100%; }
       .ns-group [number-switch] .number-switch .ns-input {
-        height: 28px;
-        line-height: 28px;
+        height: 18px;
+        line-height: 18px;
         font-size: 1em;
         text-align: center;
         padding: 0;
@@ -369,10 +364,8 @@ button {
 
 .outer-notation {
   padding: 2em 0;
-  background: black;
   overflow: hidden;
-  box-sizing: border-box;
-  box-shadow: 0px 0px 2em black, 0px 0px 0px 1px rgba(255, 255, 255, 0.2); }
+  box-sizing: border-box; }
 
 .notation {
   position: relative; }
@@ -380,222 +373,190 @@ button {
 .staff {
   display: table;
   width: 100%;
-  height: 80px; }
+  height: 50px; }
+  .staff:last-of-type {
+    border-bottom: none; }
+  .staff.treble .note-interval.ni-0 {
+    background-color: rgba(51, 255, 255, 0.8); }
+  .staff.treble .note-interval.ni-1 {
+    background-color: rgba(51, 238, 255, 0.8); }
+  .staff.treble .note-interval.ni-2 {
+    background-color: rgba(51, 220, 255, 0.8); }
+  .staff.treble .note-interval.ni-3 {
+    background-color: rgba(51, 203, 255, 0.8); }
+  .staff.treble .note-interval.ni-4 {
+    background-color: rgba(51, 185, 255, 0.8); }
+  .staff.treble .note-interval.ni-5 {
+    background-color: rgba(51, 168, 255, 0.8); }
+  .staff.treble .note-interval.ni-6 {
+    background-color: rgba(51, 150, 255, 0.8); }
+  .staff.treble .note-interval.ni-7 {
+    background-color: rgba(51, 133, 255, 0.8); }
+  .staff.treble .note-interval.ni-8 {
+    background-color: rgba(51, 115, 255, 0.8); }
+  .staff.treble .note-interval.ni-9 {
+    background-color: rgba(51, 98, 255, 0.8); }
+  .staff.treble .note-interval.ni-10 {
+    background-color: rgba(51, 80, 255, 0.8); }
+  .staff.treble .note-interval.ni-11 {
+    background-color: rgba(51, 63, 255, 0.8); }
+  .staff.treble .note-interval.ni-12 {
+    background-color: rgba(57, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-13 {
+    background-color: rgba(74, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-14 {
+    background-color: rgba(92, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-15 {
+    background-color: rgba(109, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-16 {
+    background-color: rgba(127, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-17 {
+    background-color: rgba(144, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-18 {
+    background-color: rgba(162, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-19 {
+    background-color: rgba(179, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-20 {
+    background-color: rgba(197, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-21 {
+    background-color: rgba(214, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-22 {
+    background-color: rgba(232, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-23 {
+    background-color: rgba(249, 51, 255, 0.8); }
+  .staff.treble .note-interval.ni-24 {
+    background-color: rgba(255, 51, 243, 0.8); }
+  .staff.treble .note-interval.ni-25 {
+    background-color: rgba(255, 51, 226, 0.8); }
+  .staff.treble .note-interval.ni-26 {
+    background-color: rgba(255, 51, 208, 0.8); }
+  .staff.treble .note-interval.ni-27 {
+    background-color: rgba(255, 51, 191, 0.8); }
+  .staff.treble .note-interval.ni-28 {
+    background-color: rgba(255, 51, 173, 0.8); }
+  .staff.treble .note-interval.ni-29 {
+    background-color: rgba(255, 51, 156, 0.8); }
+  .staff.treble .note-interval.ni-30 {
+    background-color: rgba(255, 51, 138, 0.8); }
+  .staff.treble .note-interval.ni-31 {
+    background-color: rgba(255, 51, 121, 0.8); }
+  .staff.treble .note-interval.ni-32 {
+    background-color: rgba(255, 51, 103, 0.8); }
+  .staff.treble .note-interval.ni-33 {
+    background-color: rgba(255, 51, 86, 0.8); }
+  .staff.treble .note-interval.ni-34 {
+    background-color: rgba(255, 51, 68, 0.8); }
+  .staff.treble .note-interval.ni-35 {
+    background-color: rgba(255, 51, 51, 0.8); }
+  .staff.bass .note-interval.ni-0 {
+    background-color: rgba(255, 51, 51, 0.8); }
+  .staff.bass .note-interval.ni-1 {
+    background-color: rgba(255, 68, 51, 0.8); }
+  .staff.bass .note-interval.ni-2 {
+    background-color: rgba(255, 86, 51, 0.8); }
+  .staff.bass .note-interval.ni-3 {
+    background-color: rgba(255, 103, 51, 0.8); }
+  .staff.bass .note-interval.ni-4 {
+    background-color: rgba(255, 121, 51, 0.8); }
+  .staff.bass .note-interval.ni-5 {
+    background-color: rgba(255, 138, 51, 0.8); }
+  .staff.bass .note-interval.ni-6 {
+    background-color: rgba(255, 156, 51, 0.8); }
+  .staff.bass .note-interval.ni-7 {
+    background-color: rgba(255, 173, 51, 0.8); }
+  .staff.bass .note-interval.ni-8 {
+    background-color: rgba(255, 191, 51, 0.8); }
+  .staff.bass .note-interval.ni-9 {
+    background-color: rgba(255, 208, 51, 0.8); }
+  .staff.bass .note-interval.ni-10 {
+    background-color: rgba(255, 226, 51, 0.8); }
+  .staff.bass .note-interval.ni-11 {
+    background-color: rgba(255, 243, 51, 0.8); }
+  .staff.bass .note-interval.ni-12 {
+    background-color: rgba(249, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-13 {
+    background-color: rgba(232, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-14 {
+    background-color: rgba(214, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-15 {
+    background-color: rgba(197, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-16 {
+    background-color: rgba(179, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-17 {
+    background-color: rgba(162, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-18 {
+    background-color: rgba(144, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-19 {
+    background-color: rgba(127, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-20 {
+    background-color: rgba(109, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-21 {
+    background-color: rgba(92, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-22 {
+    background-color: rgba(74, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-23 {
+    background-color: rgba(57, 255, 51, 0.8); }
+  .staff.bass .note-interval.ni-24 {
+    background-color: rgba(51, 255, 63, 0.8); }
+  .staff.bass .note-interval.ni-25 {
+    background-color: rgba(51, 255, 80, 0.8); }
+  .staff.bass .note-interval.ni-26 {
+    background-color: rgba(51, 255, 98, 0.8); }
+  .staff.bass .note-interval.ni-27 {
+    background-color: rgba(51, 255, 115, 0.8); }
+  .staff.bass .note-interval.ni-28 {
+    background-color: rgba(51, 255, 133, 0.8); }
+  .staff.bass .note-interval.ni-29 {
+    background-color: rgba(51, 255, 150, 0.8); }
+  .staff.bass .note-interval.ni-30 {
+    background-color: rgba(51, 255, 168, 0.8); }
+  .staff.bass .note-interval.ni-31 {
+    background-color: rgba(51, 255, 185, 0.8); }
+  .staff.bass .note-interval.ni-32 {
+    background-color: rgba(51, 255, 203, 0.8); }
+  .staff.bass .note-interval.ni-33 {
+    background-color: rgba(51, 255, 220, 0.8); }
+  .staff.bass .note-interval.ni-34 {
+    background-color: rgba(51, 255, 238, 0.8); }
+  .staff.bass .note-interval.ni-35 {
+    background-color: rgba(51, 255, 255, 0.8); }
   .staff .beat {
     display: table-cell;
     position: relative; }
     .staff .beat.chord .note-interval {
       display: block;
       position: absolute;
-      width: 4px;
-      height: 4px;
-      left: calc(50% - 2px);
-      background: #101010;
+      width: 100%;
+      height: 1px;
+      left: 0;
       border-radius: 0%;
-      -webkit-transition: height 100ms, width 100ms, box-shadow 100ms ease-out;
-              transition: height 100ms, width 100ms, box-shadow 100ms ease-out;
-      -webkit-transform: translate3d(-50%, -50%, 0);
-              transform: translate3d(-50%, -50%, 0);
+      -webkit-transition: height 100ms, box-shadow 100ms ease-out;
+              transition: height 100ms, box-shadow 100ms ease-out;
+      -webkit-transition: opacity 400ms;
+              transition: opacity 400ms;
+      -webkit-transform: translate3d(0, -50%, 0);
+              transform: translate3d(0, -50%, 0);
       opacity: 0.5; }
-      .staff .beat.chord .note-interval.ni-0 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 51, 51, 0.02);
-        background-color: #ff3333; }
-      .staff .beat.chord .note-interval.ni-1 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 86, 51, 0.02);
-        background-color: #ff5633; }
-      .staff .beat.chord .note-interval.ni-2 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 121, 51, 0.02);
-        background-color: #ff7933; }
-      .staff .beat.chord .note-interval.ni-3 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 156, 51, 0.02);
-        background-color: #ff9c33; }
-      .staff .beat.chord .note-interval.ni-4 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 191, 51, 0.02);
-        background-color: #ffbf33; }
-      .staff .beat.chord .note-interval.ni-5 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 226, 51, 0.02);
-        background-color: #ffe233; }
-      .staff .beat.chord .note-interval.ni-6 {
-        box-shadow: 0px 0px 0px 0px rgba(249, 255, 51, 0.02);
-        background-color: #f9ff33; }
-      .staff .beat.chord .note-interval.ni-7 {
-        box-shadow: 0px 0px 0px 0px rgba(214, 255, 51, 0.02);
-        background-color: #d6ff33; }
-      .staff .beat.chord .note-interval.ni-8 {
-        box-shadow: 0px 0px 0px 0px rgba(179, 255, 51, 0.02);
-        background-color: #b3ff33; }
-      .staff .beat.chord .note-interval.ni-9 {
-        box-shadow: 0px 0px 0px 0px rgba(144, 255, 51, 0.02);
-        background-color: #90ff33; }
-      .staff .beat.chord .note-interval.ni-10 {
-        box-shadow: 0px 0px 0px 0px rgba(109, 255, 51, 0.02);
-        background-color: #6dff33; }
-      .staff .beat.chord .note-interval.ni-11 {
-        box-shadow: 0px 0px 0px 0px rgba(74, 255, 51, 0.02);
-        background-color: #4aff33; }
-      .staff .beat.chord .note-interval.ni-12 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 255, 63, 0.02);
-        background-color: #33ff3f; }
-      .staff .beat.chord .note-interval.ni-13 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 255, 98, 0.02);
-        background-color: #33ff62; }
-      .staff .beat.chord .note-interval.ni-14 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 255, 133, 0.02);
-        background-color: #33ff85; }
-      .staff .beat.chord .note-interval.ni-15 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 255, 168, 0.02);
-        background-color: #33ffa8; }
-      .staff .beat.chord .note-interval.ni-16 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 255, 203, 0.02);
-        background-color: #33ffcb; }
-      .staff .beat.chord .note-interval.ni-17 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 255, 238, 0.02);
-        background-color: #33ffee; }
-      .staff .beat.chord .note-interval.ni-18 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 238, 255, 0.02);
-        background-color: #33eeff; }
-      .staff .beat.chord .note-interval.ni-19 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 203, 255, 0.02);
-        background-color: #33cbff; }
-      .staff .beat.chord .note-interval.ni-20 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 168, 255, 0.02);
-        background-color: #33a8ff; }
-      .staff .beat.chord .note-interval.ni-21 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 133, 255, 0.02);
-        background-color: #3385ff; }
-      .staff .beat.chord .note-interval.ni-22 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 98, 255, 0.02);
-        background-color: #3362ff; }
-      .staff .beat.chord .note-interval.ni-23 {
-        box-shadow: 0px 0px 0px 0px rgba(51, 63, 255, 0.02);
-        background-color: #333fff; }
-      .staff .beat.chord .note-interval.ni-24 {
-        box-shadow: 0px 0px 0px 0px rgba(74, 51, 255, 0.02);
-        background-color: #4a33ff; }
-      .staff .beat.chord .note-interval.ni-25 {
-        box-shadow: 0px 0px 0px 0px rgba(109, 51, 255, 0.02);
-        background-color: #6d33ff; }
-      .staff .beat.chord .note-interval.ni-26 {
-        box-shadow: 0px 0px 0px 0px rgba(144, 51, 255, 0.02);
-        background-color: #9033ff; }
-      .staff .beat.chord .note-interval.ni-27 {
-        box-shadow: 0px 0px 0px 0px rgba(179, 51, 255, 0.02);
-        background-color: #b333ff; }
-      .staff .beat.chord .note-interval.ni-28 {
-        box-shadow: 0px 0px 0px 0px rgba(214, 51, 255, 0.02);
-        background-color: #d633ff; }
-      .staff .beat.chord .note-interval.ni-29 {
-        box-shadow: 0px 0px 0px 0px rgba(249, 51, 255, 0.02);
-        background-color: #f933ff; }
-      .staff .beat.chord .note-interval.ni-30 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 51, 226, 0.02);
-        background-color: #ff33e2; }
-      .staff .beat.chord .note-interval.ni-31 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 51, 191, 0.02);
-        background-color: #ff33bf; }
-      .staff .beat.chord .note-interval.ni-32 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 51, 156, 0.02);
-        background-color: #ff339c; }
-      .staff .beat.chord .note-interval.ni-33 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 51, 121, 0.02);
-        background-color: #ff3379; }
-      .staff .beat.chord .note-interval.ni-34 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 51, 86, 0.02);
-        background-color: #ff3356; }
-      .staff .beat.chord .note-interval.ni-35 {
-        box-shadow: 0px 0px 0px 0px rgba(255, 51, 51, 0.02);
-        background-color: #ff3333; }
     .staff .beat.active .note-interval {
       opacity: 1;
-      width: 8px;
-      height: 8px;
-      -webkit-transition: height 400ms, width 400ms, box-shadow 4000ms ease-out;
-              transition: height 400ms, width 400ms, box-shadow 4000ms ease-out; }
-      .staff .beat.active .note-interval.ni-0 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 51, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-1 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 86, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-2 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 121, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-3 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 156, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-4 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 191, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-5 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 226, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-6 {
-        box-shadow: 0px 0px 0px 10px rgba(249, 255, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-7 {
-        box-shadow: 0px 0px 0px 10px rgba(214, 255, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-8 {
-        box-shadow: 0px 0px 0px 10px rgba(179, 255, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-9 {
-        box-shadow: 0px 0px 0px 10px rgba(144, 255, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-10 {
-        box-shadow: 0px 0px 0px 10px rgba(109, 255, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-11 {
-        box-shadow: 0px 0px 0px 10px rgba(74, 255, 51, 0.3); }
-      .staff .beat.active .note-interval.ni-12 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 255, 63, 0.3); }
-      .staff .beat.active .note-interval.ni-13 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 255, 98, 0.3); }
-      .staff .beat.active .note-interval.ni-14 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 255, 133, 0.3); }
-      .staff .beat.active .note-interval.ni-15 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 255, 168, 0.3); }
-      .staff .beat.active .note-interval.ni-16 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 255, 203, 0.3); }
-      .staff .beat.active .note-interval.ni-17 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 255, 238, 0.3); }
-      .staff .beat.active .note-interval.ni-18 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 238, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-19 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 203, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-20 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 168, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-21 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 133, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-22 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 98, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-23 {
-        box-shadow: 0px 0px 0px 10px rgba(51, 63, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-24 {
-        box-shadow: 0px 0px 0px 10px rgba(74, 51, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-25 {
-        box-shadow: 0px 0px 0px 10px rgba(109, 51, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-26 {
-        box-shadow: 0px 0px 0px 10px rgba(144, 51, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-27 {
-        box-shadow: 0px 0px 0px 10px rgba(179, 51, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-28 {
-        box-shadow: 0px 0px 0px 10px rgba(214, 51, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-29 {
-        box-shadow: 0px 0px 0px 10px rgba(249, 51, 255, 0.3); }
-      .staff .beat.active .note-interval.ni-30 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 51, 226, 0.3); }
-      .staff .beat.active .note-interval.ni-31 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 51, 191, 0.3); }
-      .staff .beat.active .note-interval.ni-32 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 51, 156, 0.3); }
-      .staff .beat.active .note-interval.ni-33 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 51, 121, 0.3); }
-      .staff .beat.active .note-interval.ni-34 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 51, 86, 0.3); }
-      .staff .beat.active .note-interval.ni-35 {
-        box-shadow: 0px 0px 0px 10px rgba(255, 51, 51, 0.3); }
+      height: 2px;
+      -webkit-transition: height 400ms, box-shadow 4000ms ease-out;
+              transition: height 400ms, box-shadow 4000ms ease-out;
+      -webkit-transition: opacity 400ms;
+              transition: opacity 400ms; }
 
 .grid-lines {
   z-index: 1; }
   .grid-lines .gl-staff {
-    height: 80px;
+    height: 50px;
     position: absolute;
     left: 2em;
     right: 2em;
     top: 2em; }
     .grid-lines .gl-staff.gl-staff-1 {
-      top: calc(2em + 80px); }
+      top: calc(2em + 50px); }
     .grid-lines .gl-staff .gl-octave {
-      height: 26.66667px;
+      height: 16.66667px;
       width: 100%;
       display: block;
       position: relative; }

@@ -2,19 +2,20 @@ body {
   font-family: $f-sans;
   margin: 0;
   background-color: $c-black;
-  background: linear-gradient(45deg, lighten(black, 8%) 0%, lighten(black, 13%) 100%);
+  background: linear-gradient(45deg, lighten(black, 0%) 0%, lighten(black, 5%) 100%);
   font-weight: 300;
   background-position: fixed;
   color: $c-white;
   min-width: $s-min-w;
   overflow: scroll;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 #masthead {
-  font-size: 3em;
+  font-size: 1em;
   text-align: center;
-  padding: 1em 0 1em;
+  padding: 4em 0 0;
+  letter-spacing: 1em;
 }
 .container {
   width: 95%;
@@ -24,7 +25,7 @@ body {
 }
 
 main {
-  padding: 0;
+  padding: 2em 0 4em;
 }
 
 aside {

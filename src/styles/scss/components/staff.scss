@@ -1,11 +1,9 @@
 .outer-notation {
   padding: 2em 0;
-  background: black;
+  // background: black;
   overflow: hidden;
   box-sizing: border-box;
-  box-shadow:
-    0px 0px 2em black,
-    0px 0px 0px 1px $c-trans-white;
+  // box-shadow: 0px 0px 0px 1px $c-trans-white;
 }
 
 .notation {
@@ -17,6 +15,43 @@
   width: 100%;
   height: $s-staff-h;
 
+  $staff-border: 1px solid $c-trans-white;
+
+  $staff-space: 12px;
+
+  // margin-top: $staff-space;
+  // padding-bottom: $staff-space;
+
+  // border-bottom: $staff-border;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.treble {
+    .note-interval {
+      @for $i from 0 through 35 {
+        &.ni-#{$i} {
+          $ratio: $i / 35;
+          $color: hsla($ratio * 180 + 180, 100%, 60%, 0.8);
+          background-color: $color;
+        }
+      }
+    }
+  }
+
+  &.bass {
+    .note-interval {
+      @for $i from 0 through 35 {
+        &.ni-#{$i} {
+          $ratio: $i / 35;
+          $color: hsla($ratio * 180, 100%, 60%, 0.8);
+          background-color: $color;
+        }
+      }
+    }
+  }
+
   .beat {
     display: table-cell;
     position: relative;
@@ -24,23 +59,16 @@
       .note-interval {
         display: block;
         position: absolute;
-        width: $s-dot-di;
-        height: $s-dot-di;
-        left: calc(50% - #{$s-dot-di/2});
-        background: $c-black;
+        width: 100%;
+        height: 1px;
+        left: 0;
+        // background: $c-black;
         border-radius: 0%;
-        transition: height 100ms, width 100ms, box-shadow 100ms ease-out;
-        transform: translate3d(-50%, -50%, 0);
+        transition: height 100ms, box-shadow 100ms ease-out;
+        transition: opacity 400ms;
+        transform: translate3d(0, -50%, 0);
         opacity: 0.5;
-        @for $i from 0 through 35 {
-          &.ni-#{$i} {
-            $ratio: $i / 35;
-            $color: hsl($ratio * 360, 100%, 60%);
-            $box-color: hsla($ratio * 360, 100%, 60%, 0.02);
-            box-shadow: 0px 0px 0px 0px $box-color;
-            background-color: $color;
-          }
-        }
+
       }
     }
     &.sustain { }
@@ -48,16 +76,17 @@
     &.active {
       .note-interval {
         opacity: 1;
-        width: $s-dot-di * 2;
-        height: $s-dot-di * 2;
-        transition: height 400ms, width 400ms, box-shadow 4000ms ease-out;
-        @for $i from 0 through 35 {
-          &.ni-#{$i} {
-            $ratio: $i / 35;
-            $color: hsla($ratio * 360, 100%, 60%, 0.3);
-            box-shadow: 0px 0px 0px 10px $color;
-          }
-        }
+        // width: $s-dot-di * 2;
+        height: $s-dot-di / 2;
+        transition: height 400ms, box-shadow 4000ms ease-out;
+        transition: opacity 400ms;
+        // @for $i from 0 through 35 {
+          // &.ni-#{$i} {
+            // $ratio: $i / 35;
+            // $color: hsla($ratio * 360, 100%, 60%, 0.3);
+            // box-shadow: 0px 0px 0px 10px $color;
+          // }
+        // }
       }
     }
   }

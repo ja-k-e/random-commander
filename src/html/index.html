@@ -32,7 +32,7 @@
                 style="width: {{100 / staff.length}}%">
                 <span class="note-interval ni-{{note.int * note.octave}}"
                   ng-repeat="note in chord.notes track by $index"
-                  style="top: {{100 - (note.int * note.octave / 36 * 100)}}%"></span>
+                  style="top: {{100 - (note.int * note.octave / 36 * 100)}}%; width: {{98 * (chord.length / (1 / composition.resolution))}}%"></span>
               </div>
             </div>
           </div>
@@ -42,12 +42,13 @@
       <div class="container">
         <div class="triggers">
           <button ng-click="togglePerformance()">
-            <span ng-if="!playing">Start Random Commander</span>
-            <span ng-if="playing">Kill Random Commander</span>
+            <span ng-if="!playing">RndCmndr On</span>
+            <span ng-if="playing">RndCmndr Off</span>
           </button>
+          <br>
           <button ng-click="toggleMetronome()">
-            <span ng-if="!metronome">Enable Metronome</span>
-            <span ng-if="metronome">Kill Metronome</span>
+            <span ng-if="!metronome">Metronome On</span>
+            <span ng-if="metronome">Metronome Off</span>
           </button>
         </div>
       </div>

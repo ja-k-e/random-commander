@@ -83,6 +83,7 @@ app.service 'Performance', [
 
             # the new chord
             new_chord = {length: (1 / value), notes: []}
+            console.log value, new_chord.length / (1 / composition.resolution)
             # for each note in the chord
             for note in [1..chord]
               # get a random interval
@@ -90,7 +91,7 @@ app.service 'Performance', [
               # get the random octave
               octave = randomVal(clef.octaves_pkg)[0]["value"]
 
-              # make intervale relative to key
+              # make interval relative to key
               interval += composition.root
               # if key pushes interval into new octave
               if interval > 12

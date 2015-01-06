@@ -10,6 +10,7 @@ button {
   background-color: $c-black;
   color: $c-white;
   padding: 1em;
+  letter-spacing: 1em;
   cursor: pointer;
   &:hover, &:active {
     background-color: $c-off-black;

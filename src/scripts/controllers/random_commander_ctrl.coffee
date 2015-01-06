@@ -15,7 +15,7 @@ app.controller 'RandomCommanderCtrl', [
 
     # the composition
     $scope.composition = {
-      measures: 12 # measures to generate
+      measures: 8 # measures to generate
       tempo: 90 # tempo of performance
       beats: 4 # beats per measure
       resolution: 16 # smallest note

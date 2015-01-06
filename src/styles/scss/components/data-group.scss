@@ -13,22 +13,23 @@
       display: block;
       box-sizing: border-box;
       transition: max-height $ui-time, padding $ui-time;
-      overflow: hidden;
-      max-height: 0;
-      padding: 0 0.5em;
-      background-color: $c-off-white;
+      // overflow: hidden;
+      // max-height: 0;
+      // padding: 0 0.5em;
+      padding: 0;
+      // background-color: $c-off-white;
     }
-    &.open {
-      h2 {
-        pointer-events: none;
-        background-color: $c-black;
-        border-bottom: $b-light;
-      }
-      .dg-drawer {
-        padding: 1em 0.5em;
-        max-height: 140px;
-      }
+    // &.open {
+    h2 {
+      pointer-events: none;
+      background-color: $c-off-black;
+      // border-bottom: $b-light;
     }
+    .dg-drawer {
+      padding: 1em 0; // 0.5em;
+      // max-height: 140px;
+    }
+    // }
   }
 
   h1 {
@@ -40,11 +41,11 @@
     box-sizing: border-box;
     font-size: 1em;
     padding: 0.5em;
-    background-color: $c-primary;
+    // background-color: $c-primary;
     cursor: pointer;
-    border-top: $b-light;
+    // border-top: $b-light;
     &:hover, &:active {
-      background-color: $c-primary-d;
+      // background-color: $c-primary-d;
     }
   }
 

@@ -2,7 +2,7 @@
   display: table;
 
   [number-switch] {
-    $ns-di: 60px;
+    $ns-di: 50px;
     $ns-arrow-h: 16px;
     user-select: none;
     display: table-cell;
@@ -23,6 +23,7 @@
       label {
         @include small-label;
         display: block;
+        color: $c-white;
       }
 
       .ns-arrow-up,
