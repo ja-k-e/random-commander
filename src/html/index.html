@@ -30,9 +30,9 @@
                 ng-repeat="chord in staff track by $index"
                 ng-class="{null: chord == 0, sustain: chord == 'sus', chord: chord.notes}"
                 style="width: {{100 / staff.length}}%">
-                <span class="note-interval ni-{{note.int * note.octave}}"
+                <span class="note-interval ni-{{note.int + (12 * (note.octave - 1))}}"
                   ng-repeat="note in chord.notes track by $index"
-                  style="top: {{100 - (note.int * note.octave / 36 * 100)}}%; width: {{98 * (chord.length / (1 / composition.resolution))}}%"></span>
+                  style="top: {{note.top}}%; width: {{chord.note_width}}%"></span>
               </div>
             </div>
           </div>
@@ -45,35 +45,50 @@
             <span ng-if="!playing">RndCmndr On</span>
             <span ng-if="playing">RndCmndr Off</span>
           </button>
-          <br>
           <button ng-click="toggleMetronome()">
             <span ng-if="!metronome">Metronome On</span>
             <span ng-if="metronome">Metronome Off</span>
           </button>
+          <br>
+          <button ng-click="generatePerformance()">New Song</button>
+          <button ng-click="toggleMenu()">Edit Parameters</button>
         </div>
       </div>
     </main>
 
-    <aside class="editor-canvas">
 
-      <div ng-controller="EditorCtrl as editor">
+    <div ng-controller="EditorCtrl as editor">
+      <aside class="editor-canvas" ng-if="menu">
         <div class="container">
+          <nav class="editor-menu">
+            <ul>
+              <li><a href="#" ng-class="{active:view.group == 'oscillators'}" ng-click="view.group = 'oscillators'">Oscillators</a></li
+              ><li><a href="#" ng-class="{active:view.group == 'global'}" ng-click="view.group = 'global'">Global</a></li
+              ><li><a href="#" ng-class="{active:view.group == 'treble'}" ng-click="view.group = 'treble'">Treble Clef</a></li
+              ><li><a href="#" ng-class="{active:view.group == 'bass'}" ng-click="view.group = 'bass'">Bass Clef</a></li
+              ><li><a href="#" ng-class="{active:view.group == 'settings'}" ng-click="view.group = 'settings'">Settings Store</a></li
+              ><li><a href="#" ng-click="toggleMenu()">Close</a></li>
+            </ul>
+          </nav>
 
-          <div class="oscillator-data data-group">
-            <div class="dg-row open">
-              <h2>Oscillators</h2>
+          <div class="oscillator-data data-group" ng-if="view.group == 'oscillators'">
+            <div class="dg-row">
               <div class="dg-drawer">
                 <div class="col-container">
                   <div class="col-4">
                     <div grid-options label="Treble Waveform" model="composition.clefs.treble.waveform" groupname="treble-waveform" options="library.waveforms"></div>
                   </div>
+                  <div class="col-2">
+                    <div class="ns-group">
+                      <div number-switch label="T. Vol" min="0" max="10" step="1" model="composition.clefs.treble.volume"></div>
+                    </div>
+                  </div>
                   <div class="col-4">
                     <div grid-options label="Bass Waveform" model="composition.clefs.bass.waveform" groupname="bass-waveform" options="library.waveforms"></div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-2">
                     <div class="ns-group">
-                      <div number-switch label="T. Volume" min="0" max="10" step="1" model="composition.clefs.treble.volume"></div>
-                      <div number-switch label="B. Volume" min="0" max="10" step="1" model="composition.clefs.bass.volume"></div>
+                      <div number-switch label="B. Vol" min="0" max="10" step="1" model="composition.clefs.bass.volume"></div>
                     </div>
                   </div>
                 </div>
@@ -81,13 +96,8 @@
             </div>
           </div>
 
-          <div class="center">
-            <button ng-click="generatePerformance()">new song (using values below)</button>
-          </div>
-
-          <div class="global-data data-group">
-            <div class="dg-row open">
-              <h2>Global</h2>
+          <div class="global-data data-group" ng-if="view.group == 'global'">
+            <div class="dg-row">
               <div class="dg-drawer">
                 <div class="col-container">
                   <div class="col-3">
@@ -108,11 +118,10 @@
             </div>
           </div>
 
-          <div class="treble-data data-group">
+          <div class="treble-data data-group" ng-if="view.group == 'treble'">
 
-            <div class="dg-row"
-              ng-class="{open: view.t_data == 'values'}">
-              <h2 ng-click="dataRow('values', 't')">Value Influence (Treble)</h2>
+            <div class="dg-row">
+              <h2>Value Influence</h2>
               <div class="dg-drawer">
                 <div class="ns-group">
                   <div number-switch
@@ -124,9 +133,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.t_data == 'intervals'}">
-              <h2 ng-click="dataRow('intervals', 't')">Interval Influence (Treble)</h2>
+            <div class="dg-row">
+              <h2>Interval Influence</h2>
               <div class="dg-drawer">
                 <div class="ns-group">
                   <div number-switch
@@ -138,9 +146,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.t_data == 'chords'}">
-              <h2 ng-click="dataRow('chords', 't')">Chord Influence (Treble)</h2>
+            <div class="dg-row">
+              <h2>Chord Influence</h2>
               <div class="dg-drawer">
                 <div class="ns-group">
                   <div number-switch
@@ -152,9 +159,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.t_data == 'octaves'}">
-              <h2 ng-click="dataRow('octaves', 't')">Octave Influence (Treble)</h2>
+            <div class="dg-row">
+              <h2>Octave Influence</h2>
               <div class="dg-drawer">
                 <div class="col-container">
                   <div class="col-3">
@@ -175,9 +181,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.t_data == 'silence'}">
-              <h2 ng-click="dataRow('silence', 't')">Silence Influence (Treble)</h2>
+            <div class="dg-row">
+              <h2>Silence Influence</h2>
               <div class="dg-drawer">
                 <div grid-options model="composition.clefs.treble.silence" groupname="treble-silence" options="library.silence"></div>
               </div>
@@ -186,11 +191,10 @@
           </div>
 
 
-          <div class="bass-data data-group">
+          <div class="bass-data data-group" ng-if="view.group == 'bass'">
 
-            <div class="dg-row"
-              ng-class="{open: view.b_data == 'values'}">
-              <h2 ng-click="dataRow('values', 'b')">Value Influence (Bass)</h2>
+            <div class="dg-row">
+              <h2>Value Influence</h2>
               <div class="dg-drawer">
                 <div class="ns-group">
                   <div number-switch
@@ -202,9 +206,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.b_data == 'intervals'}">
-              <h2 ng-click="dataRow('intervals', 'b')">Interval Influence (Bass)</h2>
+            <div class="dg-row">
+              <h2>Interval Influence</h2>
               <div class="dg-drawer">
                 <div class="ns-group">
                   <div number-switch
@@ -216,9 +219,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.b_data == 'chords'}">
-              <h2 ng-click="dataRow('chords', 'b')">Chord Influence (Bass)</h2>
+            <div class="dg-row">
+              <h2>Chord Influence</h2>
               <div class="dg-drawer">
                 <div class="ns-group">
                   <div number-switch
@@ -230,9 +232,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.b_data == 'octaves'}">
-              <h2 ng-click="dataRow('octaves', 'b')">Octave Influence (Bass)</h2>
+            <div class="dg-row">
+              <h2>Octave Influence</h2>
               <div class="dg-drawer">
                 <div class="col-container">
                   <div class="col-3">
@@ -253,9 +254,8 @@
               </div>
             </div>
 
-            <div class="dg-row"
-              ng-class="{open: view.b_data == 'silence'}">
-              <h2 ng-click="dataRow('silence', 'b')">Silence Influence (Bass)</h2>
+            <div class="dg-row">
+              <h2>Silence Influence</h2>
               <div class="dg-drawer">
                 <div grid-options model="composition.clefs.bass.silence" groupname="bass-silence" options="library.silence"></div>
               </div>
@@ -263,8 +263,8 @@
 
           </div>
 
-          <div class="settings-data data-group">
-            <div class="dg-row open dg-row-big">
+          <div class="settings-data data-group" ng-if="view.group == 'settings'">
+            <div class="dg-row dg-row-big">
               <h2>Settings Store</h2>
               <div class="dg-drawer">
                 <div json-paster model="composition" label="Copy or Paste code below to Save or Resume settings. Does not save specific pattern."></div>
@@ -274,8 +274,8 @@
 
         </div>
 
-      </div>
-    </aside>
+      </aside>
+    </div>
 
   </div>
 

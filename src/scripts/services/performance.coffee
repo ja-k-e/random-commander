@@ -6,6 +6,11 @@ app.service 'Performance', [
 
     getPerformance: (composition) ->
 
+      chordContainsFreq = (freq, notes) ->
+        for note in notes
+          if note.freq == freq then return true
+        return false
+
       # generate a package of chances and values based on an object containing multiple possible zero values
       ChancePkg = (vals, key) ->
         # generating vals and their chances of occurring
@@ -75,17 +80,24 @@ app.service 'Performance', [
             chord = randomVal(clef.chords_pkg)[0]["value"]
             # random length for the chord
             value = randomVal(clef.values_pkg)[0]["denominator"]
+            # note length
+            note_length = 1 / value
+            # step size
+            step_length = 1 / composition.resolution
 
             # if there isnt enough space
-            if ((1 / value) / (1 / composition.resolution)) >= temp_duration
+            if note_length / step_length >= temp_duration
               # make it the length of remaining
-              value = ((1 / temp_duration) / (1 / composition.resolution))
+              value = ((1 / temp_duration) / step_length)
+              note_length = 1 / value
 
             # the new chord
-            new_chord = {length: (1 / value), notes: []}
-            console.log value, new_chord.length / (1 / composition.resolution)
+            note_width = 95 * Math.floor((note_length / step_length))
+            new_chord = {length: note_length, note_width: note_width, notes: []}
+            # console.log value, new_chord.length / (1 / composition.resolution)
             # for each note in the chord
-            for note in [1..chord]
+            temp_freqs = []
+            while new_chord.notes.length < chord
               # get a random interval
               interval = randomVal(clef.intervals_pkg)[0]["interval"]
               # get the random octave
@@ -100,13 +112,17 @@ app.service 'Performance', [
               new_octave = clef.baseoctave + ((2 - octave) * -1)
               # the frequency of the note
               note = DataLibrary.frequencies[new_octave - 1][interval]
+              # calculate top
+              top = 100 - (interval + (12 * (octave - 1))) / 36 * 100
               # if note doesnt already exist in chord
-              if new_chord.notes.indexOf(note) == -1
+              new_note = {freq: note, int: interval, octave: octave, top: top}
+              if temp_freqs.indexOf(note) == -1
+                temp_freqs.push note
                 # push the frequency into the chord's notes
-                new_chord.notes.push {freq: note, int: interval, octave: octave}
-              else
+                new_chord.notes.push new_note
+              # else
                 # duplicate note in chord, ignoring it for now.
-                console.log 'duplicate note in chord, ignoring it for now.'
+                # console.log 'duplicate note in chord, ignoring it for now.'
 
             # push the chord into the sequence
             sequence.push new_chord

@@ -8,19 +8,9 @@
   app.controller('EditorCtrl', [
     '$scope', function($scope) {
       $scope.view = {
-        t_data: 'values',
-        b_data: 'values'
+        group: 'oscillators'
       };
-      $scope.editor = $scope.$parent.editor;
-      return $scope.dataRow = function(data, clef) {
-        if (clef === 't') {
-          return $scope.view.t_data = data;
-        } else if (clef === 'b') {
-          return $scope.view.b_data = data;
-        } else {
-          return $scope.view.t_data = data;
-        }
-      };
+      return $scope.editor = $scope.$parent.editor;
     }
   ]);
 
@@ -31,6 +21,10 @@
       $scope.metronome = false;
       $scope.toggleMetronome = function() {
         return $scope.metronome = !$scope.metronome;
+      };
+      $scope.menu = false;
+      $scope.toggleMenu = function() {
+        return $scope.menu = !$scope.menu;
       };
       $scope.composition = {
         measures: 8,
@@ -497,7 +491,17 @@
     'DataLibrary', function(DataLibrary) {
       return {
         getPerformance: function(composition) {
-          var ChancePkg, blank, chord, clef, duration, index, interval, new_chord, new_octave, note, octave, random, randomVal, res_value, sequence, sequences, temp_duration, value, _i, _j, _ref;
+          var ChancePkg, blank, chord, chordContainsFreq, clef, duration, index, interval, new_chord, new_note, new_octave, note, note_length, note_width, octave, random, randomVal, res_value, sequence, sequences, step_length, temp_duration, temp_freqs, top, value, _i, _ref;
+          chordContainsFreq = function(freq, notes) {
+            var note, _i, _len;
+            for (_i = 0, _len = notes.length; _i < _len; _i++) {
+              note = notes[_i];
+              if (note.freq === freq) {
+                return true;
+              }
+            }
+            return false;
+          };
           ChancePkg = function(vals, key) {
             var amount, i, new_vals, new_vals_chances, total, val, vals_count, value, _i, _j, _len, _len1;
             new_vals = [];
@@ -551,15 +555,20 @@
               if (random > clef.silence) {
                 chord = randomVal(clef.chords_pkg)[0]["value"];
                 value = randomVal(clef.values_pkg)[0]["denominator"];
-                if (((1 / value) / (1 / composition.resolution)) >= temp_duration) {
-                  value = (1 / temp_duration) / (1 / composition.resolution);
+                note_length = 1 / value;
+                step_length = 1 / composition.resolution;
+                if (note_length / step_length >= temp_duration) {
+                  value = (1 / temp_duration) / step_length;
+                  note_length = 1 / value;
                 }
+                note_width = 95 * Math.floor(note_length / step_length);
                 new_chord = {
-                  length: 1 / value,
+                  length: note_length,
+                  note_width: note_width,
                   notes: []
                 };
-                console.log(value, new_chord.length / (1 / composition.resolution));
-                for (note = _i = 1; 1 <= chord ? _i <= chord : _i >= chord; note = 1 <= chord ? ++_i : --_i) {
+                temp_freqs = [];
+                while (new_chord.notes.length < chord) {
                   interval = randomVal(clef.intervals_pkg)[0]["interval"];
                   octave = randomVal(clef.octaves_pkg)[0]["value"];
                   interval += composition.root;
@@ -568,20 +577,22 @@
                   }
                   new_octave = clef.baseoctave + ((2 - octave) * -1);
                   note = DataLibrary.frequencies[new_octave - 1][interval];
-                  if (new_chord.notes.indexOf(note) === -1) {
-                    new_chord.notes.push({
-                      freq: note,
-                      int: interval,
-                      octave: octave
-                    });
-                  } else {
-                    console.log('duplicate note in chord, ignoring it for now.');
+                  top = 100 - (interval + (12 * (octave - 1))) / 36 * 100;
+                  new_note = {
+                    freq: note,
+                    int: interval,
+                    octave: octave,
+                    top: top
+                  };
+                  if (temp_freqs.indexOf(note) === -1) {
+                    temp_freqs.push(note);
+                    new_chord.notes.push(new_note);
                   }
                 }
                 sequence.push(new_chord);
                 res_value = Math.floor((1 / value) / (1 / composition.resolution));
                 if (res_value > 1) {
-                  for (blank = _j = 1, _ref = res_value - 1; 1 <= _ref ? _j <= _ref : _j >= _ref; blank = 1 <= _ref ? ++_j : --_j) {
+                  for (blank = _i = 1, _ref = res_value - 1; 1 <= _ref ? _i <= _ref : _i >= _ref; blank = 1 <= _ref ? ++_i : --_i) {
                     sequence.push('sus');
                   }
                 }
