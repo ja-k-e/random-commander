@@ -2,6 +2,7 @@ button {
   -webkit-appearance: none;
   outline: none;
   font-family: $f-sans;
+  font-weight: 100;
   border: none;
   position: relative;
 
@@ -10,7 +11,6 @@ button {
   background-color: $c-black;
   color: $c-white;
   padding: 1em;
-  letter-spacing: 1em;
   cursor: pointer;
   &:hover, &:active {
     background-color: $c-off-black;
@@ -19,23 +19,4 @@ button {
     pointer-events: none;
     opacity: 0.3;
   }
-
-  // .play, .stop {
-  //   display: block;
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  // }
-  // .play {
-  //   border-left: 8px solid $c-white;
-  //   border-top: 8px solid transparent;
-  //   border-bottom: 8px solid transparent;
-  //   transform: translate3d(-40%, -50%, 0);
-  // }
-  // .stop {
-  //   background-color: $c-white;
-  //   height: 10px;
-  //   width: 10px;
-  //   transform: translate3d(-50%, -50%, 0);
-  // }
 }

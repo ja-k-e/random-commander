@@ -3,7 +3,7 @@ body {
   margin: 0;
   background-color: $c-black;
   background: linear-gradient(45deg, lighten(black, 0%) 0%, lighten(black, 5%) 100%);
-  font-weight: 300;
+  font-weight: 400;
   background-position: fixed;
   color: $c-white;
   min-width: $s-min-w;
@@ -11,12 +11,6 @@ body {
   font-size: 13px;
 }
 
-#masthead {
-  font-size: 1em;
-  text-align: center;
-  padding: 4em 0 0;
-  letter-spacing: 1em;
-}
 .container {
   width: 95%;
   min-width: $s-min-w;

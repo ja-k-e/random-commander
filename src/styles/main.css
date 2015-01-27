@@ -1,22 +1,29 @@
-@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700,400,300,200);
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+h1, h2, h3, h4, h5 {
+  margin: 0; }
+
+h1, h2, h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.1em; }
+
+h1#masthead {
+  font-size: 2em;
+  text-align: center;
+  font-weight: 100;
+  padding: 2em 0 0; }
+
 body {
-  font-family: "Yanone Kaffeesatz", "Helvetica Neue LT Pro", Helvetica, sans-serif;
+  font-family: "Lato", "Helvetica Neue LT Pro", Helvetica, sans-serif;
   margin: 0;
   background-color: #101010;
   background: -webkit-linear-gradient(45deg, black 0%, #0d0d0d 100%);
   background: linear-gradient(45deg, black 0%, #0d0d0d 100%);
-  font-weight: 300;
+  font-weight: 400;
   background-position: fixed;
   color: white;
   min-width: 900px;
   overflow: scroll;
   font-size: 13px; }
-
-#masthead {
-  font-size: 1em;
-  text-align: center;
-  padding: 4em 0 0;
-  letter-spacing: 1em; }
 
 .container {
   width: 95%;
@@ -36,7 +43,7 @@ input, textarea {
   -webkit-appearance: none;
   border: none;
   outline: none;
-  font-family: "Yanone Kaffeesatz", "Helvetica Neue LT Pro", Helvetica, sans-serif; }
+  font-family: "Lato", "Helvetica Neue LT Pro", Helvetica, sans-serif; }
 
 ::-moz-selection {
   background: white;
@@ -52,14 +59,6 @@ input, textarea {
 
 .center {
   text-align: center; }
-
-h1, h2, h3, h4, h5 {
-  margin: 0; }
-
-h1, h2, h3 {
-  text-transform: uppercase;
-  font-weight: 200;
-  letter-spacing: 0.1em; }
 
 .col-container:after {
   content: "";
@@ -177,17 +176,16 @@ h1, h2, h3 {
 button {
   -webkit-appearance: none;
   outline: none;
-  font-family: "Yanone Kaffeesatz", "Helvetica Neue LT Pro", Helvetica, sans-serif;
+  font-family: "Lato", "Helvetica Neue LT Pro", Helvetica, sans-serif;
+  font-weight: 100;
   border: none;
   position: relative;
   text-transform: uppercase;
-  font-weight: 200;
   letter-spacing: 0.1em;
   font-size: 1em;
   background-color: #101010;
   color: white;
   padding: 1em;
-  letter-spacing: 1em;
   cursor: pointer; }
   button:hover, button:active {
     background-color: #292929; }
@@ -199,7 +197,7 @@ button {
   margin: 2em 0; }
   .data-group:first-child {
     margin-top: 0; }
-  .data-group .dg-row.dg-row-big.open .dg-drawer {
+  .data-group .dg-row.dg-row-big .dg-drawer {
     max-height: initial; }
   .data-group .dg-row .dg-drawer {
     display: block;
@@ -228,7 +226,6 @@ button {
   pointer-events: none; }
 .grid-options > label {
   text-transform: uppercase;
-  font-weight: 200;
   letter-spacing: 0.1em;
   padding-bottom: 0.5em;
   font-size: 0.8em;
@@ -241,8 +238,7 @@ button {
   color: white; }
 .grid-options .go-grid {
   display: table;
-  width: 100%;
-  background-color: #666666; }
+  width: 100%; }
   .grid-options .go-grid:after {
     content: "";
     display: table;
@@ -250,7 +246,7 @@ button {
   .grid-options .go-grid .go-label {
     display: table-cell;
     cursor: pointer;
-    padding: 1.1em 0.5em;
+    padding: 1.35em 0.25em;
     text-align: center;
     background-color: #666666;
     opacity: 0.6; }
@@ -279,7 +275,6 @@ button {
       text-align: center; }
       .ns-group [number-switch] .number-switch label {
         text-transform: uppercase;
-        font-weight: 200;
         letter-spacing: 0.1em;
         padding-bottom: 0.5em;
         font-size: 0.8em;
@@ -343,7 +338,6 @@ button {
 
 .json-paster label {
   text-transform: uppercase;
-  font-weight: 200;
   letter-spacing: 0.1em;
   padding-bottom: 0.5em;
   font-size: 0.8em;
@@ -373,7 +367,7 @@ button {
 .staff {
   display: table;
   width: 100%;
-  height: 50px; }
+  height: 200px; }
   .staff:last-of-type {
     border-bottom: none; }
   .staff.treble .note-interval.ni-0 {
@@ -527,7 +521,7 @@ button {
       display: block;
       position: absolute;
       width: 100%;
-      height: 1px;
+      height: 4px;
       left: 0;
       border-radius: 0%;
       -webkit-transition: height 100ms, box-shadow 100ms ease-out;
@@ -539,7 +533,7 @@ button {
       opacity: 0.5; }
     .staff .beat.active .note-interval {
       opacity: 1;
-      height: 2px;
+      height: 8px;
       -webkit-transition: height 400ms, box-shadow 4000ms ease-out;
               transition: height 400ms, box-shadow 4000ms ease-out;
       -webkit-transition: opacity 400ms;
@@ -548,15 +542,15 @@ button {
 .grid-lines {
   z-index: 1; }
   .grid-lines .gl-staff {
-    height: 50px;
+    height: 200px;
     position: absolute;
     left: 2em;
     right: 2em;
     top: 2em; }
     .grid-lines .gl-staff.gl-staff-1 {
-      top: calc(2em + 50px); }
+      top: calc(2em + 200px); }
     .grid-lines .gl-staff .gl-octave {
-      height: 16.66667px;
+      height: 66.66667px;
       width: 100%;
       display: block;
       position: relative; }
@@ -595,3 +589,33 @@ button {
           top: 91.66667%; }
         .grid-lines .gl-staff .gl-octave .gl-interval:nth-child(12) {
           border-bottom: 1px dotted rgba(255, 255, 255, 0.3); }
+
+.editor-canvas {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(16, 16, 16, 0.8);
+  overflow: scroll; }
+
+.editor-menu {
+  text-align: center; }
+  .editor-menu ul {
+    list-style: none;
+    padding: 0; }
+    .editor-menu ul li {
+      display: inline-block;
+      border-right: 1px solid #101010;
+      text-transform: uppercase;
+      letter-spacing: 0.1em; }
+      .editor-menu ul li a {
+        color: #9a9a9a;
+        padding: 16px 12px;
+        text-decoration: none;
+        background-color: #292929;
+        display: block; }
+        .editor-menu ul li a.active {
+          color: white; }
+      .editor-menu ul li:first-child {
+        border-left: 1px solid #101010; }

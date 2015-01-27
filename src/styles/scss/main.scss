@@ -1,8 +1,8 @@
 // herro
 @import "global/mixins";
 @import "global/variables";
-@import "global/base";
 @import "global/typography";
+@import "global/base";
 @import "components/cols";
 @import "components/buttons";
 @import "components/data-group";
@@ -11,3 +11,4 @@
 @import "components/json-paster";
 @import "components/staff";
 @import "components/grid-lines";
+@import "components/editor";

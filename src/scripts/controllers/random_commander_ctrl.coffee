@@ -13,6 +13,11 @@ app.controller 'RandomCommanderCtrl', [
     $scope.toggleMetronome = () ->
       $scope.metronome = !$scope.metronome
 
+    # menu
+    $scope.menu = false
+    $scope.toggleMenu = () ->
+      $scope.menu = !$scope.menu
+
     # the composition
     $scope.composition = {
       measures: 8 # measures to generate

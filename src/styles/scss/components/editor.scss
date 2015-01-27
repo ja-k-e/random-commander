@@ -1,0 +1,33 @@
+.editor-canvas {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: transparentize($c-black,0.2);
+  overflow: scroll;
+}
+
+.editor-menu {
+  text-align:center;
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      display: inline-block;
+      border-right: 1px solid $c-black;
+      @include uppercase;
+      a {
+        color: $c-gray;
+        padding: 16px 12px;
+        text-decoration: none;
+        background-color: $c-off-black;
+        display: block;
+        &.active {
+          color: $c-white;
+        }
+      }
+      &:first-child {
+        border-left: 1px solid $c-black;
+      }
+    }
+  }
+}

@@ -14,12 +14,12 @@
   .go-grid {
     display: table;
     width: 100%;
-    background-color: $c-primary;
+    // background-color: $c-primary;
     @include clearfix;
     .go-label {
       display: table-cell;
       cursor: pointer;
-      padding: 1.1em 0.5em;
+      padding: 1.35em 0.25em;
       text-align: center;
       background-color: $c-primary;
       opacity: 0.6;

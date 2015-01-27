@@ -60,7 +60,7 @@
         display: block;
         position: absolute;
         width: 100%;
-        height: 1px;
+        height: $s-note-h;
         left: 0;
         // background: $c-black;
         border-radius: 0%;
@@ -76,8 +76,7 @@
     &.active {
       .note-interval {
         opacity: 1;
-        // width: $s-dot-di * 2;
-        height: $s-dot-di / 2;
+        height: $s-note-h * 2;
         transition: height 400ms, box-shadow 4000ms ease-out;
         transition: opacity 400ms;
         // @for $i from 0 through 35 {
