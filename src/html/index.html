@@ -14,14 +14,14 @@
     <main ng-controller="DisplayCtrl">
       <div class="outer-notation">
         <div class="container">
-          <div class="notation">
-            <div class="grid-lines">
-              <!-- <span class="gl-staff gl-staff-{{$index}}" ng-repeat="staff in performance track by $index">
+          <div class="notation beats-{{composition.beats}}-per-measure beats-{{composition.resolution}}-resolution">
+<!--             <div class="grid-lines">
+              <span class="gl-staff gl-staff-{{$index}}" ng-repeat="staff in performance track by $index">
                 <span class="gl-octave gl-octave-{{octave.value}}" ng-repeat="octave in library.octaves track by $index">
                   <span class="gl-interval gl-interval-{{interval.interval}}" ng-repeat="interval in library.intervals track by $index"></span>
                 </span>
-              </span> -->
-            </div>
+              </span>
+            </div> -->
 
             <div class="staff"
               ng-class="{treble: $index == 0, bass: $index == 1}"
@@ -40,17 +40,17 @@
 
       <div class="container">
         <div class="triggers">
-          <button ng-click="togglePerformance()">
+          <button class="space-it" ng-click="togglePerformance()">
             <span ng-if="!playing">RndCmndr On</span>
             <span ng-if="playing">RndCmndr Off</span>
           </button>
-          <button ng-click="toggleMetronome()">
+          <button class="space-it" ng-click="toggleMetronome()">
             <span ng-if="!metronome">Metronome On</span>
             <span ng-if="metronome">Metronome Off</span>
           </button>
           <br>
-          <button ng-click="generatePerformance()">New Song</button>
-          <button ng-click="toggleMenu()">Edit Parameters</button>
+          <button class="space-it" ng-click="generatePerformance()">New Song</button>
+          <button class="space-it" ng-click="toggleMenu()">Edit Parameters</button>
         </div>
       </div>
     </main>
@@ -99,7 +99,7 @@
                 <div class="col-container">
                   <div class="col-3">
                     <div class="ns-group">
-                      <div number-switch label="Measures" min="4" max="64" step="1" model="composition.measures"></div>
+                      <div number-switch label="Measures" min="1" max="64" step="1" model="composition.measures"></div>
                       <div number-switch label="Tempo" min="80" max="160" step="1" model="composition.tempo"></div>
                       <div number-switch label="Beats" min="2" max="7" step="1" model="composition.beats"></div>
                     </div>
@@ -116,8 +116,8 @@
             <div class="dg-row">
               <div class="dg-drawer">
                 <div class="col-container">
-                  <div class="col-12">
-                    <button ng-repeat="(preset, value) in presets" ng-click="updateComposition(value)" ng-bind="value.name"></button>
+                  <div class="col-12 center">
+                    <button class="space-it" ng-repeat="(preset, value) in presets" ng-click="updateComposition(value)" ng-bind="value.name"></button>
                   </div>
                 </div>
               </div>

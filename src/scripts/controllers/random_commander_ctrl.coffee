@@ -22,7 +22,7 @@ app.controller 'RandomCommanderCtrl', [
 
     # the composition
     $scope.presets = Presets
-    $scope.composition = Presets.flutter
+    $scope.composition = Presets.jonny
 
     # getting first performance
     $scope.performance = Performance.getPerformance($scope.composition)
@@ -76,8 +76,14 @@ app.controller 'RandomCommanderCtrl', [
           # if beat in any rhythm array has value
           if i == 0 then clef = 'treble' else clef = 'bass'
           if typeof chord == "object"
-            waveforms = [composition.clefs.treble.waveform, composition.clefs.bass.waveform]
-            decibels = [composition.clefs.treble.decibels, composition.clefs.bass.decibels]
+            waveforms = []
+            decibels = []
+            if composition.clefs.treble
+              waveforms.push composition.clefs.treble.waveform
+              decibels.push composition.clefs.treble.decibels
+            if composition.clefs.bass
+              waveforms.push composition.clefs.bass.waveform
+              decibels.push composition.clefs.bass.decibels
             # beats per second
             bps = composition.tempo / 60
             # how much of a beat is the length
@@ -88,8 +94,8 @@ app.controller 'RandomCommanderCtrl', [
             notes_size = chord.notes.length
 
             chord_0 = performance[0][index]
-            chord_1 = performance[1][index]
-            if chord != chord_1 && (typeof chord_1 == "object")
+            chord_1 = if performance[1] then performance[1][index] else null
+            if chord_1 && chord != chord_1 && (typeof chord_1 == "object")
               notes_size += chord_1.notes.length
             else if chord != chord_0 && (typeof chord_0 == "object")
               notes_size += chord_0.notes.length

@@ -8,15 +8,18 @@ button {
 
   @include uppercase;
   font-size: 1em;
-  background-color: $c-black;
+  background-color: $c-off-black;
   color: $c-white;
   padding: 1em;
   cursor: pointer;
   &:hover, &:active {
-    background-color: $c-off-black;
+    color: $c-off-white;
   }
   &.disabled {
     pointer-events: none;
     opacity: 0.3;
+  }
+  &.space-it {
+    margin: 0 8px 16px;
   }
 }

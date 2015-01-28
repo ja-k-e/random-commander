@@ -31,7 +31,7 @@
         return $scope.menu = !$scope.menu;
       };
       $scope.presets = Presets;
-      $scope.composition = Presets.flutter;
+      $scope.composition = Presets.jonny;
       $scope.performance = Performance.getPerformance($scope.composition);
       $scope.generatePerformance = function() {
         $scope.stopPerformance();
@@ -72,15 +72,23 @@
               clef = 'bass';
             }
             if (typeof chord === "object") {
-              waveforms = [composition.clefs.treble.waveform, composition.clefs.bass.waveform];
-              decibels = [composition.clefs.treble.decibels, composition.clefs.bass.decibels];
+              waveforms = [];
+              decibels = [];
+              if (composition.clefs.treble) {
+                waveforms.push(composition.clefs.treble.waveform);
+                decibels.push(composition.clefs.treble.decibels);
+              }
+              if (composition.clefs.bass) {
+                waveforms.push(composition.clefs.bass.waveform);
+                decibels.push(composition.clefs.bass.decibels);
+              }
               bps = composition.tempo / 60;
               beat_count = chord.length / (1 / composition.resolution);
               sustain = (beat_count * (bps * (1 / composition.resolution))) * 0.99;
               notes_size = chord.notes.length;
               chord_0 = performance[0][index];
-              chord_1 = performance[1][index];
-              if (chord !== chord_1 && (typeof chord_1 === "object")) {
+              chord_1 = performance[1] ? performance[1][index] : null;
+              if (chord_1 && chord !== chord_1 && (typeof chord_1 === "object")) {
                 notes_size += chord_1.notes.length;
               } else if (chord !== chord_0 && (typeof chord_0 === "object")) {
                 notes_size += chord_0.notes.length;
@@ -323,22 +331,6 @@
             name: 'Sixteenth',
             size: 1 / 16,
             denominator: 16
-          }, {
-            name: 'Dotted Half',
-            size: 1 / 1.5,
-            denominator: 1.5
-          }, {
-            name: 'Dotted Quarter',
-            size: 1 / 6,
-            denominator: 6
-          }, {
-            name: 'Dotted Eighth',
-            size: 1 / 12,
-            denominator: 12
-          }, {
-            name: 'Dotted Sixteenth',
-            size: 1 / 24,
-            denominator: 24
           }
         ],
         intervals: [
@@ -464,7 +456,7 @@
     'DataLibrary', function(DataLibrary) {
       return {
         getPerformance: function(composition) {
-          var ChancePkg, blank, chord, chordContainsFreq, clef, duration, index, interval, new_chord, new_note, new_octave, note, note_length, note_width, octave, random, randomVal, res_value, sequence, sequences, step_length, temp_duration, temp_freqs, value, _i, _ref;
+          var ChancePkg, blank, chord, chordContainsFreq, clef, duration, index, interval, new_chord, new_note, new_octave, note, note_decimal, note_length, note_whole, note_width, octave, random, randomVal, res_value, sequence, sequences, step_length, temp_duration, temp_freqs, value, _i, _ref;
           chordContainsFreq = function(freq, notes) {
             var note, _i, _len;
             for (_i = 0, _len = notes.length; _i < _len; _i++) {
@@ -534,7 +526,9 @@
                   value = (1 / temp_duration) / step_length;
                   note_length = 1 / value;
                 }
-                note_width = Math.floor(note_length / step_length);
+                note_whole = Math.floor(note_length / step_length);
+                note_decimal = Math.floor((note_length / step_length - note_whole) * 100);
+                note_width = note_whole + '_' + note_decimal;
                 new_chord = {
                   length: note_length,
                   note_width: note_width,
@@ -593,8 +587,8 @@
           root: 0,
           clefs: {
             treble: {
-              values: [0, 0, 0, 0, 10, 0, 0, 0, 0],
-              intervals: [10, 0, 0, 5, 0, 0, 0, 5, 0, 0, 5, 0],
+              values: [0, 0, 0, 0, 10],
+              intervals: [10, 0, 0, 10, 0, 6, 0, 10, 4, 0, 5, 0],
               chords: [10, 0, 0, 0, 0],
               octaves: [5, 10, 5],
               silence: 0,
@@ -603,8 +597,8 @@
               volume: 6
             },
             bass: {
-              values: [10, 10, 10, 10, 0, 0, 0, 0, 0],
-              intervals: [10, 0, 0, 10, 0, 10, 0, 10, 0, 0, 10, 0],
+              values: [10, 10, 10, 10, 0],
+              intervals: [10, 10, 0, 10, 0, 10, 0, 10, 10, 0, 10, 0],
               chords: [10, 0, 0, 0, 0],
               octaves: [0, 10, 0],
               silence: 0,
@@ -623,7 +617,7 @@
           root: 7,
           clefs: {
             treble: {
-              values: [5, 0, 10, 5, 0, 0, 0, 0, 0],
+              values: [5, 0, 10, 5, 0],
               intervals: [10, 0, 0, 5, 0, 0, 0, 5, 0, 0, 5, 0],
               chords: [10, 5, 5, 0, 0],
               octaves: [5, 10, 5],
@@ -633,14 +627,74 @@
               volume: 6
             },
             bass: {
-              values: [10, 10, 10, 10, 0, 0, 0, 0, 0],
+              values: [10, 10, 10, 10, 0],
               intervals: [10, 0, 0, 10, 0, 10, 0, 10, 0, 0, 10, 0],
               chords: [10, 0, 0, 0, 0],
               octaves: [5, 10, 3],
               silence: 0,
               baseoctave: 3,
-              waveform: 'sawtooth',
+              waveform: 'triangle',
               volume: 10
+            }
+          }
+        },
+        magic: {
+          name: 'Magic',
+          measures: 4,
+          tempo: 120,
+          beats: 4,
+          resolution: 16,
+          root: 1,
+          clefs: {
+            treble: {
+              values: [5, 5, 5, 5, 5],
+              intervals: [10, 5, 0, 5, 0, 5, 0, 5, 5, 0, 5, 0],
+              chords: [10, 5, 5, 0, 0],
+              octaves: [5, 10, 5],
+              silence: 0,
+              baseoctave: 6,
+              waveform: 'triangle',
+              volume: 6
+            },
+            bass: {
+              values: [10, 10, 10, 10, 0],
+              intervals: [10, 5, 0, 10, 0, 10, 0, 10, 5, 0, 10, 0],
+              chords: [10, 0, 0, 0, 0],
+              octaves: [0, 10, 0],
+              silence: 0,
+              baseoctave: 3,
+              waveform: 'triangle',
+              volume: 10
+            }
+          }
+        },
+        jonny: {
+          name: 'Jonny',
+          measures: 1,
+          tempo: 160,
+          beats: 7,
+          resolution: 16,
+          root: 6,
+          clefs: {
+            treble: {
+              values: [0, 0, 0, 0, 10],
+              intervals: [10, 0, 0, 10, 0, 6, 0, 10, 4, 0, 5, 0],
+              chords: [10, 0, 0, 0, 0],
+              octaves: [5, 10, 5],
+              silence: 0,
+              baseoctave: 6,
+              waveform: 'sawtooth',
+              volume: 6
+            },
+            bass: {
+              values: [0, 0, 10, 0, 0],
+              intervals: [10, 0, 0, 10, 0, 6, 0, 10, 4, 0, 5, 0],
+              chords: [10, 0, 0, 0, 0],
+              octaves: [5, 10, 5],
+              silence: 0,
+              baseoctave: 3,
+              waveform: 'square',
+              volume: 7
             }
           }
         }

@@ -93,7 +93,10 @@ app.service 'Performance', [
               note_length = 1 / value
 
             # the new chord
-            note_width = Math.floor((note_length / step_length))
+            # prepping for smaller grid that allots for dotted notes
+            note_whole = Math.floor((note_length / step_length))
+            note_decimal = Math.floor((note_length / step_length - note_whole) * 100)
+            note_width = note_whole + '_' + note_decimal
             new_chord = {length: note_length, note_width: note_width, notes: []}
             # console.log value, new_chord.length / (1 / composition.resolution)
             # for each note in the chord

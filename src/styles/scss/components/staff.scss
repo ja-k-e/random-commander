@@ -6,41 +6,60 @@
   // box-shadow: 0px 0px 0px 1px $c-trans-white;
 }
 
+$staff-grid: 1px solid rgba(255,255,255,0.05);
+$staff-grid-1: 1px solid rgba(255,255,255,0.1);
+$staff-grid-2: 1px solid rgba(255,255,255,0.15);
+
 .notation {
   position: relative;
+  &.beats-16-resolution {
+    .staff .beat:nth-child(4n){
+      &::after {
+        border-right: $staff-grid-1;
+      }
+    }
+    @for $i from 2 through 7 {
+    &.beats-#{$i}-per-measure {
+        .staff .beat:nth-child(#{4*$i}n){
+          &::after {
+            border-right: $staff-grid-2;
+          }
+        }
+      }
+    }
+  }
 }
-
-$staff-grid: 1px solid rgba(255,255,255,0.1);
 
 .staff {
   display: block;
   width: 100%;
   height: $s-staff-h;
 
-  $staff-border: 1px solid $c-trans-white;
-
   $staff-space: 12px;
 
-  border-top: $staff-grid;
-  &:last-child { border-bottom: $staff-grid;}
+  border-top: $staff-grid-2;
+  &:last-child { border-bottom: $staff-grid-2;}
 
-  @for $i from 1 through 16 {
-    .beat.beat-#{$i} .note-interval {
+  @for $i from 0 through 16 {
+    .beat.beat-#{$i}_0 .note-interval {
       right: (100 * $i) * -1 + 100%;
     }
+    // for dotted. our grid isnt small enough yet.
+    // .beat.beat-#{$i}_33 .note-interval { right: (100 * ($i + 0.3333)) * -1 + 100%; }
+    // .beat.beat-#{$i}_66 .note-interval { right: (100 * ($i + 0.6666)) * -1 + 100%; }
   }
   .note-interval {
-    @for $i from 0 through 35 {
+    @for $i from 1 through 36 {
       &.ni-#{$i} {
-        top: 100% - (100 * ($i/35));
+        top: 100% - (100 * ($i/36));
       }
     }
   }
   &.treble {
     .note-interval {
-      @for $i from 0 through 35 {
+      @for $i from 1 through 36 {
         &.ni-#{$i} {
-          $ratio: $i / 35;
+          $ratio: $i / 36;
           $color: hsla($ratio * 180 + 180, 100%, 60%, 0.8);
           background-color: $color;
         }
@@ -50,9 +69,9 @@ $staff-grid: 1px solid rgba(255,255,255,0.1);
 
   &.bass {
     .note-interval {
-      @for $i from 0 through 35 {
+      @for $i from 1 through 36 {
         &.ni-#{$i} {
-          $ratio: $i / 35;
+          $ratio: $i / 36;
           $color: hsla($ratio * 180, 100%, 60%, 0.8);
           background-color: $color;
         }
@@ -65,6 +84,7 @@ $staff-grid: 1px solid rgba(255,255,255,0.1);
     float: left;
     height: 100%;
     position: relative;
+    // maybe only the big ones
     &::after {
       content: '';
       position: absolute;
@@ -77,7 +97,7 @@ $staff-grid: 1px solid rgba(255,255,255,0.1);
       position:absolute;
       top: 0; bottom: 0;
       left: 0;
-      border-left: $staff-grid;
+      border-left: $staff-grid-2;
     }
     &.chord {
       .note-interval {
@@ -104,13 +124,6 @@ $staff-grid: 1px solid rgba(255,255,255,0.1);
         height: $s-note-h * 2;
         transition: height 400ms, box-shadow 4000ms ease-out;
         transition: opacity 400ms;
-        // @for $i from 0 through 35 {
-          // &.ni-#{$i} {
-            // $ratio: $i / 35;
-            // $color: hsla($ratio * 360, 100%, 60%, 0.3);
-            // box-shadow: 0px 0px 0px 10px $color;
-          // }
-        // }
       }
     }
   }

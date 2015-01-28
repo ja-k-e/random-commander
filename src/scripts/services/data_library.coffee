@@ -38,10 +38,9 @@ app.service 'DataLibrary', [ () ->
         {name: 'Quarter', size: 1/4, denominator: 4}
         {name: 'Eighth', size: 1/8, denominator: 8}
         {name: 'Sixteenth', size: 1/16, denominator: 16}
-        {name: 'Dotted Half', size: 1/1.5, denominator: 1.5}
-        {name: 'Dotted Quarter', size: 1/6, denominator: 6}
-        {name: 'Dotted Eighth', size: 1/12, denominator: 12}
-        {name: 'Dotted Sixteenth', size: 1/24, denominator: 24}
+        # {name: 'Dotted Half', size: 1/2 * 1.5, denominator: 1.5}
+        # {name: 'Dotted Quarter', size: 1/4 * 1.5, denominator: 6}
+        # {name: 'Dotted Eighth', size: 1/8 * 1.5, denominator: 12}
       ]
       intervals: [
         {name: 'Perfect Unison', interval: 1}
