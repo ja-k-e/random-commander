@@ -22,8 +22,8 @@ app.controller 'RandomCommanderCtrl', [
     # the composition
     $scope.composition = {
       measures: 4 # measures to generate
-      tempo: 90 # tempo of performance
-      beats: 5 # beats per measure
+      tempo: 120 # tempo of performance
+      beats: 4 # beats per measure
       resolution: 16 # smallest note
       root: 4 # root of key
       clefs: {
@@ -36,7 +36,8 @@ app.controller 'RandomCommanderCtrl', [
           octaves: [5,10,5]
           silence: 0
           baseoctave: 6
-          waveform: 'sawtooth'
+          # waveform: 'sawtooth'
+          waveform: 'triangle'
           volume: 6
         }
         bass: {
@@ -46,7 +47,8 @@ app.controller 'RandomCommanderCtrl', [
           octaves: [0,10,0]
           silence: 0
           baseoctave: 3
-          waveform: 'sawtooth'
+          # waveform: 'sawtooth'
+          waveform: 'triangle'
           volume: 10
         }
       }
@@ -109,9 +111,9 @@ app.controller 'RandomCommanderCtrl', [
             # beats per second
             bps = composition.tempo / 60
             # how much of a beat is the length
-            beat_count = chord.length / 0.25
+            beat_count = chord.length / (1 / composition.resolution)
             # sustain of the note in seconds
-            sustain = (beat_count * bps / 2) * 0.95
+            sustain = (beat_count * (bps * (1 / composition.resolution))) * 0.99
 
             notes_size = chord.notes.length
 

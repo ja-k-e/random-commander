@@ -28,8 +28,8 @@
       };
       $scope.composition = {
         measures: 4,
-        tempo: 90,
-        beats: 5,
+        tempo: 120,
+        beats: 4,
         resolution: 16,
         root: 4,
         clefs: {
@@ -40,7 +40,7 @@
             octaves: [5, 10, 5],
             silence: 0,
             baseoctave: 6,
-            waveform: 'sawtooth',
+            waveform: 'triangle',
             volume: 6
           },
           bass: {
@@ -50,7 +50,7 @@
             octaves: [0, 10, 0],
             silence: 0,
             baseoctave: 3,
-            waveform: 'sawtooth',
+            waveform: 'triangle',
             volume: 10
           }
         }
@@ -98,8 +98,8 @@
               waveforms = [composition.clefs.treble.waveform, composition.clefs.bass.waveform];
               decibels = [composition.clefs.treble.decibels, composition.clefs.bass.decibels];
               bps = composition.tempo / 60;
-              beat_count = chord.length / 0.25;
-              sustain = (beat_count * bps / 2) * 0.95;
+              beat_count = chord.length / (1 / composition.resolution);
+              sustain = (beat_count * (bps * (1 / composition.resolution))) * 0.99;
               notes_size = chord.notes.length;
               chord_0 = performance[0][index];
               chord_1 = performance[1][index];
