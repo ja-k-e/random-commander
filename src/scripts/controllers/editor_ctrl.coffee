@@ -5,7 +5,7 @@ app.controller 'EditorCtrl', [
 
     # view variables
     $scope.view = {
-      group: 'oscillators'
+      group: 'global'
     }
 
     $scope.editor = $scope.$parent.editor

@@ -44,18 +44,18 @@ app.service 'DataLibrary', [ () ->
         {name: 'Dotted Sixteenth', size: 1/24, denominator: 24}
       ]
       intervals: [
-        {name: 'Perfect Unison', interval: 0}
-        {name: 'Minor Second', interval: 1}
-        {name: 'Major Second', interval: 2}
-        {name: 'Minor Third', interval: 3}
-        {name: 'Major Third', interval: 4}
-        {name: 'Perfect Fourth', interval: 5}
-        {name: 'Tritone', interval: 6}
-        {name: 'Perfect Fifth', interval: 7}
-        {name: 'Minor Sixth', interval: 8}
-        {name: 'Major Sixth', interval: 9}
-        {name: 'Minor Seventh', interval: 10}
-        {name: 'Major Seventh', interval: 11}
+        {name: 'Perfect Unison', interval: 1}
+        {name: 'Minor Second', interval: 2}
+        {name: 'Major Second', interval: 3}
+        {name: 'Minor Third', interval: 4}
+        {name: 'Major Third', interval: 5}
+        {name: 'Perfect Fourth', interval: 6}
+        {name: 'Tritone', interval: 7}
+        {name: 'Perfect Fifth', interval: 8}
+        {name: 'Minor Sixth', interval: 9}
+        {name: 'Major Sixth', interval: 10}
+        {name: 'Minor Seventh', interval: 11}
+        {name: 'Major Seventh', interval: 12}
       ]
       # chord sizes
       chords: [

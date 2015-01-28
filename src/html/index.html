@@ -62,8 +62,7 @@
         <div class="container">
           <nav class="editor-menu">
             <ul>
-              <li><a href="#" ng-class="{active:view.group == 'oscillators'}" ng-click="view.group = 'oscillators'">Oscillators</a></li
-              ><li><a href="#" ng-class="{active:view.group == 'global'}" ng-click="view.group = 'global'">Global</a></li
+              <li><a href="#" ng-class="{active:view.group == 'global'}" ng-click="view.group = 'global'">Global</a></li
               ><li><a href="#" ng-class="{active:view.group == 'treble'}" ng-click="view.group = 'treble'">Treble Clef</a></li
               ><li><a href="#" ng-class="{active:view.group == 'bass'}" ng-click="view.group = 'bass'">Bass Clef</a></li
               ><li><a href="#" ng-class="{active:view.group == 'settings'}" ng-click="view.group = 'settings'">Settings Store</a></li
@@ -71,7 +70,7 @@
             </ul>
           </nav>
 
-          <div class="oscillator-data data-group" ng-if="view.group == 'oscillators'">
+          <div class="global-data data-group" ng-if="view.group == 'global'">
             <div class="dg-row">
               <div class="dg-drawer">
                 <div class="col-container">
@@ -94,9 +93,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="global-data data-group" ng-if="view.group == 'global'">
             <div class="dg-row">
               <div class="dg-drawer">
                 <div class="col-container">
@@ -107,9 +103,6 @@
                       <div number-switch label="Beats" min="2" max="7" step="1" model="composition.beats"></div>
                     </div>
                   </div>
-                  <!-- <div class="col-3">
-                    <div grid-options label="Resolution" model="composition.resolution" groupname="resolutions" options="library.resolutions"></div>
-                  </div> -->
                   <div class="col-6">
                     <div grid-options label="Root" model="composition.root" groupname="roots" options="library.notes"></div>
                   </div>

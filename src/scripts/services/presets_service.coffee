@@ -27,7 +27,7 @@ app.service 'Presets', [ () ->
         }
       }
       glory: {
-        measures: 16, tempo: 120, beats: 4, resolution: 16, root: 4
+        measures: 16, tempo: 120, beats: 4, resolution: 16, root: 7
         clefs: {
           treble: {
             values: [5,0,10,5,0,0,0,0,0]
@@ -42,7 +42,7 @@ app.service 'Presets', [ () ->
           bass: {
             values: [10,10,10,10,0,0,0,0,0]
             intervals: [10,0,0,10,0,10,0,10,0,0,10,0]
-            chords: [10,2,0,0,0]
+            chords: [10,0,0,0,0]
             octaves: [5,10,3]
             silence: 0
             baseoctave: 3

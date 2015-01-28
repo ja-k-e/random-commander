@@ -8,7 +8,7 @@
   app.controller('EditorCtrl', [
     '$scope', function($scope) {
       $scope.view = {
-        group: 'oscillators'
+        group: 'global'
       };
       return $scope.editor = $scope.$parent.editor;
     }
@@ -339,40 +339,40 @@
         intervals: [
           {
             name: 'Perfect Unison',
-            interval: 0
-          }, {
-            name: 'Minor Second',
             interval: 1
           }, {
-            name: 'Major Second',
+            name: 'Minor Second',
             interval: 2
           }, {
-            name: 'Minor Third',
+            name: 'Major Second',
             interval: 3
           }, {
-            name: 'Major Third',
+            name: 'Minor Third',
             interval: 4
           }, {
-            name: 'Perfect Fourth',
+            name: 'Major Third',
             interval: 5
           }, {
-            name: 'Tritone',
+            name: 'Perfect Fourth',
             interval: 6
           }, {
-            name: 'Perfect Fifth',
+            name: 'Tritone',
             interval: 7
           }, {
-            name: 'Minor Sixth',
+            name: 'Perfect Fifth',
             interval: 8
           }, {
-            name: 'Major Sixth',
+            name: 'Minor Sixth',
             interval: 9
           }, {
-            name: 'Minor Seventh',
+            name: 'Major Sixth',
             interval: 10
           }, {
-            name: 'Major Seventh',
+            name: 'Minor Seventh',
             interval: 11
+          }, {
+            name: 'Major Seventh',
+            interval: 12
           }
         ],
         chords: [
@@ -543,6 +543,7 @@
                   if (interval > 12) {
                     interval -= 12;
                   }
+                  console.log(interval);
                   new_octave = clef.baseoctave + ((2 - octave) * -1);
                   note = DataLibrary.frequencies[new_octave - 1][interval - 1];
                   new_note = {
@@ -614,7 +615,7 @@
           tempo: 120,
           beats: 4,
           resolution: 16,
-          root: 4,
+          root: 7,
           clefs: {
             treble: {
               values: [5, 0, 10, 5, 0, 0, 0, 0, 0],
@@ -629,7 +630,7 @@
             bass: {
               values: [10, 10, 10, 10, 0, 0, 0, 0, 0],
               intervals: [10, 0, 0, 10, 0, 10, 0, 10, 0, 0, 10, 0],
-              chords: [10, 2, 0, 0, 0],
+              chords: [10, 0, 0, 0, 0],
               octaves: [5, 10, 3],
               silence: 0,
               baseoctave: 3,
