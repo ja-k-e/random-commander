@@ -15,7 +15,7 @@
   ]);
 
   app.controller('RandomCommanderCtrl', [
-    '$scope', 'DataLibrary', 'Performance', function($scope, DataLibrary, Performance) {
+    '$scope', '$timeout', 'DataLibrary', 'Performance', function($scope, $timeout, DataLibrary, Performance) {
       var performance_interval;
       $scope.library = DataLibrary;
       $scope.metronome = false;
@@ -27,16 +27,16 @@
         return $scope.menu = !$scope.menu;
       };
       $scope.composition = {
-        measures: 8,
+        measures: 4,
         tempo: 90,
-        beats: 4,
+        beats: 5,
         resolution: 16,
         root: 4,
         clefs: {
           treble: {
-            values: [5, 0, 10, 5, 0, 0, 0, 0, 0],
+            values: [0, 0, 0, 0, 10, 0, 0, 0, 0],
             intervals: [10, 0, 0, 5, 0, 0, 0, 5, 0, 0, 5, 0],
-            chords: [10, 5, 5, 0, 0],
+            chords: [10, 0, 0, 0, 0],
             octaves: [5, 10, 5],
             silence: 0,
             baseoctave: 6,
@@ -65,24 +65,23 @@
       performance_interval = void 0;
       $scope.progress = 0;
       $scope.playPerformance = function() {
-        var beat_width, beats, index, next_beat, tempo_time, time;
+        var beats, composition, index, next_beat, performance, tempo_time, time;
         $scope.playing = true;
-        beats = $scope.composition.measures * ($scope.composition.beats * ($scope.composition.resolution / 4));
-        beat_width = 100 / beats;
+        composition = $scope.composition;
+        performance = $scope.performance;
+        beats = composition.measures * composition.beats * composition.resolution / 4;
         index = 0;
-        tempo_time = 60000 / $scope.composition.tempo;
+        tempo_time = 60000 / composition.tempo;
         next_beat = function() {
-          var beat_count, bps, chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, performance, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
-          $('.beat:nth-child(' + index + ')').addClass('active');
-          performance = $scope.performance;
+          var beat_count, bps, chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, selector, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
           for (i = _i = 0, _len = performance.length; _i < _len; i = ++_i) {
             sequence = performance[i];
             chord = sequence[index];
-            if ($scope.metronome && index % $scope.composition.beats === 0) {
-              if (index % ($scope.composition.beats * $scope.composition.beats)) {
-                freq = 3000;
+            if ($scope.metronome && index % (composition.resolution / 4) === 0) {
+              if (index === 0 || index / 4 % composition.beats === 0) {
+                freq = 4100;
               } else {
-                freq = 4000;
+                freq = 3000;
               }
               metronome = new Tone.OmniOscillator(freq, 'pulse');
               metronome.setVolume(-30);
@@ -96,9 +95,9 @@
               clef = 'bass';
             }
             if (typeof chord === "object") {
-              waveforms = [$scope.composition.clefs.treble.waveform, $scope.composition.clefs.bass.waveform];
-              decibels = [$scope.composition.clefs.treble.decibels, $scope.composition.clefs.bass.decibels];
-              bps = $scope.composition.tempo / 60;
+              waveforms = [composition.clefs.treble.waveform, composition.clefs.bass.waveform];
+              decibels = [composition.clefs.treble.decibels, composition.clefs.bass.decibels];
+              bps = composition.tempo / 60;
               beat_count = chord.length / 0.25;
               sustain = (beat_count * bps / 2) * 0.95;
               notes_size = chord.notes.length;
@@ -113,7 +112,7 @@
               for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
                 note = _ref[_j];
                 osc = new Tone.OmniOscillator(note.freq, waveforms[i]);
-                gain = 0.1 * ($scope.composition.clefs[clef].volume / 10);
+                gain = 0.1 * (composition.clefs[clef].volume / 10);
                 decibels = osc.gainToDb((gain / notes_size) + gain);
                 osc.setVolume(decibels);
                 osc.toMaster();
@@ -121,19 +120,16 @@
                 osc.stop("+" + sustain);
               }
             }
-            if (typeof chord === "object") {
+            selector = '.' + clef + ' .beat:nth-child(' + (index + 1) + ')';
+            if (chord !== 'sus') {
               $('.' + clef + ' .beat.active').removeClass('active');
-              $('.' + clef + ' .beat.go').removeClass(clef + '-go');
-              $('.' + clef + ' .beat:nth-child(' + (index + 1) + ')').addClass(clef + '-go');
-            } else if (chord !== 'sus') {
-              $('.' + clef + ' .beat.active').removeClass('active');
-              $('.' + clef + ' .beat.go').removeClass(clef + '-go');
+              $(selector).addClass('active');
             }
           }
           return index = (index + 1) % beats;
         };
         next_beat();
-        time = tempo_time / ($scope.composition.resolution / 4);
+        time = tempo_time / (composition.resolution / 4);
         return performance_interval = window.setInterval(next_beat, time);
       };
       $scope.stopPerformance = function() {
@@ -491,7 +487,7 @@
     'DataLibrary', function(DataLibrary) {
       return {
         getPerformance: function(composition) {
-          var ChancePkg, blank, chord, chordContainsFreq, clef, duration, index, interval, new_chord, new_note, new_octave, note, note_length, note_width, octave, random, randomVal, res_value, sequence, sequences, step_length, temp_duration, temp_freqs, top, value, _i, _ref;
+          var ChancePkg, blank, chord, chordContainsFreq, clef, duration, index, interval, new_chord, new_note, new_octave, note, note_length, note_width, octave, random, randomVal, res_value, sequence, sequences, step_length, temp_duration, temp_freqs, value, _i, _ref;
           chordContainsFreq = function(freq, notes) {
             var note, _i, _len;
             for (_i = 0, _len = notes.length; _i < _len; _i++) {
@@ -561,7 +557,7 @@
                   value = (1 / temp_duration) / step_length;
                   note_length = 1 / value;
                 }
-                note_width = 95 * Math.floor(note_length / step_length);
+                note_width = Math.floor(note_length / step_length);
                 new_chord = {
                   length: note_length,
                   note_width: note_width,
@@ -577,12 +573,10 @@
                   }
                   new_octave = clef.baseoctave + ((2 - octave) * -1);
                   note = DataLibrary.frequencies[new_octave - 1][interval];
-                  top = 100 - (interval + (12 * (octave - 1))) / 36 * 100;
                   new_note = {
                     freq: note,
                     int: interval,
-                    octave: octave,
-                    top: top
+                    octave: octave
                   };
                   if (temp_freqs.indexOf(note) === -1) {
                     temp_freqs.push(note);

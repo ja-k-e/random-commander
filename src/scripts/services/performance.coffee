@@ -47,6 +47,7 @@ app.service 'Performance', [
 
       # get the duration in smallest resolution amount
       duration = composition.measures * (composition.beats * (composition.resolution / 4))
+      # console.log duration
       # future sequences
       sequences = []
 
@@ -92,7 +93,7 @@ app.service 'Performance', [
               note_length = 1 / value
 
             # the new chord
-            note_width = 95 * Math.floor((note_length / step_length))
+            note_width = Math.floor((note_length / step_length))
             new_chord = {length: note_length, note_width: note_width, notes: []}
             # console.log value, new_chord.length / (1 / composition.resolution)
             # for each note in the chord
@@ -112,10 +113,8 @@ app.service 'Performance', [
               new_octave = clef.baseoctave + ((2 - octave) * -1)
               # the frequency of the note
               note = DataLibrary.frequencies[new_octave - 1][interval]
-              # calculate top
-              top = 100 - (interval + (12 * (octave - 1))) / 36 * 100
               # if note doesnt already exist in chord
-              new_note = {freq: note, int: interval, octave: octave, top: top}
+              new_note = {freq: note, int: interval, octave: octave}
               if temp_freqs.indexOf(note) == -1
                 temp_freqs.push note
                 # push the frequency into the chord's notes

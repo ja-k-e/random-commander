@@ -10,8 +10,10 @@
   position: relative;
 }
 
+$staff-grid: 1px solid rgba(255,255,255,0.1);
+
 .staff {
-  display: table;
+  display: block;
   width: 100%;
   height: $s-staff-h;
 
@@ -19,15 +21,21 @@
 
   $staff-space: 12px;
 
-  // margin-top: $staff-space;
-  // padding-bottom: $staff-space;
+  border-top: $staff-grid;
+  &:last-child { border-bottom: $staff-grid;}
 
-  // border-bottom: $staff-border;
-
-  &:last-of-type {
-    border-bottom: none;
+  @for $i from 1 through 16 {
+    .beat.beat-#{$i} .note-interval {
+      right: (100 * $i) * -1 + 100%;
+    }
   }
-
+  .note-interval {
+    @for $i from 0 through 35 {
+      &.ni-#{$i} {
+        top: 100% - (100 * ($i/35));
+      }
+    }
+  }
   &.treble {
     .note-interval {
       @for $i from 0 through 35 {
@@ -53,13 +61,29 @@
   }
 
   .beat {
-    display: table-cell;
+    display: block;
+    float: left;
+    height: 100%;
     position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; z-index: -1;
+      right: 0;
+      border-right: $staff-grid;
+    }
+    &:first-child::before {
+      content: '';
+      position:absolute;
+      top: 0; bottom: 0; z-index: -1;
+      left: 0;
+      border-left: $staff-grid;
+    }
     &.chord {
       .note-interval {
         display: block;
         position: absolute;
-        width: 100%;
+        // width: 100%;
         height: $s-note-h;
         left: 0;
         // background: $c-black;
@@ -68,6 +92,7 @@
         transition: opacity 400ms;
         transform: translate3d(0, -50%, 0);
         opacity: 0.5;
+        z-index: 9;
 
       }
     }

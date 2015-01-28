@@ -365,11 +365,116 @@ button {
   position: relative; }
 
 .staff {
-  display: table;
+  display: block;
   width: 100%;
-  height: 200px; }
-  .staff:last-of-type {
-    border-bottom: none; }
+  height: 200px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); }
+  .staff:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+  .staff .beat.beat-1 .note-interval {
+    right: 0%; }
+  .staff .beat.beat-2 .note-interval {
+    right: -100%; }
+  .staff .beat.beat-3 .note-interval {
+    right: -200%; }
+  .staff .beat.beat-4 .note-interval {
+    right: -300%; }
+  .staff .beat.beat-5 .note-interval {
+    right: -400%; }
+  .staff .beat.beat-6 .note-interval {
+    right: -500%; }
+  .staff .beat.beat-7 .note-interval {
+    right: -600%; }
+  .staff .beat.beat-8 .note-interval {
+    right: -700%; }
+  .staff .beat.beat-9 .note-interval {
+    right: -800%; }
+  .staff .beat.beat-10 .note-interval {
+    right: -900%; }
+  .staff .beat.beat-11 .note-interval {
+    right: -1000%; }
+  .staff .beat.beat-12 .note-interval {
+    right: -1100%; }
+  .staff .beat.beat-13 .note-interval {
+    right: -1200%; }
+  .staff .beat.beat-14 .note-interval {
+    right: -1300%; }
+  .staff .beat.beat-15 .note-interval {
+    right: -1400%; }
+  .staff .beat.beat-16 .note-interval {
+    right: -1500%; }
+  .staff .note-interval.ni-0 {
+    top: 100%; }
+  .staff .note-interval.ni-1 {
+    top: 97.14286%; }
+  .staff .note-interval.ni-2 {
+    top: 94.28571%; }
+  .staff .note-interval.ni-3 {
+    top: 91.42857%; }
+  .staff .note-interval.ni-4 {
+    top: 88.57143%; }
+  .staff .note-interval.ni-5 {
+    top: 85.71429%; }
+  .staff .note-interval.ni-6 {
+    top: 82.85714%; }
+  .staff .note-interval.ni-7 {
+    top: 80%; }
+  .staff .note-interval.ni-8 {
+    top: 77.14286%; }
+  .staff .note-interval.ni-9 {
+    top: 74.28571%; }
+  .staff .note-interval.ni-10 {
+    top: 71.42857%; }
+  .staff .note-interval.ni-11 {
+    top: 68.57143%; }
+  .staff .note-interval.ni-12 {
+    top: 65.71429%; }
+  .staff .note-interval.ni-13 {
+    top: 62.85714%; }
+  .staff .note-interval.ni-14 {
+    top: 60%; }
+  .staff .note-interval.ni-15 {
+    top: 57.14286%; }
+  .staff .note-interval.ni-16 {
+    top: 54.28571%; }
+  .staff .note-interval.ni-17 {
+    top: 51.42857%; }
+  .staff .note-interval.ni-18 {
+    top: 48.57143%; }
+  .staff .note-interval.ni-19 {
+    top: 45.71429%; }
+  .staff .note-interval.ni-20 {
+    top: 42.85714%; }
+  .staff .note-interval.ni-21 {
+    top: 40%; }
+  .staff .note-interval.ni-22 {
+    top: 37.14286%; }
+  .staff .note-interval.ni-23 {
+    top: 34.28571%; }
+  .staff .note-interval.ni-24 {
+    top: 31.42857%; }
+  .staff .note-interval.ni-25 {
+    top: 28.57143%; }
+  .staff .note-interval.ni-26 {
+    top: 25.71429%; }
+  .staff .note-interval.ni-27 {
+    top: 22.85714%; }
+  .staff .note-interval.ni-28 {
+    top: 20%; }
+  .staff .note-interval.ni-29 {
+    top: 17.14286%; }
+  .staff .note-interval.ni-30 {
+    top: 14.28571%; }
+  .staff .note-interval.ni-31 {
+    top: 11.42857%; }
+  .staff .note-interval.ni-32 {
+    top: 8.57143%; }
+  .staff .note-interval.ni-33 {
+    top: 5.71429%; }
+  .staff .note-interval.ni-34 {
+    top: 2.85714%; }
+  .staff .note-interval.ni-35 {
+    top: 0%; }
   .staff.treble .note-interval.ni-0 {
     background-color: rgba(51, 255, 255, 0.8); }
   .staff.treble .note-interval.ni-1 {
@@ -515,12 +620,29 @@ button {
   .staff.bass .note-interval.ni-35 {
     background-color: rgba(51, 255, 255, 0.8); }
   .staff .beat {
-    display: table-cell;
+    display: block;
+    float: left;
+    height: 100%;
     position: relative; }
+    .staff .beat::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      right: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.1); }
+    .staff .beat:first-child::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      left: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.1); }
     .staff .beat.chord .note-interval {
       display: block;
       position: absolute;
-      width: 100%;
       height: 4px;
       left: 0;
       border-radius: 0%;
@@ -530,7 +652,8 @@ button {
               transition: opacity 400ms;
       -webkit-transform: translate3d(0, -50%, 0);
               transform: translate3d(0, -50%, 0);
-      opacity: 0.5; }
+      opacity: 0.5;
+      z-index: 9; }
     .staff .beat.active .note-interval {
       opacity: 1;
       height: 8px;
@@ -591,7 +714,7 @@ button {
           border-bottom: 1px dotted rgba(255, 255, 255, 0.3); }
 
 .editor-canvas {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;

@@ -26,13 +26,12 @@
             <div class="staff"
               ng-class="{treble: $index == 0, bass: $index == 1}"
               ng-repeat="staff in performance track by $index">
-              <div class="beat"
+              <div class="beat beat-{{chord.note_width}}"
                 ng-repeat="chord in staff track by $index"
                 ng-class="{null: chord == 0, sustain: chord == 'sus', chord: chord.notes}"
                 style="width: {{100 / staff.length}}%">
                 <span class="note-interval ni-{{note.int + (12 * (note.octave - 1))}}"
-                  ng-repeat="note in chord.notes track by $index"
-                  style="top: {{note.top}}%; width: {{chord.note_width}}%"></span>
+                  ng-repeat="note in chord.notes track by $index"></span>
               </div>
             </div>
           </div>
