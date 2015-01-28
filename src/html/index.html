@@ -63,6 +63,7 @@
           <nav class="editor-menu">
             <ul>
               <li><a href="#" ng-class="{active:view.group == 'global'}" ng-click="view.group = 'global'">Global</a></li
+              ><li><a href="#" ng-class="{active:view.group == 'presets'}" ng-click="view.group = 'presets'">Presets</a></li
               ><li><a href="#" ng-class="{active:view.group == 'treble'}" ng-click="view.group = 'treble'">Treble Clef</a></li
               ><li><a href="#" ng-class="{active:view.group == 'bass'}" ng-click="view.group = 'bass'">Bass Clef</a></li
               ><li><a href="#" ng-class="{active:view.group == 'settings'}" ng-click="view.group = 'settings'">Settings Store</a></li
@@ -105,6 +106,18 @@
                   </div>
                   <div class="col-6">
                     <div grid-options label="Root" model="composition.root" groupname="roots" options="library.notes"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="presets-data data-group" ng-if="view.group == 'presets'">
+            <div class="dg-row">
+              <div class="dg-drawer">
+                <div class="col-container">
+                  <div class="col-12">
+                    <button ng-repeat="(preset, value) in presets" ng-click="updateComposition(value)" ng-bind="value.name"></button>
                   </div>
                 </div>
               </div>

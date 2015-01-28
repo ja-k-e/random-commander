@@ -21,7 +21,8 @@ app.controller 'RandomCommanderCtrl', [
       $scope.menu = !$scope.menu
 
     # the composition
-    $scope.composition = Presets.glory
+    $scope.presets = Presets
+    $scope.composition = Presets.flutter
 
     # getting first performance
     $scope.performance = Performance.getPerformance($scope.composition)

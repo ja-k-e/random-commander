@@ -10,6 +10,10 @@
       $scope.view = {
         group: 'global'
       };
+      $scope.updateComposition = function(val) {
+        $scope.$parent.composition = val;
+        return $scope.$parent.generatePerformance();
+      };
       return $scope.editor = $scope.$parent.editor;
     }
   ]);
@@ -26,7 +30,8 @@
       $scope.toggleMenu = function() {
         return $scope.menu = !$scope.menu;
       };
-      $scope.composition = Presets.glory;
+      $scope.presets = Presets;
+      $scope.composition = Presets.flutter;
       $scope.performance = Performance.getPerformance($scope.composition);
       $scope.generatePerformance = function() {
         $scope.stopPerformance();
@@ -543,7 +548,6 @@
                   if (interval > 12) {
                     interval -= 12;
                   }
-                  console.log(interval);
                   new_octave = clef.baseoctave + ((2 - octave) * -1);
                   note = DataLibrary.frequencies[new_octave - 1][interval - 1];
                   new_note = {
@@ -611,6 +615,7 @@
           }
         },
         glory: {
+          name: 'Glory',
           measures: 16,
           tempo: 120,
           beats: 4,

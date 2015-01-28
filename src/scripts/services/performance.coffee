@@ -109,7 +109,6 @@ app.service 'Performance', [
               # if key pushes interval into new octave
               if interval > 12
                 interval -= 12
-              console.log interval
               # make the octave relative to the clef's octave
               new_octave = clef.baseoctave + ((2 - octave) * -1)
               # the frequency of the note

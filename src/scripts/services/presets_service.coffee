@@ -27,6 +27,7 @@ app.service 'Presets', [ () ->
         }
       }
       glory: {
+        name: 'Glory'
         measures: 16, tempo: 120, beats: 4, resolution: 16, root: 7
         clefs: {
           treble: {
