@@ -112,7 +112,7 @@ app.service 'Performance', [
               # make the octave relative to the clef's octave
               new_octave = clef.baseoctave + ((2 - octave) * -1)
               # the frequency of the note
-              note = DataLibrary.frequencies[new_octave - 1][interval]
+              note = DataLibrary.frequencies[new_octave - 1][interval - 1]
               # if note doesnt already exist in chord
               new_note = {freq: note, int: interval, octave: octave}
               if temp_freqs.indexOf(note) == -1
@@ -141,6 +141,6 @@ app.service 'Performance', [
             # subtract tick from temp_duration
             temp_duration--
         sequences.push sequence
-
+      # console.log sequences[1]
       return sequences
 ]

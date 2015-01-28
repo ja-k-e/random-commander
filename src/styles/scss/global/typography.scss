@@ -10,7 +10,7 @@ h1, h2, h3 {
   @include uppercase;
 }
 
-h1#masthead {
+h1.masthead {
   font-size: 2em;
   text-align: center;
   font-weight: 100;

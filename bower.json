@@ -24,6 +24,7 @@
     "jquery": "~2.1.3"
   },
   "devDependencies": {
-    "tone": "*"
+    "tone": "*",
+    "angular-animate": "~1.3.11"
   }
 }

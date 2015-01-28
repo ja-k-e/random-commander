@@ -3,8 +3,9 @@ app.controller 'RandomCommanderCtrl', [
   '$timeout'
   'DataLibrary'
   'Performance'
+  'Presets'
 
-  ($scope, $timeout, DataLibrary, Performance) ->
+  ($scope, $timeout, DataLibrary, Performance, Presets) ->
 
     # data library
     $scope.library = DataLibrary
@@ -20,39 +21,7 @@ app.controller 'RandomCommanderCtrl', [
       $scope.menu = !$scope.menu
 
     # the composition
-    $scope.composition = {
-      measures: 4 # measures to generate
-      tempo: 120 # tempo of performance
-      beats: 4 # beats per measure
-      resolution: 16 # smallest note
-      root: 4 # root of key
-      clefs: {
-        treble: {
-          # values: [5,0,10,5,0,0,0,0,0]
-          values: [0,0,0,0,10,0,0,0,0]
-          intervals: [10,0,0,5,0,0,0,5,0,0,5,0]
-          # chords: [10,5,5,0,0]
-          chords: [10,0,0,0,0]
-          octaves: [5,10,5]
-          silence: 0
-          baseoctave: 6
-          # waveform: 'sawtooth'
-          waveform: 'triangle'
-          volume: 6
-        }
-        bass: {
-          values: [10,10,10,10,0,0,0,0,0]
-          intervals: [10,0,0,10,0,10,0,10,0,0,10,0]
-          chords: [10,0,0,0,0]
-          octaves: [0,10,0]
-          silence: 0
-          baseoctave: 3
-          # waveform: 'sawtooth'
-          waveform: 'triangle'
-          volume: 10
-        }
-      }
-    }
+    $scope.composition = Presets.glory
 
     # getting first performance
     $scope.performance = Performance.getPerformance($scope.composition)

@@ -6,7 +6,7 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.1em; }
 
-h1#masthead {
+h1.masthead {
   font-size: 2em;
   text-align: center;
   font-weight: 100;
@@ -629,7 +629,6 @@ button {
       position: absolute;
       top: 0;
       bottom: 0;
-      z-index: -1;
       right: 0;
       border-right: 1px solid rgba(255, 255, 255, 0.1); }
     .staff .beat:first-child::before {
@@ -637,7 +636,6 @@ button {
       position: absolute;
       top: 0;
       bottom: 0;
-      z-index: -1;
       left: 0;
       border-left: 1px solid rgba(255, 255, 255, 0.1); }
     .staff .beat.chord .note-interval {
@@ -653,7 +651,7 @@ button {
       -webkit-transform: translate3d(0, -50%, 0);
               transform: translate3d(0, -50%, 0);
       opacity: 0.5;
-      z-index: 9; }
+      z-index: 1; }
     .staff .beat.active .note-interval {
       opacity: 1;
       height: 8px;
@@ -719,8 +717,16 @@ button {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(16, 16, 16, 0.8);
+  padding: 0;
+  z-index: 9;
+  background-color: rgba(16, 16, 16, 0.9);
   overflow: scroll; }
+  .editor-canvas.ng-enter {
+    -webkit-animation: slide-up 250ms;
+            animation: slide-up 250ms; }
+  .editor-canvas.ng-leave {
+    -webkit-animation: slide-down 250ms;
+            animation: slide-down 250ms; }
 
 .editor-menu {
   text-align: center; }
@@ -742,3 +748,39 @@ button {
           color: white; }
       .editor-menu ul li:first-child {
         border-left: 1px solid #101010; }
+
+@-webkit-keyframes slide-up {
+  from {
+    top: 100%;
+    bottom: -100%; }
+
+  to {
+    top: 0;
+    bottom: 0; } }
+
+@keyframes slide-up {
+  from {
+    top: 100%;
+    bottom: -100%; }
+
+  to {
+    top: 0;
+    bottom: 0; } }
+
+@-webkit-keyframes slide-down {
+  from {
+    top: 0;
+    bottom: 0; }
+
+  to {
+    top: 100%;
+    bottom: -100%; } }
+
+@keyframes slide-down {
+  from {
+    top: 0;
+    bottom: 0; }
+
+  to {
+    top: 100%;
+    bottom: -100%; } }

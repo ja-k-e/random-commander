@@ -2,8 +2,12 @@
   position: fixed;
   top: 0; bottom: 0;
   left: 0; right: 0;
-  background-color: transparentize($c-black,0.2);
+  padding: 0;
+  z-index: 9;
+  background-color: transparentize($c-black,0.1);
   overflow: scroll;
+  &.ng-enter { animation: slide-up 250ms }
+  &.ng-leave { animation: slide-down 250ms }
 }
 
 .editor-menu {
@@ -30,4 +34,14 @@
       }
     }
   }
+}
+
+@keyframes slide-up {
+  from { top: 100%; bottom: -100% }
+  to { top: 0; bottom: 0 }
+}
+
+@keyframes slide-down {
+  from { top: 0; bottom: 0 }
+  to { top: 100%; bottom: -100% }
 }

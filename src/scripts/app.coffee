@@ -1,2 +1,2 @@
 # defining our app
-app = angular.module 'RandomCommander', []
+app = angular.module 'RandomCommander', ['ngAnimate']
