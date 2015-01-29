@@ -22,7 +22,7 @@ app.controller 'RandomCommanderCtrl', [
 
     # the composition
     $scope.presets = Presets
-    $scope.composition = Presets.jonny
+    $scope.composition = Presets.flutter
 
     # getting first performance
     $scope.performance = Performance.getPerformance($scope.composition)

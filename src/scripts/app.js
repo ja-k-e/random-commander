@@ -31,7 +31,7 @@
         return $scope.menu = !$scope.menu;
       };
       $scope.presets = Presets;
-      $scope.composition = Presets.jonny;
+      $scope.composition = Presets.flutter;
       $scope.performance = Performance.getPerformance($scope.composition);
       $scope.generatePerformance = function() {
         $scope.stopPerformance();
