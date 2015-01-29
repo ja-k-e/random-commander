@@ -41,10 +41,10 @@ app.service 'Presets', [ () ->
           volume: 6
         }
         bass: {
-          values: [10,10,10,10,0]
+          values: [0,0,0,0,10]
           intervals: [10,0,0,10,0,10,0,10,0,0,10,0]
           chords: [10,0,0,0,0]
-          octaves: [5,10,3]
+          octaves: [0,10,3]
           silence: 0
           baseoctave: 3
           waveform: 'triangle'
@@ -52,9 +52,9 @@ app.service 'Presets', [ () ->
         }
       }
     }
-    magic: {
-      name: 'Magic'
-      measures: 4, tempo: 120, beats: 4, resolution: 16, root: 1
+    wander: {
+      name: 'Wander'
+      measures: 4, tempo: 110, beats: 4, resolution: 16, root: 1
       clefs: {
         treble: {
           values: [5,5,5,5,5]
@@ -80,7 +80,7 @@ app.service 'Presets', [ () ->
     }
     jonny: {
       name: 'Jonny'
-      measures: 1, tempo: 160, beats: 7, resolution: 16, root: 6
+      measures: 2, tempo: 160, beats: 7, resolution: 16, root: 6
       clefs: {
         treble: {
           values: [0,0,0,0,10]
@@ -89,7 +89,7 @@ app.service 'Presets', [ () ->
           octaves: [5,10,5]
           silence: 0
           baseoctave: 6
-          waveform: 'sawtooth'
+          waveform: 'triangle'
           volume: 6
         }
         bass: {
@@ -99,7 +99,7 @@ app.service 'Presets', [ () ->
           octaves: [5,10,5]
           silence: 0
           baseoctave: 5
-          waveform: 'square'
+          waveform: 'triangle'
           volume: 7
         }
       }

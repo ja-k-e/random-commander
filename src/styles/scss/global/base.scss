@@ -35,15 +35,22 @@ input, textarea {
   font-family: $f-sans;
 }
 
+label {
+  @include small-label;
+  display: block;
+  color: $c-white;
+}
+
+a {
+  text-decoration: none;
+  color: $c-white;
+}
+
 ::selection {
   background: $c-white;
   color: $c-black;
 }
 
-.triggers {
-  text-align: center;
-  margin: 1em 0;
-}
 .center {
   text-align: center;
 }

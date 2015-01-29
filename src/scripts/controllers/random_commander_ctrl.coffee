@@ -47,13 +47,14 @@ app.controller 'RandomCommanderCtrl', [
     $scope.playPerformance = () ->
       $scope.playing = true
       composition = $scope.composition
+      tempo = composition.tempo
       performance = $scope.performance
       # total beat count
       beats = composition.measures * composition.beats * composition.resolution / 4
       # relative index
       index = 0
       # tempo to ms
-      tempo_time = 60000 / composition.tempo
+      tempo_time = 60000 / tempo
 
       # single beat instance
       next_beat = () ->
@@ -85,11 +86,11 @@ app.controller 'RandomCommanderCtrl', [
               waveforms.push composition.clefs.bass.waveform
               decibels.push composition.clefs.bass.decibels
             # beats per second
-            bps = composition.tempo / 60
+            bps = tempo / 60
             # how much of a beat is the length
             beat_count = chord.length / (1 / composition.resolution)
             # sustain of the note in seconds
-            sustain = (beat_count * (bps * (1 / composition.resolution))) * 0.99
+            sustain = (beat_count * (bps * (1 / composition.resolution))) #* 0.99
 
             notes_size = chord.notes.length
 

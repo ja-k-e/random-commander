@@ -43,18 +43,18 @@ app.service 'DataLibrary', [ () ->
         # {name: 'Dotted Eighth', size: 1/8 * 1.5, denominator: 12}
       ]
       intervals: [
-        {name: 'Perfect Unison', interval: 1}
-        {name: 'Minor Second', interval: 2}
-        {name: 'Major Second', interval: 3}
-        {name: 'Minor Third', interval: 4}
-        {name: 'Major Third', interval: 5}
-        {name: 'Perfect Fourth', interval: 6}
+        {name: 'Perf Unison', interval: 1}
+        {name: 'Min 2nd', interval: 2}
+        {name: 'Maj 2nd', interval: 3}
+        {name: 'Min 3rd', interval: 4}
+        {name: 'Maj 3rd', interval: 5}
+        {name: 'Perf 4th', interval: 6}
         {name: 'Tritone', interval: 7}
-        {name: 'Perfect Fifth', interval: 8}
-        {name: 'Minor Sixth', interval: 9}
-        {name: 'Major Sixth', interval: 10}
-        {name: 'Minor Seventh', interval: 11}
-        {name: 'Major Seventh', interval: 12}
+        {name: 'Perf 5th', interval: 8}
+        {name: 'Min 6th', interval: 9}
+        {name: 'Maj 6th', interval: 10}
+        {name: 'Min 7th', interval: 11}
+        {name: 'Maj 7th', interval: 12}
       ]
       # chord sizes
       chords: [
@@ -102,5 +102,19 @@ app.service 'DataLibrary', [ () ->
         [4186.009, 4434.922, 4698.636, 4978.032, 5274.042, 5587.652, 5919.91, 6271.928, 6644.876, 7040, 7458.62, 7902.132]
         [8372.018, 8869.844, 9397.272, 9956.064, 10548.084, 11175.304, 11839.82, 12543.856, 13289.752, 14080, 14917.24, 15804.264]
       ]
+      # intervals: [
+      #   {name: 'Perfect Unison', interval: 1}
+      #   {name: 'Minor Second', interval: 2}
+      #   {name: 'Major Second', interval: 3}
+      #   {name: 'Minor Third', interval: 4}
+      #   {name: 'Major Third', interval: 5}
+      #   {name: 'Perfect Fourth', interval: 6}
+      #   {name: 'Tritone', interval: 7}
+      #   {name: 'Perfect Fifth', interval: 8}
+      #   {name: 'Minor Sixth', interval: 9}
+      #   {name: 'Major Sixth', interval: 10}
+      #   {name: 'Minor Seventh', interval: 11}
+      #   {name: 'Major Seventh', interval: 12}
+      # ]
    }
 ]

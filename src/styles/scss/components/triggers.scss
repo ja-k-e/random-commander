@@ -1,0 +1,96 @@
+$button-height: 30px;
+.triggers-wrapper {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: $button-height;
+  padding: floor($button-height / 2) 0;
+  z-index: 999;
+  .container {
+    position: relative;
+  }
+}
+.triggers {
+  text-align: center;
+  margin: 0;
+  .triggers-center,
+  .triggers-left,
+  .triggers-right {
+    position: absolute;
+  }
+  .triggers-center {
+    width: 50%;
+    left: 25%;
+    text-align: center;
+  }
+  .triggers-right {
+    right: floor($button-height / 2);
+    text-align: right;
+  }
+  .triggers-left {
+    left: floor($button-height / 2);
+    text-align: left;
+  }
+
+  button {
+    padding: 0.5em;
+    background-color: transparentize($c-off-white,0.8);
+    color: $c-black;
+    height: $button-height;
+    margin-right: 1em;
+    font-weight: 400;
+    &:hover, &:active {
+      background-color: transparentize($c-off-white,0);
+    }
+  }
+
+  $i-di: 6px;
+  .button-play-stop,
+  .button-metronome {
+    padding-left: $i-di * 3;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: $i-di * 1.5;
+    }
+    &.play::after {
+      transform: translateX(floor($i-di * -0.25)) translateY(-50%);
+      $trans: floor($i-di * 0.75) solid transparent;
+      $solid: $i-di solid $c-black;
+      border-left: $solid;
+      border-top: $trans;
+      border-bottom: $trans;
+    }
+    &.stop {
+      background-color: $c-white;
+      &::after {
+        height: $i-di; width: $i-di;
+        transform: translate3d(-50%,-50%,0);
+        background-color: $c-black;
+      }
+    }
+  }
+  .button-editor {
+    padding-right: $i-di * 3;
+    position: relative;
+    $trans: floor($i-di * 0.75) solid transparent;
+    $solid: $i-di solid $c-black;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%; right: $i-di * 1.5;
+      border-left: $trans;
+      border-right: $trans;
+      transform: translate3d(50%,-50%,0);
+    }
+    &.open::after {
+      border-bottom: $solid;
+    }
+    &.close {
+      background-color: $c-white;
+      &::after {
+        border-top: $solid;
+      }
+    }
+  }
+}

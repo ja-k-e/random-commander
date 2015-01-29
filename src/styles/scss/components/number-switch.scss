@@ -1,5 +1,6 @@
 .ns-group {
   display: table;
+  width: 100%;
 
   [number-switch] {
     $ns-di: 50px;
@@ -8,7 +9,7 @@
     display: table-cell;
     vertical-align: bottom;
     padding: 0 0.5em;
-    width: $ns-di;
+    width: auto;
 
     &:first-child {
       padding-left: 0;
@@ -41,7 +42,7 @@
         padding: 0;
         background-color: $c-primary;
         color: $c-white;
-        font-weight: 100;
+        font-weight: 300;
       }
 
       .ns-arrow-up,
@@ -53,7 +54,7 @@
         height: $ns-arrow-h;
         cursor: pointer;
         &.disabled {
-          opacity: 0.2;
+          opacity: 0.4;
           pointer-events: none;
         }
 

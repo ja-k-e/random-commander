@@ -26,7 +26,13 @@
         background-color: $c-off-black;
         display: block;
         &.active {
-          color: $c-white;
+          color: $c-black;
+          pointer-events: none;
+          background-color: $c-white;
+        }
+        &:hover, &:active {
+          color: $c-black;
+          background-color: $c-off-white;
         }
       }
       &:first-child {

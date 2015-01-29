@@ -42,13 +42,14 @@
       performance_interval = void 0;
       $scope.progress = 0;
       $scope.playPerformance = function() {
-        var beats, composition, index, next_beat, performance, tempo_time, time;
+        var beats, composition, index, next_beat, performance, tempo, tempo_time, time;
         $scope.playing = true;
         composition = $scope.composition;
+        tempo = composition.tempo;
         performance = $scope.performance;
         beats = composition.measures * composition.beats * composition.resolution / 4;
         index = 0;
-        tempo_time = 60000 / composition.tempo;
+        tempo_time = 60000 / tempo;
         next_beat = function() {
           var beat_count, bps, chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, selector, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
           for (i = _i = 0, _len = performance.length; _i < _len; i = ++_i) {
@@ -82,9 +83,9 @@
                 waveforms.push(composition.clefs.bass.waveform);
                 decibels.push(composition.clefs.bass.decibels);
               }
-              bps = composition.tempo / 60;
+              bps = tempo / 60;
               beat_count = chord.length / (1 / composition.resolution);
-              sustain = (beat_count * (bps * (1 / composition.resolution))) * 0.99;
+              sustain = beat_count * (bps * (1 / composition.resolution));
               notes_size = chord.notes.length;
               chord_0 = performance[0][index];
               chord_1 = performance[1] ? performance[1][index] : null;
@@ -335,40 +336,40 @@
         ],
         intervals: [
           {
-            name: 'Perfect Unison',
+            name: 'Perf Unison',
             interval: 1
           }, {
-            name: 'Minor Second',
+            name: 'Min 2nd',
             interval: 2
           }, {
-            name: 'Major Second',
+            name: 'Maj 2nd',
             interval: 3
           }, {
-            name: 'Minor Third',
+            name: 'Min 3rd',
             interval: 4
           }, {
-            name: 'Major Third',
+            name: 'Maj 3rd',
             interval: 5
           }, {
-            name: 'Perfect Fourth',
+            name: 'Perf 4th',
             interval: 6
           }, {
             name: 'Tritone',
             interval: 7
           }, {
-            name: 'Perfect Fifth',
+            name: 'Perf 5th',
             interval: 8
           }, {
-            name: 'Minor Sixth',
+            name: 'Min 6th',
             interval: 9
           }, {
-            name: 'Major Sixth',
+            name: 'Maj 6th',
             interval: 10
           }, {
-            name: 'Minor Seventh',
+            name: 'Min 7th',
             interval: 11
           }, {
-            name: 'Major Seventh',
+            name: 'Maj 7th',
             interval: 12
           }
         ],
@@ -627,10 +628,10 @@
               volume: 6
             },
             bass: {
-              values: [10, 10, 10, 10, 0],
+              values: [0, 0, 0, 0, 10],
               intervals: [10, 0, 0, 10, 0, 10, 0, 10, 0, 0, 10, 0],
               chords: [10, 0, 0, 0, 0],
-              octaves: [5, 10, 3],
+              octaves: [0, 10, 3],
               silence: 0,
               baseoctave: 3,
               waveform: 'triangle',
@@ -638,10 +639,10 @@
             }
           }
         },
-        magic: {
-          name: 'Magic',
+        wander: {
+          name: 'Wander',
           measures: 4,
-          tempo: 120,
+          tempo: 110,
           beats: 4,
           resolution: 16,
           root: 1,
@@ -670,7 +671,7 @@
         },
         jonny: {
           name: 'Jonny',
-          measures: 1,
+          measures: 2,
           tempo: 160,
           beats: 7,
           resolution: 16,
@@ -683,7 +684,7 @@
               octaves: [5, 10, 5],
               silence: 0,
               baseoctave: 6,
-              waveform: 'sawtooth',
+              waveform: 'triangle',
               volume: 6
             },
             bass: {
@@ -693,7 +694,7 @@
               octaves: [5, 10, 5],
               silence: 0,
               baseoctave: 5,
-              waveform: 'square',
+              waveform: 'triangle',
               volume: 7
             }
           }

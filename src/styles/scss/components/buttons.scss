@@ -2,7 +2,6 @@ button {
   -webkit-appearance: none;
   outline: none;
   font-family: $f-sans;
-  font-weight: 100;
   border: none;
   position: relative;
 
@@ -13,7 +12,8 @@ button {
   padding: 1em;
   cursor: pointer;
   &:hover, &:active {
-    color: $c-off-white;
+    background-color: $c-gray;
+    color: $c-black;
   }
   &.disabled {
     pointer-events: none;
@@ -21,5 +21,18 @@ button {
   }
   &.space-it {
     margin: 0 8px 16px;
+  }
+}
+
+.button-list {
+  list-style: none;
+  padding: 0; margin: 0 0 1em;
+  display: table;
+  width: 100%;
+  li {
+    display: table-cell;
+    // margin-right: 0.5em;
+    button { display: block; width: 100%; border-right: $b-light; }
+    &:first-child button { border-left: $b-light; }
   }
 }

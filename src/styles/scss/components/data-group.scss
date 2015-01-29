@@ -4,6 +4,7 @@
   &:first-child { margin-top: 0; }
 
   .dg-row {
+    margin-top: 1em;
     &.dg-row-big {
       .dg-drawer {
         max-height: initial;
@@ -22,8 +23,9 @@
     // &.open {
     h2 {
       pointer-events: none;
-      background-color: $c-off-black;
-      // border-bottom: $b-light;
+      // background-color: $c-off-black;
+      border-top: $b-light;
+      border-bottom: $b-light;
     }
     .dg-drawer {
       padding: 1em 0; // 0.5em;
