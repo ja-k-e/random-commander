@@ -10,12 +10,12 @@ module.exports = function(grunt) {
     copy: {
       html: {
         files: [
-          {expand: true, flatten: false, cwd: 'src/html', src: ['*'], dest: 'build', filter: 'isFile'}
+          {expand: true, flatten: false, cwd: 'src/html', src: ['*'], dest: '', filter: 'isFile'}
         ]
       },
       templates: {
         files: [
-          {expand: true, flatten: false, cwd: 'src/html/templates', src: ['*'], dest: 'build/templates', filter: 'isFile'}
+          {expand: true, flatten: false, cwd: 'src/html/templates', src: ['*'], dest: 'templates', filter: 'isFile'}
         ]
       }
     },
@@ -26,12 +26,12 @@ module.exports = function(grunt) {
           beautify: true
         },
         files: {
-          'build/js/app.min.js': ['src/scripts/app.js']
+          'js/app.min.js': ['src/scripts/app.js']
         }
       },
       bower: {
         files: {
-          'build/js/head.min.js': ['src/scripts/_bower.js']
+          'js/head.min.js': ['src/scripts/_bower.js']
         }
       }
     },
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
     cssmin: {
       compile: {
         files: {
-          'build/css/main.min.css': ['src/styles/main.css']
+          'css/main.min.css': ['src/styles/main.css']
         }
       }
     },
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           livereload: true,
-          base: 'build/',
+          base: '',
           port: 9000
         }
       }
