@@ -19,22 +19,6 @@
       display: inline-block;
       border-right: 1px solid $c-black;
       @include uppercase;
-      a {
-        color: $c-gray;
-        padding: 16px 12px;
-        text-decoration: none;
-        background-color: $c-off-black;
-        display: block;
-        &.active {
-          color: $c-black;
-          pointer-events: none;
-          background-color: $c-white;
-        }
-        &:hover, &:active {
-          color: $c-black;
-          background-color: $c-off-white;
-        }
-      }
       &:first-child {
         border-left: 1px solid $c-black;
       }

@@ -202,7 +202,11 @@ button {
   background-color: #292929;
   color: white;
   padding: 1em;
-  cursor: pointer; }
+  cursor: pointer;
+  color: #9a9a9a;
+  padding: 16px 12px;
+  text-decoration: none;
+  background-color: #292929; }
   button:hover, button:active {
     background-color: #9a9a9a;
     color: #101010; }
@@ -211,6 +215,12 @@ button {
     opacity: 0.3; }
   button.space-it {
     margin: 0 8px 16px; }
+  button.active {
+    color: #101010;
+    background-color: white; }
+  button:hover, button:active {
+    color: #101010;
+    background-color: #d9d9d9; }
 
 .button-list {
   list-style: none;
@@ -883,19 +893,6 @@ button {
       border-right: 1px solid #101010;
       text-transform: uppercase;
       letter-spacing: 0.1em; }
-      .editor-menu ul li a {
-        color: #9a9a9a;
-        padding: 16px 12px;
-        text-decoration: none;
-        background-color: #292929;
-        display: block; }
-        .editor-menu ul li a.active {
-          color: #101010;
-          pointer-events: none;
-          background-color: white; }
-        .editor-menu ul li a:hover, .editor-menu ul li a:active {
-          color: #101010;
-          background-color: #d9d9d9; }
       .editor-menu ul li:first-child {
         border-left: 1px solid #101010; }
 
@@ -946,8 +943,6 @@ button {
   font-weight: 400; }
   .button-about:hover, .button-about:active {
     background-color: #d9d9d9; }
-  .button-about.active {
-    background-color: white; }
 
 .about-wrapper {
   height: 300px;
@@ -977,9 +972,11 @@ button {
     padding: 0;
     margin: 0; }
     .about-wrapper ul li {
-      font-size: 1.4em;
+      font-size: 1.2em;
       font-weight: 300;
-      margin-bottom: 0.5em; }
+      margin-bottom: 0.75em; }
+    .about-wrapper ul a {
+      text-decoration: underline; }
 
 @-webkit-keyframes slide-about-down {
   from {
