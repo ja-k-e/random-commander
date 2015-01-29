@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 h1, h2, h3, h4, h5 {
   margin: 0; }
 
@@ -962,7 +962,7 @@ button {
     -webkit-animation: slide-about-up 250ms linear;
             animation: slide-about-up 250ms linear; }
   .about-wrapper h1 {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 2em;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding-bottom: 0.5em;

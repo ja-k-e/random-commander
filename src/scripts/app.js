@@ -20,7 +20,19 @@
 
   app.controller('RandomCommanderCtrl', [
     '$scope', '$timeout', 'DataLibrary', 'Performance', 'Presets', function($scope, $timeout, DataLibrary, Performance, Presets) {
-      var performance_interval;
+      var isChrome, isFirefox, isIE, isOpera, isSafari, performance_interval;
+      isOpera = !!window.opera || navigator.userAgent.indexOf(" OPR/") >= 0;
+      isFirefox = typeof InstallTrigger !== "undefined";
+      isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf("Constructor") > 0;
+      isChrome = !!window.chrome && !isOpera;
+      isIE = false || !!document.documentMode;
+      $scope.browser = {
+        opera: isOpera,
+        firefox: isFirefox,
+        safari: isSafari,
+        chrome: isChrome,
+        ie: isIE
+      };
       $scope.library = DataLibrary;
       $scope.about = false;
       $scope.toggleAbout = function() {
