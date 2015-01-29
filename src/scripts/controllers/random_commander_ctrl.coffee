@@ -48,9 +48,11 @@ app.controller 'RandomCommanderCtrl', [
       $scope.playing = true
       composition = $scope.composition
       tempo = composition.tempo
+      beats_per_measure = composition.beats
+      resolution = composition.resolution
       performance = $scope.performance
       # total beat count
-      beats = composition.measures * composition.beats * composition.resolution / 4
+      beats = composition.measures * beats_per_measure * resolution / 4
       # relative index
       index = 0
       # tempo to ms
@@ -62,8 +64,8 @@ app.controller 'RandomCommanderCtrl', [
         for sequence, i in performance
           chord = sequence[index]
 
-          if $scope.metronome && index % (composition.resolution / 4) == 0
-            if index == 0 || index / 4 % composition.beats == 0 then freq = 4100 else freq = 3000
+          if $scope.metronome && index % (resolution / 4) == 0
+            if index == 0 || index / 4 % beats_per_measure == 0 then freq = 4100 else freq = 3000
             metronome = new Tone.OmniOscillator(freq, 'pulse')
             # set volume in decibels
             metronome.setVolume -30
@@ -88,9 +90,13 @@ app.controller 'RandomCommanderCtrl', [
             # beats per second
             bps = tempo / 60
             # how much of a beat is the length
-            beat_count = chord.length / (1 / composition.resolution)
+            beat_count = chord.length / (1 / resolution)
+            # resolution in beats
+            res_beats = 4 / resolution
+            # sustain of a beat in seconds
+            beat_sus = res_beats / bps
             # sustain of the note in seconds
-            sustain = (beat_count * (bps * (1 / composition.resolution))) #* 0.99
+            sustain = (beat_count * beat_sus) #* 0.99
 
             notes_size = chord.notes.length
 
@@ -127,7 +133,7 @@ app.controller 'RandomCommanderCtrl', [
       # first call of next beat
       next_beat()
       # ms to relative speed (based on resolution)
-      time = tempo_time / (composition.resolution / 4)
+      time = tempo_time / (resolution / 4)
       # set interval for next beat to occur at appropriate time
       performance_interval = window.setInterval(next_beat, time)
 

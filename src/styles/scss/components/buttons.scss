@@ -31,8 +31,15 @@ button {
   width: 100%;
   li {
     display: table-cell;
+    &.active {
+      button {
+        background-color: $c-white;
+        color: $c-black;
+        pointer-events: none;
+      }
+    }
     // margin-right: 0.5em;
-    button { display: block; width: 100%; border-right: $b-light; }
-    &:first-child button { border-left: $b-light; }
+    button { display: block; width: 100%; border-right: 1px solid $c-black; }
+    &:first-child button { border-left: 1px solid $c-black; }
   }
 }

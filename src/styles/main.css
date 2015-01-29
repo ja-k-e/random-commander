@@ -218,12 +218,16 @@ button {
   width: 100%; }
   .button-list li {
     display: table-cell; }
+    .button-list li.active button {
+      background-color: white;
+      color: #101010;
+      pointer-events: none; }
     .button-list li button {
       display: block;
       width: 100%;
-      border-right: 1px solid rgba(255, 255, 255, 0.2); }
+      border-right: 1px solid #101010; }
     .button-list li:first-child button {
-      border-left: 1px solid rgba(255, 255, 255, 0.2); }
+      border-left: 1px solid #101010; }
 
 .triggers-wrapper {
   position: fixed;

@@ -8,7 +8,7 @@
   app.controller('EditorCtrl', [
     '$scope', function($scope) {
       $scope.view = {
-        group: 'global'
+        group: 'presets'
       };
       $scope.updateComposition = function(val) {
         $scope.$parent.composition = val;
@@ -42,21 +42,23 @@
       performance_interval = void 0;
       $scope.progress = 0;
       $scope.playPerformance = function() {
-        var beats, composition, index, next_beat, performance, tempo, tempo_time, time;
+        var beats, beats_per_measure, composition, index, next_beat, performance, resolution, tempo, tempo_time, time;
         $scope.playing = true;
         composition = $scope.composition;
         tempo = composition.tempo;
+        beats_per_measure = composition.beats;
+        resolution = composition.resolution;
         performance = $scope.performance;
-        beats = composition.measures * composition.beats * composition.resolution / 4;
+        beats = composition.measures * beats_per_measure * resolution / 4;
         index = 0;
         tempo_time = 60000 / tempo;
         next_beat = function() {
-          var beat_count, bps, chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, selector, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
+          var beat_count, beat_sus, bps, chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, res_beats, selector, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
           for (i = _i = 0, _len = performance.length; _i < _len; i = ++_i) {
             sequence = performance[i];
             chord = sequence[index];
-            if ($scope.metronome && index % (composition.resolution / 4) === 0) {
-              if (index === 0 || index / 4 % composition.beats === 0) {
+            if ($scope.metronome && index % (resolution / 4) === 0) {
+              if (index === 0 || index / 4 % beats_per_measure === 0) {
                 freq = 4100;
               } else {
                 freq = 3000;
@@ -84,8 +86,10 @@
                 decibels.push(composition.clefs.bass.decibels);
               }
               bps = tempo / 60;
-              beat_count = chord.length / (1 / composition.resolution);
-              sustain = beat_count * (bps * (1 / composition.resolution));
+              beat_count = chord.length / (1 / resolution);
+              res_beats = 4 / resolution;
+              beat_sus = res_beats / bps;
+              sustain = beat_count * beat_sus;
               notes_size = chord.notes.length;
               chord_0 = performance[0][index];
               chord_1 = performance[1] ? performance[1][index] : null;
@@ -115,7 +119,7 @@
           return index = (index + 1) % beats;
         };
         next_beat();
-        time = tempo_time / (composition.resolution / 4);
+        time = tempo_time / (resolution / 4);
         return performance_interval = window.setInterval(next_beat, time);
       };
       $scope.stopPerformance = function() {
@@ -609,8 +613,38 @@
             }
           }
         },
-        glory: {
-          name: 'Glory',
+        flicker: {
+          name: 'Flicker',
+          measures: 4,
+          tempo: 100,
+          beats: 5,
+          resolution: 16,
+          root: 6,
+          clefs: {
+            treble: {
+              values: [0, 0, 0, 0, 10],
+              intervals: [10, 0, 5, 0, 10, 0, 0, 10, 0, 5, 0, 10],
+              chords: [0, 10, 5, 0, 0],
+              octaves: [5, 10, 5],
+              silence: 0,
+              baseoctave: 6,
+              waveform: 'triangle',
+              volume: 6
+            },
+            bass: {
+              values: [10, 10, 0, 0, 0],
+              intervals: [10, 0, 0, 0, 10, 0, 0, 10, 0, 0, 0, 10],
+              chords: [10, 0, 0, 0, 0],
+              octaves: [0, 10, 0],
+              silence: 0,
+              baseoctave: 5,
+              waveform: 'square',
+              volume: 5
+            }
+          }
+        },
+        thumper: {
+          name: 'Thumper',
           measures: 16,
           tempo: 120,
           beats: 4,
@@ -642,7 +676,7 @@
         wander: {
           name: 'Wander',
           measures: 4,
-          tempo: 110,
+          tempo: 150,
           beats: 4,
           resolution: 16,
           root: 1,
@@ -653,7 +687,7 @@
               chords: [10, 5, 5, 0, 0],
               octaves: [5, 10, 5],
               silence: 0,
-              baseoctave: 6,
+              baseoctave: 5,
               waveform: 'triangle',
               volume: 6
             },
@@ -664,7 +698,7 @@
               octaves: [0, 10, 0],
               silence: 0,
               baseoctave: 3,
-              waveform: 'triangle',
+              waveform: 'sine',
               volume: 10
             }
           }

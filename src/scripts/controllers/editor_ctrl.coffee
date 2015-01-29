@@ -5,7 +5,7 @@ app.controller 'EditorCtrl', [
 
     # view variables
     $scope.view = {
-      group: 'global'
+      group: 'presets'
     }
 
     $scope.updateComposition = (val) ->
