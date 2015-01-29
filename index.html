@@ -9,6 +9,33 @@
 
   <div ng-controller="RandomCommanderCtrl as main">
 
+    <button ng-click="toggleAbout()" ng-class="{active: about}"class="button-about">About</button>
+    <div class="about-wrapper" ng-if="about == true" ng-cloak>
+      <div class="container">
+        <div class="about">
+          <div class="col-container">
+            <div class="col-6">
+              <h1>Jake Albaugh</h1>
+              <ul>
+                <li><a href="https://github.com/jakealbaugh/random_commander" target="blank">Random Commander Source on GitHub</a></li>
+                <li><a href="http://codepen.io/jakealbaugh" target="blank">codepen.io/jakealbaugh</a></li>
+                <li><a href="https://twitter.com/jake_albaugh" target="blank">@jake_albaugh</a></li>
+                <li><a href="http://jakealbaugh.com" target="blank">jakealbaugh.com</a></li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <h1>Thanks</h1>
+              <ul>
+                <li><a href="https://github.com/TONEnoTONE/Tone.js/" target="blank">Tone.js</a></li>
+                <li><a href="http://codepen.io" target="blank">Codepen</a></li>
+                <li><a href="https://angularjs.org/" target="blank">AngularJS</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h1 class="masthead">Random Commander</h1>
 
     <div class="triggers-wrapper">

@@ -63,6 +63,8 @@ label {
 a {
   text-decoration: none;
   color: white; }
+  a:hover {
+    color: #d9d9d9; }
 
 ::-moz-selection {
   background: white;
@@ -252,10 +254,10 @@ button {
     left: 25%;
     text-align: center; }
   .triggers .triggers-right {
-    right: 15px;
+    right: 0;
     text-align: right; }
   .triggers .triggers-left {
-    left: 15px;
+    left: 0;
     text-align: left; }
   .triggers button {
     padding: 0.5em;
@@ -264,6 +266,8 @@ button {
     height: 30px;
     margin-right: 1em;
     font-weight: 400; }
+    .triggers button:last-child {
+      margin-right: 0; }
     .triggers button:hover, .triggers button:active {
       background-color: #d9d9d9; }
   .triggers .button-play-stop,
@@ -930,3 +934,77 @@ button {
   to {
     top: 100%;
     bottom: -100%; } }
+
+.button-about {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 1em;
+  background-color: rgba(217, 217, 217, 0.2);
+  color: #101010;
+  font-weight: 400; }
+  .button-about:hover, .button-about:active {
+    background-color: #d9d9d9; }
+  .button-about.active {
+    background-color: white; }
+
+.about-wrapper {
+  height: 300px;
+  z-index: 9998;
+  position: fixed;
+  padding: 4em 2em;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: rgba(16, 16, 16, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+  .about-wrapper.ng-enter {
+    -webkit-animation: slide-about-down 250ms linear;
+            animation: slide-about-down 250ms linear; }
+  .about-wrapper.ng-leave {
+    -webkit-animation: slide-about-up 250ms linear;
+            animation: slide-about-up 250ms linear; }
+  .about-wrapper h1 {
+    font-weight: 100;
+    font-size: 2em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em; }
+  .about-wrapper ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .about-wrapper ul li {
+      font-size: 1.4em;
+      font-weight: 300;
+      margin-bottom: 0.5em; }
+
+@-webkit-keyframes slide-about-down {
+  from {
+    top: -300px; }
+
+  to {
+    top: 0; } }
+
+@keyframes slide-about-down {
+  from {
+    top: -300px; }
+
+  to {
+    top: 0; } }
+
+@-webkit-keyframes slide-about-up {
+  from {
+    top: 0; }
+
+  to {
+    top: -300px; } }
+
+@keyframes slide-about-up {
+  from {
+    top: 0; }
+
+  to {
+    top: -300px; } }

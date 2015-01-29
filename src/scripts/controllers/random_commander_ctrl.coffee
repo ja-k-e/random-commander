@@ -10,6 +10,12 @@ app.controller 'RandomCommanderCtrl', [
     # data library
     $scope.library = DataLibrary
 
+    # about
+    $scope.about = false
+    $scope.toggleAbout = () ->
+      $scope.menu = false
+      $scope.about = !$scope.about
+
     # metronome
     $scope.metronome = false
     $scope.toggleMetronome = () ->
@@ -18,6 +24,7 @@ app.controller 'RandomCommanderCtrl', [
     # menu
     $scope.menu = false
     $scope.toggleMenu = () ->
+      $scope.about = false
       $scope.menu = !$scope.menu
 
     # the composition

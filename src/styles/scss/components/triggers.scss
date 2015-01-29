@@ -23,11 +23,11 @@ $button-height: 30px;
     text-align: center;
   }
   .triggers-right {
-    right: floor($button-height / 2);
+    right: 0;
     text-align: right;
   }
   .triggers-left {
-    left: floor($button-height / 2);
+    left: 0;
     text-align: left;
   }
 
@@ -38,6 +38,7 @@ $button-height: 30px;
     height: $button-height;
     margin-right: 1em;
     font-weight: 400;
+    &:last-child { margin-right: 0; }
     &:hover, &:active {
       background-color: transparentize($c-off-white,0);
     }

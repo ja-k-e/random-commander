@@ -22,12 +22,18 @@
     '$scope', '$timeout', 'DataLibrary', 'Performance', 'Presets', function($scope, $timeout, DataLibrary, Performance, Presets) {
       var performance_interval;
       $scope.library = DataLibrary;
+      $scope.about = false;
+      $scope.toggleAbout = function() {
+        $scope.menu = false;
+        return $scope.about = !$scope.about;
+      };
       $scope.metronome = false;
       $scope.toggleMetronome = function() {
         return $scope.metronome = !$scope.metronome;
       };
       $scope.menu = false;
       $scope.toggleMenu = function() {
+        $scope.about = false;
         return $scope.menu = !$scope.menu;
       };
       $scope.presets = Presets;
