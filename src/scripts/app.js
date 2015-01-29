@@ -631,8 +631,8 @@
             }
           }
         },
-        flicker: {
-          name: 'Flicker',
+        jonny: {
+          name: 'Jonny',
           measures: 4,
           tempo: 100,
           beats: 5,
@@ -751,8 +751,8 @@
             }
           }
         },
-        jonny: {
-          name: 'Jonny',
+        flicker: {
+          name: 'Flicker',
           measures: 2,
           tempo: 160,
           beats: 7,

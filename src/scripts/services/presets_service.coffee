@@ -26,8 +26,8 @@ app.service 'Presets', [ () ->
         }
       }
     }
-    flicker: {
-      name: 'Flicker'
+    jonny: {
+      name: 'Jonny'
       measures: 4,tempo: 100, beats: 5, resolution: 16, root: 6
       clefs: {
         treble: {
@@ -129,8 +129,8 @@ app.service 'Presets', [ () ->
         }
       }
     }
-    jonny: {
-      name: 'Jonny'
+    flicker: {
+      name: 'Flicker'
       measures: 2, tempo: 160, beats: 7, resolution: 16, root: 6
       clefs: {
         treble: {
