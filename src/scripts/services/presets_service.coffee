@@ -52,6 +52,31 @@ app.service 'Presets', [ () ->
         }
       }
     }
+    roulette: {
+      name: 'Roulette', measures: 4, tempo: 150, beats: 4, resolution: 16, root: 1
+      clefs: {
+        treble: {
+          values: [1,1,1,1,1]
+          intervals: [1,1,1,1,1,1,1,1,1,1,1,1]
+          chords: [1,1,1,1,1]
+          octaves: [1,1,1]
+          silence: 5
+          baseoctave: 6
+          waveform: 'triangle'
+          volume: 6
+        }
+        bass: {
+          values: [1,1,1,1,1]
+          intervals: [1,1,1,1,1,1,1,1,1,1,1,1]
+          chords: [1,1,1,1,1]
+          octaves: [1,1,1]
+          silence: 5
+          baseoctave: 5
+          waveform: 'triangle'
+          volume: 6
+        }
+      }
+    }
     thumper: {
       name: 'Thumper'
       measures: 16, tempo: 120, beats: 4, resolution: 16, root: 7
