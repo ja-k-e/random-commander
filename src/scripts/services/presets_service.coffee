@@ -98,7 +98,7 @@ app.service 'Presets', [ () ->
           chords: [10,0,0,0,0]
           octaves: [5,10,5]
           silence: 0
-          baseoctave: 3
+          baseoctave: 5
           waveform: 'square'
           volume: 7
         }
