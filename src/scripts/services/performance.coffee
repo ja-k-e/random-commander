@@ -92,12 +92,26 @@ app.service 'Performance', [
               value = ((1 / temp_duration) / step_length)
               note_length = 1 / value
 
-            # the new chord
+            # getting chord sustain
+            # beats per second
+            bps = composition.tempo / 60
+            # how much of a beat is the length
+            beat_count = note_length / (1 / composition.resolution)
+            # resolution in beats
+            res_beats = 4 / composition.resolution
+            # sustain of a beat in seconds
+            beat_sus = res_beats / bps
+            # sustain of the note in seconds
+            sustain = (beat_count * beat_sus) #* 0.99
+            sustain_classname = Math.round(sustain * 1000)
+
             # prepping for smaller grid that allots for dotted notes
             note_whole = Math.floor((note_length / step_length))
             note_decimal = Math.floor((note_length / step_length - note_whole) * 100)
             note_width = note_whole + '_' + note_decimal
-            new_chord = {length: note_length, note_width: note_width, notes: []}
+
+            # the new chord
+            new_chord = {length: note_length, note_width: note_width, notes: [], sustain: sustain, sustain_classname: sustain_classname}
             # console.log value, new_chord.length / (1 / composition.resolution)
             # for each note in the chord
             temp_freqs = []

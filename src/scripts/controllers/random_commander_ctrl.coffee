@@ -112,17 +112,8 @@ app.controller 'RandomCommanderCtrl', [
             if composition.clefs.bass
               waveforms.push composition.clefs.bass.waveform
               decibels.push composition.clefs.bass.decibels
-            # beats per second
-            bps = tempo / 60
-            # how much of a beat is the length
-            beat_count = chord.length / (1 / resolution)
-            # resolution in beats
-            res_beats = 4 / resolution
-            # sustain of a beat in seconds
-            beat_sus = res_beats / bps
-            # sustain of the note in seconds
-            sustain = (beat_count * beat_sus) #* 0.99
 
+            sustain = chord.sustain
             notes_size = chord.notes.length
 
             chord_0 = performance[0][index]
@@ -149,7 +140,7 @@ app.controller 'RandomCommanderCtrl', [
 
           # styling dom
           selector = '.' + clef + ' .beat:nth-child(' + (index + 1) + ')'
-          if chord != 'sus'
+          if chord && chord != 'sus'
             $('.' + clef + ' .beat.active').removeClass 'active'
             $(selector).addClass 'active'
 

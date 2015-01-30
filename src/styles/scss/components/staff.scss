@@ -54,14 +54,22 @@ $staff-grid-2: 1px solid rgba(255,255,255,0.15);
         top: 100% - (100 * ($i/36));
       }
     }
+    @for $i from 1 through 3000 {
+      &.ni-sustain-#{$i} {
+        &::after { animation-duration: $i * 1ms; }
+      }
+    }
   }
   &.treble {
     .note-interval {
       @for $i from 1 through 36 {
         &.ni-#{$i} {
           $ratio: $i / 36;
-          $color: hsla($ratio * 180 + 180, 100%, 60%, 0.8);
+          $color: hsl($ratio * 180 + 180, 100%, 60%);
+          $trans-color: transparentize($color, 0.2);
+          color: $color; // picked up in zip animation
           background-color: $color;
+          &::after { background-color: $color; }
         }
       }
     }
@@ -72,8 +80,11 @@ $staff-grid-2: 1px solid rgba(255,255,255,0.15);
       @for $i from 1 through 36 {
         &.ni-#{$i} {
           $ratio: $i / 36;
-          $color: hsla($ratio * 180, 100%, 60%, 0.8);
+          $color: hsl($ratio * 180, 100%, 60%);
+          $trans-color: transparentize($color, 0.2);
+          color: $color; // picked up in zip animation
           background-color: $color;
+          &::after { background-color: $color; }
         }
       }
     }
@@ -113,7 +124,12 @@ $staff-grid-2: 1px solid rgba(255,255,255,0.15);
         transform: translate3d(0, -50%, 0);
         opacity: 0.5;
         z-index: 1;
-
+        &::after {
+          content: '';
+          animation-timing-function: linear;
+          position: absolute;
+          color: inherit; // being set above in loop
+        }
       }
     }
     &.sustain { }
@@ -121,10 +137,20 @@ $staff-grid-2: 1px solid rgba(255,255,255,0.15);
     &.active {
       .note-interval {
         opacity: 1;
-        height: $s-note-h * 2;
-        transition: height 400ms, box-shadow 4000ms ease-out;
+        // height: $s-note-h * 2;
         transition: opacity 400ms;
+        $runner-h: $s-note-h * 2;
+        &::after {
+          animation-name: zip;
+          height: $runner-h;
+          top: -$runner-h/4;
+        }
       }
     }
   }
+}
+
+@keyframes zip {
+  0% { width: 0;}
+  100% { width: 100%;}
 }

@@ -71,7 +71,7 @@
         index = 0;
         tempo_time = 60000 / tempo;
         next_beat = function() {
-          var beat_count, beat_sus, bps, chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, res_beats, selector, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
+          var chord, chord_0, chord_1, clef, decibels, freq, gain, i, metronome, note, notes_size, osc, selector, sequence, sustain, waveforms, _i, _j, _len, _len1, _ref;
           for (i = _i = 0, _len = performance.length; _i < _len; i = ++_i) {
             sequence = performance[i];
             chord = sequence[index];
@@ -103,11 +103,7 @@
                 waveforms.push(composition.clefs.bass.waveform);
                 decibels.push(composition.clefs.bass.decibels);
               }
-              bps = tempo / 60;
-              beat_count = chord.length / (1 / resolution);
-              res_beats = 4 / resolution;
-              beat_sus = res_beats / bps;
-              sustain = beat_count * beat_sus;
+              sustain = chord.sustain;
               notes_size = chord.notes.length;
               chord_0 = performance[0][index];
               chord_1 = performance[1] ? performance[1][index] : null;
@@ -129,7 +125,7 @@
               }
             }
             selector = '.' + clef + ' .beat:nth-child(' + (index + 1) + ')';
-            if (chord !== 'sus') {
+            if (chord && chord !== 'sus') {
               $('.' + clef + ' .beat.active').removeClass('active');
               $(selector).addClass('active');
             }
@@ -479,7 +475,7 @@
     'DataLibrary', function(DataLibrary) {
       return {
         getPerformance: function(composition) {
-          var ChancePkg, blank, chord, chordContainsFreq, clef, duration, index, interval, new_chord, new_note, new_octave, note, note_decimal, note_length, note_whole, note_width, octave, random, randomVal, res_value, sequence, sequences, step_length, temp_duration, temp_freqs, value, _i, _ref;
+          var ChancePkg, beat_count, beat_sus, blank, bps, chord, chordContainsFreq, clef, duration, index, interval, new_chord, new_note, new_octave, note, note_decimal, note_length, note_whole, note_width, octave, random, randomVal, res_beats, res_value, sequence, sequences, step_length, sustain, sustain_classname, temp_duration, temp_freqs, value, _i, _ref;
           chordContainsFreq = function(freq, notes) {
             var note, _i, _len;
             for (_i = 0, _len = notes.length; _i < _len; _i++) {
@@ -549,13 +545,21 @@
                   value = (1 / temp_duration) / step_length;
                   note_length = 1 / value;
                 }
+                bps = composition.tempo / 60;
+                beat_count = note_length / (1 / composition.resolution);
+                res_beats = 4 / composition.resolution;
+                beat_sus = res_beats / bps;
+                sustain = beat_count * beat_sus;
+                sustain_classname = Math.round(sustain * 1000);
                 note_whole = Math.floor(note_length / step_length);
                 note_decimal = Math.floor((note_length / step_length - note_whole) * 100);
                 note_width = note_whole + '_' + note_decimal;
                 new_chord = {
                   length: note_length,
                   note_width: note_width,
-                  notes: []
+                  notes: [],
+                  sustain: sustain,
+                  sustain_classname: sustain_classname
                 };
                 temp_freqs = [];
                 while (new_chord.notes.length < chord) {

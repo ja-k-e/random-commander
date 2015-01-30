@@ -80,7 +80,7 @@
                 ng-repeat="chord in staff track by $index"
                 ng-class="{null: chord == 0, sustain: chord == 'sus', chord: chord.notes}"
                 style="width: {{100 / staff.length}}%">
-                <span class="note-interval ni-{{note.int + (12 * (note.octave - 1))}}"
+                <span class="note-interval ni-{{note.int + (12 * (note.octave - 1))}} ni-sustain-{{chord.sustain_classname}}"
                   ng-repeat="note in chord.notes track by $index"></span>
               </div>
             </div>
