@@ -1,7 +1,7 @@
 #Random Commander
 And here we go...
 
-See it in action at [randomcommander.io](http://randomcommander.io)
+See it in action at [jakealbaugh.github.io/random_commander/](http://jakealbaugh.github.io/random_commander/)
 
 ## To get it running:
 - cd to directory
