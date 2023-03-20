@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Random music sequencer",
   "main": "Gruntfile.js",
-  "author": "Jake Albaugh",
+  "author": "Jake",
   "license": "ISC",
   "devDependencies": {
     "grunt": "^0.4.5",
