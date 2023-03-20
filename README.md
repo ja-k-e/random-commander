@@ -1,10 +1,7 @@
-#Random Commander
+# Random Commander
+
 And here we go...
 
-See it in action at [jakealbaugh.github.io/random_commander/](http://jakealbaugh.github.io/random_commander/)
+See it in action at [random-commander.jake.fun/](http://random-commander.jake.fun/)
 
-## To get it running:
-- cd to directory
-- run `npm install`
-- run `bower install`
-- run `grunt serve`
+This is old as hell. needs to be rebuilt.
